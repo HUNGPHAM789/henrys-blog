@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henry's Blog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --card: #FFFFFF;
+      --text: #1A1A1A;
+      --muted: #6B7280;
+      --accent: #D4705A;
+      --accent-light: #FFF0EC;
+      --border: #E5E7EB;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      background: #1A1A1A;
+      color: white;
+      padding: 48px 24px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    header p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+    nav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0 16px;
+    }
+    nav a:hover { color: var(--accent); }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+      margin-bottom: 24px;
+    }
+    .post-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .post-card a { text-decoration: none; color: inherit; display: block; }
+    .post-banner {
+      height: 200px;
+      background: linear-gradient(135deg, #2D1F1A 0%, #5C3317 50%, #8B6914 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+    .post-body {
+      padding: 28px;
+    }
+    .post-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--accent-light);
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .post-body h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .post-body p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 14px;
+    }
+    .post-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .read-more {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .read-more:hover { text-decoration: underline; }
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    @media (max-width: 600px) {
+      header { padding: 36px 16px; }
+      header h1 { font-size: 1.8rem; }
+      .container { padding: 28px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Henry's Blog</h1>
+  <p>Research, ideas, and things worth sharing</p>
+</header>
+
+<nav>
+  <a href="/">Home</a>
+</nav>
+
+<div class="container">
+
+  <div class="post-card">
+    <a href="posts/eyebrow-research.html">
+      <div class="post-banner">&#128133;</div>
+      <div class="post-body">
+        <span class="post-tag">Nghiên Cứu</span>
+        <h2>Top 5 Xu Hướng Phun Xăm Lông Mày & Top 10 Cơ Sở TP.HCM 2026</h2>
+        <p>Báo cáo nghiên cứu toàn diện về xu hướng phun xăm lông mày thịnh hành nhất Việt Nam 2026, bảng giá, chăm sóc sau phun, và top 10 cơ sở uy tín tại TP. Hồ Chí Minh — dành cho mục đích tìm việc & phát triển sự nghiệp.</p>
+        <div class="post-meta">16/03/2026 &bull; Jarvis AI Research</div>
+        <span class="read-more">Đọc bài viết →</span>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 Henry's Blog. All rights reserved.
+</footer>
+
+</body>
+</html>

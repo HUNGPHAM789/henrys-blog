@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nghiên Cứu Phun Xăm Lông Mày — Top 5 Xu Hướng & Top 10 Cơ Sở TP.HCM 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAFAF8;
+      --card: #FFFFFF;
+      --text: #1A1A1A;
+      --muted: #6B7280;
+      --accent: #D4705A;
+      --accent-light: #FFF0EC;
+      --border: #E5E7EB;
+      --gold: #D4A847;
+      --silver: #94A3B8;
+      --bronze: #CD7F32;
+      --green: #16A34A;
+      --blue: #2563EB;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2D1F1A 50%, #3D2A20 100%);
+      color: white;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero .date {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 6px 16px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Nav Tabs */
+    .tab-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 0 16px;
+    }
+    .tab-btn {
+      padding: 14px 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Container */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* Section headers */
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 40px 0 8px;
+      color: var(--text);
+    }
+    h2:first-child { margin-top: 0; }
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 32px 0 12px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+
+    /* Style Cards (Top 5) */
+    .style-card { position: relative; overflow: hidden; }
+    .style-rank {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1rem;
+      color: white;
+    }
+    .rank-1 { background: var(--gold); }
+    .rank-2 { background: var(--silver); }
+    .rank-3 { background: var(--bronze); }
+    .rank-4, .rank-5 { background: var(--muted); }
+
+    .style-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .style-eng {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .style-desc {
+      color: #374151;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .tag-green { background: #DCFCE7; color: #166534; }
+    .tag-blue { background: #DBEAFE; color: #1E40AF; }
+    .tag-amber { background: #FEF3C7; color: #92400E; }
+    .tag-pink { background: var(--accent-light); color: var(--accent); }
+
+    .price-range {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #F3F4F6;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .pros-list {
+      list-style: none;
+      padding: 0;
+    }
+    .pros-list li {
+      padding: 4px 0 4px 24px;
+      position: relative;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+    .pros-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .fit-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+    .fit-text {
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    .ref-links {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .ref-links a {
+      display: inline-block;
+      margin-right: 12px;
+      font-size: 0.8rem;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .ref-links a:hover { text-decoration: underline; }
+
+    /* Shop Cards (Top 10) */
+    .shop-card { position: relative; }
+    .shop-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .shop-rank-badge {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: white;
+    }
+    .shop-rank-1 { background: linear-gradient(135deg, #D4A847, #F0D78C); }
+    .shop-rank-2 { background: linear-gradient(135deg, #94A3B8, #CBD5E1); }
+    .shop-rank-3 { background: linear-gradient(135deg, #CD7F32, #E8A860); }
+    .shop-rank-default { background: #374151; }
+
+    .shop-info h3 {
+      margin: 0 0 4px;
+      font-size: 1.1rem;
+    }
+    .shop-type {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .shop-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .meta-item {
+      font-size: 0.85rem;
+      color: #374151;
+    }
+    .meta-label {
+      font-weight: 600;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .why-list {
+      list-style: none;
+      padding: 0;
+    }
+    .why-list li {
+      padding: 3px 0 3px 20px;
+      position: relative;
+      font-size: 0.88rem;
+      color: #374151;
+    }
+    .why-list li::before {
+      content: '★';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.75rem;
+      top: 5px;
+    }
+
+    .career-box {
+      background: var(--accent-light);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: #374151;
+    }
+    .career-box strong { color: var(--accent); }
+
+    .shop-links {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .shop-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: #F3F4F6;
+      color: var(--text);
+      transition: background 0.2s;
+    }
+    .shop-link:hover { background: #E5E7EB; }
+
+    /* Price Table */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+    .price-table th {
+      background: #1A1A1A;
+      color: white;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .price-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .price-table tr:nth-child(even) { background: #F9FAFB; }
+    .price-table tr:hover { background: #F3F4F6; }
+
+    /* Care Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      margin: 20px 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .timeline-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .timeline-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Do/Don't */
+    .do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 600px) {
+      .do-dont { grid-template-columns: 1fr; }
+    }
+    .do-box, .dont-box {
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .do-box { background: #DCFCE7; }
+    .dont-box { background: #FEE2E2; }
+    .do-box h4 { color: #166534; margin-bottom: 10px; }
+    .dont-box h4 { color: #991B1B; margin-bottom: 10px; }
+    .do-box li, .dont-box li {
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      list-style: none;
+      padding-left: 20px;
+      position: relative;
+    }
+    .do-box li::before { content: '✅'; position: absolute; left: 0; font-size: 0.75rem; }
+    .dont-box li::before { content: '❌'; position: absolute; left: 0; font-size: 0.75rem; }
+
+    /* Color Swatches */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .color-swatch {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .color-sample {
+      height: 60px;
+    }
+    .color-info {
+      padding: 10px 12px;
+      background: white;
+    }
+    .color-name { font-weight: 600; font-size: 0.88rem; }
+    .color-desc { font-size: 0.78rem; color: var(--muted); }
+
+    /* Career Comparison */
+    .career-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .career-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .career-card h4 {
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+    .career-card p {
+      font-size: 0.88rem;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+    .career-card .arrow {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* Tips */
+    .tip-list {
+      counter-reset: tip;
+      list-style: none;
+      padding: 0;
+    }
+    .tip-list li {
+      counter-increment: tip;
+      padding: 14px 14px 14px 52px;
+      position: relative;
+      margin-bottom: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+    .tip-list li::before {
+      content: counter(tip);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+    .footer p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .sources {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px 16px;
+    }
+    .sources a {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .sources a:hover { color: var(--accent); }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 16px 40px; }
+      .container { padding: 24px 16px 60px; }
+      .card { padding: 20px; }
+      .tab-btn { padding: 12px 14px; font-size: 0.8rem; }
+      .shop-meta { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Phun Xăm Lông Mày<br><span>Nghiên Cứu 2026</span></h1>
+  <p>Top 5 xu hướng thịnh hành nhất & Top 10 cơ sở uy tín tại TP. Hồ Chí Minh — dành cho mục đích tìm việc & phát triển sự nghiệp</p>
+  <div class="date">Ngày 16/03/2026 — Jarvis AI Research</div>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('styles')">Top 5 Xu Hướng</button>
+  <button class="tab-btn" onclick="showTab('shops')">Top 10 Cơ Sở</button>
+  <button class="tab-btn" onclick="showTab('prices')">Bảng Giá</button>
+  <button class="tab-btn" onclick="showTab('care')">Chăm Sóc</button>
+  <button class="tab-btn" onclick="showTab('career')">Sự Nghiệp</button>
+</nav>
+
+<div class="container">
+
+  <!-- ==================== TAB 1: TOP 5 STYLES ==================== -->
+  <div id="styles" class="section active">
+    <h2>Top 5 Kiểu Phun Xăm Lông Mày Hot Nhất 2026</h2>
+    <p class="section-subtitle">Xu hướng tập trung vào: tự nhiên, cá nhân hóa, và công nghệ cao (Nano, mực hữu cơ, 6D-9D)</p>
+
+    <!-- #1 Ombre -->
+    <div class="card style-card">
+      <div class="style-rank rank-1">1</div>
+      <div class="style-name">Phun Mày Ombre</div>
+      <div class="style-eng">Powder Ombre Brows</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; Phổ biến nhất</div>
+      <div class="style-desc">Kỹ thuật tạo hiệu ứng chuyển màu gradient — nhạt ở đầu mày, đậm dần về đuôi — tạo cảm giác như trang điểm tán bột tự nhiên.</div>
+      <div class="tag-row">
+        <span class="tag tag-green">Mọi loại da</span>
+        <span class="tag tag-blue">Giữ 2-4 năm</span>
+        <span class="tag tag-amber">Ít đau</span>
+        <span class="tag tag-pink">Phục hồi nhanh</span>
+      </div>
+      <div class="price-range">&#128176; 2.000.000 – 7.000.000 VN&#272;</div>
+      <ul class="pros-list">
+        <li>Phù hợp MỌI loại da (kể cả da dầu, da nhạy cảm)</li>
+        <li>Hiệu ứng mềm mại, không lộ nét vẽ</li>
+        <li>Ít đau, phục hồi nhanh</li>
+      </ul>
+      <div class="fit-label">Phù hợp với</div>
+      <div class="fit-text">Mọi khuôn mặt, đặc biệt người muốn vẻ đẹp tự nhiên nhưng vẫn có điểm nhấn.</div>
+      <div class="ref-links">
+        <a href="https://vienthammytrangle.com/phun-may-ombre/" target="_blank">vienthammytrangle.com</a>
+        <a href="https://thammyvienthaovy.com/phun-may-ombre-sac-may-chuyen-min-tu-nhien/" target="_blank">thammyvienthaovy.com</a>
+        <a href="https://thammyhoaianh.com.vn/phun-chan-may-ombre.html" target="_blank">thammyhoaianh.com.vn</a>
+      </div>
+    </div>
+
+    <!-- #2 Hairstroke -->
+    <div class="card style-card">
+      <div class="style-rank rank-2">2</div>
+      <div class="style-name">&#272;iêu Kh&#7855;c Hairstroke</div>
+      <div class="style-eng">Microblading / Nano Brows</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733; Cực kỳ tự nhiên</div>
+      <div class="style-desc">Kỹ thuật vẽ từng sợi lông mày riêng lẻ, mô phỏng lông mày thật. Phiên bản Nano dùng đầu kim siêu nhỏ cho kết quả chân thực hơn.</div>
+      <div class="tag-row">
+        <span class="tag tag-green">Như mày thật</span>
+        <span class="tag tag-blue">Giữ 1-2 năm</span>
+        <span class="tag tag-amber">Kỹ thuật cao</span>
+      </div>
+      <div class="price-range">&#128176; 4.500.000 – 12.000.000 VN&#272;</div>
+      <ul class="pros-list">
+        <li>Cực kỳ tự nhiên — như mày thật</li>
+        <li>Phù hợp cho người mày thưa, rụng mày</li>
+        <li>Kỹ thuật tinh xảo, kết quả chân thực</li>
+        <li>Có thể kết hợp với Ombre (Combo Brows)</li>
+      </ul>
+      <div class="fit-label">Phù hợp với</div>
+      <div class="fit-text">Da thường đến da khô. Da dầu cần cân nhắc vì mực có thể bị nhòe.</div>
+      <div class="ref-links">
+        <a href="https://npbrows.vn/" target="_blank">npbrows.vn</a>
+        <a href="https://quynhquyenbeauty.vn/en" target="_blank">quynhquyenbeauty.vn</a>
+      </div>
+    </div>
+
+    <!-- #3 Korean Straight -->
+    <div class="card style-card">
+      <div class="style-rank rank-3">3</div>
+      <div class="style-name">Mày Ngang Hàn Qu&#7889;c</div>
+      <div class="style-eng">Korean Straight Brows</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733; Trẻ trung, K-beauty</div>
+      <div class="style-desc">Dáng mày ngang, đầu và đuôi gần như cùng cao độ, tạo vẻ đẹp thanh thoát, trong sáng kiểu Hàn Quốc.</div>
+      <div class="tag-row">
+        <span class="tag tag-green">Trẻ trung</span>
+        <span class="tag tag-blue">Giữ 2-4 năm</span>
+        <span class="tag tag-pink">K-beauty</span>
+      </div>
+      <div class="price-range">&#128176; 2.000.000 – 6.000.000 VN&#272;</div>
+      <ul class="pros-list">
+        <li>Nhẹ nhàng, trong sáng</li>
+        <li>Giúp khuôn mặt mềm mại hơn</li>
+        <li>Dễ kết hợp với trang điểm hàng ngày</li>
+      </ul>
+      <div class="fit-label">Phù hợp với</div>
+      <div class="fit-text">Mặt trái xoan, mặt dài. Người thích phong cách Hàn Quốc, trong sáng.</div>
+      <div class="ref-links">
+        <a href="https://seoulcenter.vn/lam-dep/cac-dang-long-may-dep" target="_blank">seoulcenter.vn</a>
+      </div>
+    </div>
+
+    <!-- #4 Soft Arch -->
+    <div class="card style-card">
+      <div class="style-rank rank-4">4</div>
+      <div class="style-name">Mày Cánh Cung</div>
+      <div class="style-eng">Soft Arch Brows</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733; Nữ tính, thanh tú</div>
+      <div class="style-desc">Dáng mày cong nhẹ hình cánh cung, tạo vẻ mềm mại, nữ tính. Không quá cong, không quá thẳng — đúng điểm cân bằng.</div>
+      <div class="tag-row">
+        <span class="tag tag-green">Nữ tính</span>
+        <span class="tag tag-blue">Giữ 2-4 năm</span>
+        <span class="tag tag-amber">Không lỗi mốt</span>
+      </div>
+      <div class="price-range">&#128176; 2.000.000 – 6.000.000 VN&#272;</div>
+      <ul class="pros-list">
+        <li>Thanh tú, phù hợp nhiều khuôn mặt</li>
+        <li>Giúp mắt trông to và sáng hơn</li>
+        <li>Không bao giờ lỗi mốt</li>
+      </ul>
+      <div class="fit-label">Phù hợp với</div>
+      <div class="fit-text">Mặt tròn, mặt chữ điền — giúp gương mặt thon gọn, mềm mại hơn.</div>
+      <div class="ref-links">
+        <a href="https://chiaki.vn/tin-tuc/dang-long-may-dep" target="_blank">chiaki.vn</a>
+        <a href="https://thammylinhanh.vn/nhung-dang-long-may-dep/" target="_blank">thammylinhanh.vn</a>
+      </div>
+    </div>
+
+    <!-- #5 Combo -->
+    <div class="card style-card">
+      <div class="style-rank rank-5">5</div>
+      <div class="style-name">Combo Brows</div>
+      <div class="style-eng">Hairstroke + Ombre</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733; Xu hướng mới nhất 2026</div>
+      <div class="style-desc">Kỹ thuật kết hợp — Hairstroke ở phần đầu mày (tạo sợi tự nhiên) và Ombre ở thân + đuôi mày (tạo độ đầy). Kết quả hoàn hảo nhất.</div>
+      <div class="tag-row">
+        <span class="tag tag-green">Mọi loại da</span>
+        <span class="tag tag-blue">Giữ 2-3 năm</span>
+        <span class="tag tag-pink">Hoàn hảo nhất</span>
+      </div>
+      <div class="price-range">&#128176; 5.000.000 – 12.000.000 VN&#272;</div>
+      <ul class="pros-list">
+        <li>Kết hợp ưu điểm của cả 2 kỹ thuật</li>
+        <li>Đầu mày tự nhiên, thân mày đầy đặn</li>
+        <li>Giữ màu lâu hơn Hairstroke đơn lẻ</li>
+        <li>Kết quả chân thực nhất trong tất cả kỹ thuật</li>
+      </ul>
+      <div class="fit-label">Phù hợp với</div>
+      <div class="fit-text">Mọi loại da. Đặc biệt tốt cho người muốn kết quả hoàn hảo nhất.</div>
+      <div class="ref-links">
+        <a href="https://thammybaoanh.com/xu-huong-phun-xam-tham-my-2026-phun-chan-may/" target="_blank">thammybaoanh.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 2: TOP 10 SHOPS ==================== -->
+  <div id="shops" class="section">
+    <h2>Top 10 C&#417; S&#7903; Uy Tín Nh&#7845;t TP.HCM 2026</h2>
+    <p class="section-subtitle">Đánh giá dựa trên uy tín, kinh nghiệm, chất lượng dịch vụ, và cơ hội phát triển sự nghiệp</p>
+
+    <!-- Shop 1 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-1">1</div>
+        <div class="shop-info">
+          <h3>Miss Tram Natural Beauty Center</h3>
+          <div class="shop-type">Phòng khám da liễu + Spa thẩm mỹ + Học viện đào tạo</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>95A3 Trần Quốc Toản, Q.3 &bull; 30 &#272;ặng Thị Nhu, Q.1</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>3+ cơ sở tại TP.HCM</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>&#272;ội ngũ lớn (chưa công bố số cụ thể)</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có Miss Tram Academy</div>
+      </div>
+      <ul class="why-list">
+        <li>Hơn 15 năm kinh nghiệm trong ngành phun xăm thẩm mỹ</li>
+        <li>&#272;ội ngũ được đào tạo tại Hàn Quốc, Nhật Bản, Mỹ, &#272;ức</li>
+        <li>Có giấy phép Bộ Y tế, chứng chỉ hành nghề đầy đủ</li>
+        <li>Giám khảo và giảng viên tại các cuộc thi sắc đẹp</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Rất tốt — có Academy đào tạo, quy mô lớn, nhiều vị trí. Phù hợp cho cả người mới muốn học nghề và người có kinh nghiệm muốn nâng cao.</div>
+      <div class="shop-links">
+        <a href="https://thammymisstram.vn/" class="shop-link" target="_blank">&#127760; Website</a>
+        <a href="https://misstram.edu.vn/" class="shop-link" target="_blank">&#127891; Academy</a>
+      </div>
+    </div>
+
+    <!-- Shop 2 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-2">2</div>
+        <div class="shop-info">
+          <h3>B&#7879;nh Vi&#7879;n TM Kangnam Sài Gòn</h3>
+          <div class="shop-type">Bệnh viện thẩm mỹ (cấp phép Bộ Y tế)</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>666 Cách Mạng Tháng Tám, Q. Tân Bình</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>2 (TP.HCM + Hà Nội)</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>300+ nhân viên</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có</div>
+      </div>
+      <ul class="why-list">
+        <li>Quy mô lớn nhất trong danh sách — tiêu chuẩn 5 sao Hàn Quốc</li>
+        <li>Bộ Y tế cấp phép hoạt động</li>
+        <li>Công nghệ tiên tiến: Phun mày Plascell, &#272;iêu khắc 6D, Hair Stroke</li>
+        <li>300+ y bác sĩ và nhân viên với 10+ năm kinh nghiệm</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Xuất sắc — quy mô lớn nhất, chế độ đãi ngộ tốt, môi trường chuyên nghiệp, cơ hội thăng tiến rõ ràng. Phù hợp cho sự nghiệp ổn định lâu dài.</div>
+      <div class="shop-links">
+        <a href="https://benhvienthammykangnam.com.vn" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+
+    <!-- Shop 3 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-3">3</div>
+        <div class="shop-info">
+          <h3>NP Brows & Lashes x Ukiyo Spa</h3>
+          <div class="shop-type">Studio phun xăm cao cấp (Boutique)</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>165-167 &#272;inh Tiên Hoàng, Q.1</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>1 cơ sở duy nhất</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Boutique — đội ngũ nhỏ, tinh nhuệ</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có</div>
+      </div>
+      <ul class="why-list">
+        <li>Sáng lập bởi Nhung Phan — nghệ nhân tiên phong trong ngành permanent makeup</li>
+        <li>Kỹ thuật độc quyền: Satori Hairstrokes&#8482;</li>
+        <li>Khách quốc tế bay đến Việt Nam để làm tại đây</li>
+        <li>Nhân viên nói tiếng Anh tốt, môi trường quốc tế</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Rất đặc biệt — học hỏi từ Master artist, môi trường quốc tế, kỹ thuật cao cấp. Phù hợp cho người có tay nghề muốn nâng tầm lên phân khúc premium.</div>
+      <div class="shop-links">
+        <a href="https://npbrows.vn/" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+
+    <!-- Shop 4 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">4</div>
+        <div class="shop-info">
+          <h3>B&#7879;nh Vi&#7879;n TM Thu Cúc Sài Gòn</h3>
+          <div class="shop-type">Bệnh viện thẩm mỹ (chuỗi toàn quốc)</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>218 &#272;iện Biên Phủ, Q.3</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>Chuỗi toàn quốc</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Rất lớn — 6.000m² tại SG</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có</div>
+      </div>
+      <ul class="why-list">
+        <li>Tiêu chuẩn quốc tế 5 sao</li>
+        <li>Hệ thống chuỗi lớn nhất — uy tín toàn quốc</li>
+        <li>&#272;a dạng kỹ thuật: điêu khắc Hàn Quốc, 6D, Thái Lan</li>
+        <li>Giấy tờ pháp lý đầy đủ, cơ sở khang trang</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Rất tốt — chuỗi lớn = nhiều vị trí, chế độ phúc lợi bệnh viện, cơ hội luân chuyển giữa các chi nhánh.</div>
+      <div class="shop-links">
+        <a href="https://thammythucuc.vn/" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+
+    <!-- Shop 5 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">5</div>
+        <div class="shop-info">
+          <h3>Taylar Nguyen Beauty & Academy</h3>
+          <div class="shop-type">Thẩm mỹ viện + Học viện đào tạo</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>35 Hùng Vương, Q.5, TP.HCM</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>3 (HCM, Hà Nội, Nghệ An)</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Trung bình — CEO Master 10 năm KN</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có Academy</div>
+      </div>
+      <ul class="why-list">
+        <li>CEO là Master với 10 năm kinh nghiệm thẩm mỹ</li>
+        <li>3 chi nhánh trên cả nước — đang phát triển</li>
+        <li>Dịch vụ cao cấp, toàn diện</li>
+        <li>&#272;ược nhiều KOL và khách hàng review tích cực</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Tốt — có hệ thống đào tạo, cơ hội phát triển cùng thương hiệu đang mở rộng. Phù hợp cho người muốn vừa học vừa làm.</div>
+      <div class="shop-links">
+        <a href="https://taylarnguyen.vn/" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+
+    <!-- Shop 6 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">6</div>
+        <div class="shop-info">
+          <h3>Tuy&#7873;n Lê Beauty Academy</h3>
+          <div class="shop-type">Thẩm mỹ viện + Học viện đào tạo</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>77 &#272;ào Duy Anh, Q. Phú Nhu&#7853;n</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>1 cơ sở</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Trung bình</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có Academy</div>
+      </div>
+      <ul class="why-list">
+        <li>&#272;ào tạo từ cơ bản đến nâng cao — học viện uy tín</li>
+        <li>Liên tục cập nhật trang thiết bị và kỹ thuật mới</li>
+        <li>Chuyên gia thực hiện trực tiếp (không giao cho học viên)</li>
+        <li>Phù hợp cả học nghề và làm đẹp</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Tốt — đặc biệt cho người muốn HỌC NGHỀ. Academy chính quy, có thể vừa học vừa thực hành.</div>
+    </div>
+
+    <!-- Shop 7 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">7</div>
+        <div class="shop-info">
+          <h3>Fleekbrows Studio & Academy</h3>
+          <div class="shop-type">Studio phun xăm + Học viện</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>1138A Trường Sa, Q. Phú Nhu&#7853;n</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>1 cơ sở</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Boutique — đội ngũ nhỏ, chất lượng cao</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có Academy</div>
+      </div>
+      <ul class="why-list">
+        <li>Khách hàng quốc tế bay đến Việt Nam để làm tại đây</li>
+        <li>Review cực kỳ tích cực trên các nền tảng quốc tế</li>
+        <li>Có Academy đào tạo kỹ thuật viên</li>
+        <li>Môi trường boutique — học hỏi kỹ thuật chuyên sâu</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Tốt cho phân khúc cao cấp. Học trực tiếp từ master, khách hàng chất lượng.</div>
+      <div class="shop-links">
+        <a href="https://fleekbrowsacademy.com/" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+
+    <!-- Shop 8 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">8</div>
+        <div class="shop-info">
+          <h3>Timi Eyebrows Microblading</h3>
+          <div class="shop-type">Studio chuyên microblading</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>21 &#272;ường 46, Thảo &#272;iền, Q.2 (Thủ &#272;ức)</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>1 cơ sở</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Boutique — nhỏ, chuyên biệt</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có</div>
+      </div>
+      <ul class="why-list">
+        <li>Chuyên môn sâu về microblading — không làm đại trà</li>
+        <li>Vị trí tại Thảo &#272;iền — khu vực nhiều khách nước ngoài</li>
+        <li>&#272;ánh giá 5 sao, khách hàng rất hài lòng</li>
+        <li>Phong cách phục vụ quốc tế</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Phù hợp cho người muốn chuyên sâu microblading trong môi trường quốc tế. Khách hàng cao cấp.</div>
+      <div class="shop-links">
+        <a href="https://www.timipretty.com/" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+
+    <!-- Shop 9 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">9</div>
+        <div class="shop-info">
+          <h3>DK Eyebrows & Beauty</h3>
+          <div class="shop-type">Studio phun xăm chuyên nghiệp</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>61 Nguyễn Công Trứ, Hai Bà Trưng, Hà Nội</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>1 (Hà Nội) — chưa có tại HCM</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Trung bình — Master Ngoan Minh Vuong</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>&#10003; Có</div>
+      </div>
+      <ul class="why-list">
+        <li>Master Ngoan Minh Vuong — chuyên gia hàng đầu</li>
+        <li>Kỹ thuật Hairstroke máy kỹ thuật số — công nghệ mới nhất</li>
+        <li>100% mực hữu cơ nhập khẩu Châu Âu</li>
+        <li>&#272;ược nhiều báo chí và trang review quốc tế giới thiệu</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Tốt nếu sẵn sàng làm việc tại Hà Nội. Nếu DK mở rộng vào HCM sẽ là cơ hội sớm.</div>
+    </div>
+
+    <!-- Shop 10 -->
+    <div class="card shop-card">
+      <div class="shop-header">
+        <div class="shop-rank-badge shop-rank-default">10</div>
+        <div class="shop-info">
+          <h3>Th&#7849;m M&#7929; Vi&#7879;n Hoài Anh</h3>
+          <div class="shop-type">Thẩm mỹ viện</div>
+        </div>
+      </div>
+      <div class="shop-meta">
+        <div class="meta-item"><div class="meta-label">&#272;&#7883;a ch&#7881;</div>TP.HCM (liên hệ trực tiếp)</div>
+        <div class="meta-item"><div class="meta-label">Chi nhánh</div>1+ cơ sở tại HCM</div>
+        <div class="meta-item"><div class="meta-label">Quy mô</div>Trung bình</div>
+        <div class="meta-item"><div class="meta-label">&#272;ào t&#7841;o</div>Ch&#432;a rõ</div>
+      </div>
+      <ul class="why-list">
+        <li>Nổi tiếng với phun mày, điêu khắc lông mày, sửa mày</li>
+        <li>Máy móc hiện đại, kỹ thuật phẩy sợi tiên tiến</li>
+        <li>Phục vụ cả nam và nữ</li>
+        <li>Chuyên Combo Brows (Hairstroke + Ombre)</li>
+      </ul>
+      <div class="career-box"><strong>C&#417; h&#7897;i ngh&#7873; nghi&#7879;p:</strong> Khá — phù hợp cho người muốn làm tại thẩm mỹ viện truyền thống, học nhiều kỹ thuật đa dạng.</div>
+      <div class="shop-links">
+        <a href="https://thammyhoaianh.com.vn/" class="shop-link" target="_blank">&#127760; Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 3: PRICES ==================== -->
+  <div id="prices" class="section">
+    <h2>B&#7843;ng Giá Tham Kh&#7843;o 2026</h2>
+    <p class="section-subtitle">Giá có thể thay đổi theo cơ sở, kỹ thuật viên, và chương trình khuyến mãi</p>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Kỹ thuật</th>
+          <th>Giá thấp</th>
+          <th>Giá cao</th>
+          <th>&#272;ộ bền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Phun Ombre</td><td>2.000.000&#8363;</td><td>7.000.000&#8363;</td><td>2-4 năm</td></tr>
+        <tr><td>Phun Shading</td><td>2.000.000&#8363;</td><td>7.000.000&#8363;</td><td>2-3 năm</td></tr>
+        <tr><td>&#272;iêu khắc 3D</td><td>1.500.000&#8363;</td><td>5.000.000&#8363;</td><td>1-2 năm</td></tr>
+        <tr><td>&#272;iêu khắc 6D-9D</td><td>2.500.000&#8363;</td><td>8.000.000&#8363;</td><td>1-2 năm</td></tr>
+        <tr><td>Hairstroke máy</td><td>7.000.000&#8363;</td><td>10.000.000&#8363;</td><td>1-2 năm</td></tr>
+        <tr><td><strong>Combo (Hairstroke + Ombre)</strong></td><td><strong>5.000.000&#8363;</strong></td><td><strong>12.000.000&#8363;</strong></td><td><strong>2-3 năm</strong></td></tr>
+        <tr><td>Nano Brows</td><td>1.300.000&#8363;</td><td>5.000.000&#8363;</td><td>1-2 năm</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Xu H&#432;&#7899;ng Màu S&#7855;c 2026</h3>
+    <p style="margin-bottom:12px;color:var(--muted);font-size:0.9rem;">Nguyên tắc: Màu mày nên đậm hơn màu tóc 1-2 tone để tạo sự hài hòa.</p>
+
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="color-sample" style="background:#2C1810;"></div>
+        <div class="color-info">
+          <div class="color-name">Nâu đen</div>
+          <div class="color-desc">Sang trọng, phù hợp tóc đen</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-sample" style="background:#5C3317;"></div>
+        <div class="color-info">
+          <div class="color-name">Nâu socola</div>
+          <div class="color-desc">&#7844;m áp, phổ biến nhất</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-sample" style="background:#8B6914;"></div>
+        <div class="color-info">
+          <div class="color-name">Nâu h&#7841;t d&#7867;</div>
+          <div class="color-desc">Nhẹ nhàng, trẻ trung</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-sample" style="background:#6B5B4B;"></div>
+        <div class="color-info">
+          <div class="color-name">Nâu khói &#127775;</div>
+          <div class="color-desc">Cá tính, xu hướng mới</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="color-sample" style="background:#A0522D;"></div>
+        <div class="color-info">
+          <div class="color-name">Nâu tây</div>
+          <div class="color-desc">Sáng, phù hợp tóc nhuộm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TAB 4: CARE ==================== -->
+  <div id="care" class="section">
+    <h2>Quy Trình Chăm Sóc Sau Phun</h2>
+    <p class="section-subtitle">Giai đoạn hồi phục 4-6 tuần — kiên nhẫn là chìa khóa</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-label">Ngày 1-2</div>
+        <div class="timeline-text">Mày đậm hơn bình thường, hơi sưng nhẹ → BÌNH THƯỜNG</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Ngày 3-7</div>
+        <div class="timeline-text">Bắt đầu đóng vảy, ngứa → KHÔNG GÃI, KHÔNG BÓC</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Ngày 8-14</div>
+        <div class="timeline-text">Mày nhạt đi, có thể thấy loang lổ → BÌNH THƯỜNG, sẽ lên màu lại</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Tuần 3-4</div>
+        <div class="timeline-text">Màu bắt đầu ổn định</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-label">Tuần 4-6</div>
+        <div class="timeline-text">Hoàn toàn hồi phục — thấy kết quả cuối cùng</div>
+      </div>
+    </div>
+
+    <div class="do-dont">
+      <div class="do-box">
+        <h4>&#272;i&#7873;u C&#7846;N làm</h4>
+        <ul>
+          <li>Giữ mày khô (7-10 ngày đầu)</li>
+          <li>Thoa kem dưỡng mỏng theo hướng dẫn</li>
+          <li>Dùng nước muối sinh lý lau nhẹ</li>
+          <li>Nằm ngửa khi ngủ</li>
+          <li>&#272;ội mũ khi ra nắng</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>&#272;i&#7873;u KHÔNG &#273;&#432;&#7907;c làm</h4>
+        <ul>
+          <li>&#272;ể mày dính nước</li>
+          <li>Gãi, bóc vảy</li>
+          <li>Trang điểm vùng mày</li>
+          <li>Tập thể dục nặng (tuần đầu)</li>
+          <li>&#272;i bơi, xông hơi, sauna</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Kiêng &#258;n (Kinh nghi&#7879;m Vi&#7879;t Nam)</h3>
+    <div class="card">
+      <div class="tag-row">
+        <span class="tag tag-pink">Hải sản</span>
+        <span class="tag tag-pink">Thịt bò</span>
+        <span class="tag tag-pink">Thịt gà</span>
+        <span class="tag tag-pink">Trứng</span>
+        <span class="tag tag-pink">Nếp (xôi)</span>
+        <span class="tag tag-pink">&#272;ồ cay</span>
+        <span class="tag tag-pink">Dầu mỡ</span>
+        <span class="tag tag-pink">Rau muống</span>
+        <span class="tag tag-pink">Cà phê</span>
+        <span class="tag tag-pink">Rượu bia</span>
+      </div>
+    </div>
+
+    <h3>7 L&#7901;i Khuyên Cho Ng&#432;&#7901;i M&#7899;i</h3>
+    <ol class="tip-list">
+      <li><strong>Chọn cơ sở uy tín</strong> — Xem portfolio thực tế, đọc review</li>
+      <li><strong>Tư vấn kỹ trước khi làm</strong> — Thử dáng mày bằng bút kẻ trước khi phun</li>
+      <li><strong>Hiểu về da mình</strong> — Da dầu → Ombre/Powder; Da khô → Hairstroke</li>
+      <li><strong>&#272;ừng chọn giá rẻ nhất</strong> — Chất lượng mực và tay nghề ảnh hưởng trực tiếp kết quả</li>
+      <li><strong>Kiên nhẫn với quá trình hồi phục</strong> — Mày sẽ thay đổi nhiều trong 4-6 tuần đầu</li>
+      <li><strong>Dặm lại đúng hẹn</strong> — Sau 6-8 tuần cần dặm lần 1 để hoàn thiện</li>
+      <li><strong>Bảo vệ khỏi nắng</strong> — Tia UV làm phai màu nhanh</li>
+    </ol>
+  </div>
+
+  <!-- ==================== TAB 5: CAREER ==================== -->
+  <div id="career" class="section">
+    <h2>H&#432;&#7899;ng D&#7851;n S&#7921; Nghi&#7879;p</h2>
+    <p class="section-subtitle">So sánh cơ hội nghề nghiệp và lời khuyên khi xin việc</p>
+
+    <div class="career-grid">
+      <div class="career-card">
+        <h4>&#7892;n &#272;&#7883;nh + Ch&#7871; &#272;&#7897; T&#7889;t</h4>
+        <p>Muốn sự nghiệp ổn định lâu dài, chế độ đãi ngộ tốt, môi trường chuyên nghiệp</p>
+        <div class="arrow">→ Kangnam (300+ NV) hoặc Thu Cúc (chuỗi BV)</div>
+      </div>
+      <div class="career-card">
+        <h4>H&#7885;c Ngh&#7873; T&#7915; &#272;&#7847;u</h4>
+        <p>Mới bắt đầu, muốn học bài bản từ cơ bản đến nâng cao</p>
+        <div class="arrow">→ Miss Tram Academy hoặc Taylar Nguyen Academy</div>
+      </div>
+      <div class="career-card">
+        <h4>Cao C&#7845;p + Qu&#7889;c T&#7871;</h4>
+        <p>Có tay nghề, muốn nâng tầm lên phân khúc premium, khách quốc tế</p>
+        <div class="arrow">→ NP Brows, Fleekbrows, hoặc Timi</div>
+      </div>
+      <div class="career-card">
+        <h4>V&#7915;a H&#7885;c V&#7915;a Làm</h4>
+        <p>Muốn vừa học nghề vừa thực hành tại chỗ</p>
+        <div class="arrow">→ Tuyền Lê Beauty Academy hoặc Taylar Nguyen</div>
+      </div>
+      <div class="career-card">
+        <h4>M&#7903; Ti&#7879;m Riêng</h4>
+        <p>Mục tiêu dài hạn là mở studio boutique riêng</p>
+        <div class="arrow">→ Học tại Fleekbrows/Miss Tram Academy → lấy chứng chỉ → tích lũy KN → mở studio</div>
+      </div>
+    </div>
+
+    <h3>L&#7901;i Khuyên Khi Xin Vi&#7879;c</h3>
+    <ol class="tip-list">
+      <li><strong>Chuẩn bị portfolio</strong> — Chụp ảnh trước/sau các tác phẩm đã làm (nếu có)</li>
+      <li><strong>Học cơ bản trước</strong> — Nhiều cơ sở yêu cầu có chứng chỉ hoặc kinh nghiệm cơ bản</li>
+      <li><strong>Follow Instagram/Facebook</strong> của các cơ sở — Nhiều nơi đăng tuyển trên mạng xã hội</li>
+      <li><strong>&#272;ến trực tiếp</strong> — Gặp mặt và thể hiện sự nhiệt tình luôn có giá trị hơn CV online</li>
+      <li><strong>Hỏi về lộ trình phát triển</strong> — Cơ sở tốt sẽ có lộ trình rõ ràng: học viên → kỹ thuật viên → master</li>
+      <li><strong>Kiểm tra giấy phép</strong> — &#272;ảm bảo cơ sở có giấy phép Bộ Y tế (quan trọng cho sự nghiệp lâu dài)</li>
+      <li><strong>&#272;ầu tư vào kỹ năng</strong> — Ngành thay đổi nhanh; ai học liên tục sẽ đi xa</li>
+    </ol>
+
+    <div class="card" style="margin-top:24px;background:var(--accent-light);border-color:var(--accent);">
+      <h3 style="margin-top:0;color:var(--accent);">Trang Tuy&#7875;n D&#7909;ng</h3>
+      <p style="font-size:0.9rem;">Kiểm tra các trang sau để tìm cơ hội việc làm mới nhất:</p>
+      <div class="shop-links" style="margin-top:10px;">
+        <a href="https://vieclam24h.vn" class="shop-link" target="_blank">vieclam24h.vn</a>
+        <a href="https://topcv.vn" class="shop-link" target="_blank">topcv.vn</a>
+        <a href="https://www.facebook.com" class="shop-link" target="_blank">Facebook Groups</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Báo cáo này được tổng hợp từ nhiều nguồn uy tín. Giá cả và xu hướng có thể thay đổi theo thời gian và khu vực. Nên liên hệ trực tiếp để biết thông tin tuyển dụng mới nhất.</p>
+  <div class="sources">
+    <a href="https://thammymisstram.vn">thammymisstram.vn</a>
+    <a href="https://benhvienthammykangnam.com.vn">kangnam.com.vn</a>
+    <a href="https://npbrows.vn">npbrows.vn</a>
+    <a href="https://thammythucuc.vn">thammythucuc.vn</a>
+    <a href="https://taylarnguyen.vn">taylarnguyen.vn</a>
+    <a href="https://fleekbrowsacademy.com">fleekbrowsacademy.com</a>
+    <a href="https://timipretty.com">timipretty.com</a>
+    <a href="https://thammyhoaianh.com.vn">thammyhoaianh.com.vn</a>
+    <a href="https://vietnamdoneright.com">vietnamdoneright.com</a>
+    <a href="https://mytour.vn">mytour.vn</a>
+    <a href="https://bookingcare.vn">bookingcare.vn</a>
+    <a href="https://seoulcenter.vn">seoulcenter.vn</a>
+  </div>
+</div>
+
+<script>
+  function showTab(tabId) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
