@@ -63,6 +63,26 @@ body.neu footer { background: #e0e0e0; border: none; box-shadow: inset 0 2px 8px
 body.neu .font-panel { background: #e0e0e0; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; border: none; }
 body.neu .font-option:hover { background: #d0d0d0; }
 
+/* Material 3 theme */
+body.m3 { background: #FEF7FF !important; background-image: none !important; }
+body.m3 .card { background: #FFFBFE; border: none; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); transition: box-shadow 0.2s, transform 0.2s; }
+body.m3 .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
+body.m3 .card-img { border-radius: 16px 16px 0 0; }
+body.m3 .card-body .tag { background: #EADDFF; color: #21005D; border-radius: 8px; font-weight: 600; }
+body.m3 .card-body .tag-coding { background: #F3E8FD; color: #4A148C; }
+body.m3 .card-body .tag-education { background: #E8F5E9; color: #1B5E20; }
+body.m3 .card-body .tag-automation { background: #E3F2FD; color: #0D47A1; }
+body.m3 .card-body .tag-research { background: #FFF8E1; color: #F57F17; }
+body.m3 header { background: #1C1B1F; }
+body.m3 .tab { background: transparent; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 20px; }
+body.m3 .tab.active { background: #EADDFF; color: #21005D; border-color: #EADDFF; }
+body.m3 footer { background: #FEF7FF; border-color: #E7E0EC; }
+body.m3 .font-panel { background: #FFFBFE; border: 1px solid #E7E0EC; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+body.m3 .font-option:hover { background: #EADDFF; border-color: transparent; }
+body.m3 .font-option.active { background: #EADDFF; border-color: #6750A4; }
+body.m3 .font-btn { background: #6750A4; }
+body.m3 .bg-opt.active, body.m3 .theme-opt.active { border-color: #6750A4 !important; box-shadow: 0 0 0 2px #EADDFF; }
+
 /* Header */
 header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 48px 24px 24px; }
 .header-inner { max-width: 1100px; margin: 0 auto; }
@@ -183,6 +203,7 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
       <button class="bg-opt theme-opt active" onclick="setTheme('default',this)" title="Default" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:white;cursor:pointer;font-size:11px;font-weight:700">Aa</button>
       <button class="bg-opt theme-opt" onclick="setTheme('glass',this)" title="Glassmorphism" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:rgba(255,255,255,0.4);backdrop-filter:blur(4px);cursor:pointer;font-size:11px">🪟</button>
       <button class="bg-opt theme-opt" onclick="setTheme('neu',this)" title="Neumorphism" style="width:36px;height:36px;border-radius:12px;border:none;background:#e0e0e0;box-shadow:3px 3px 6px #bebebe,-3px -3px 6px #ffffff;cursor:pointer;font-size:11px">🔘</button>
+      <button class="bg-opt theme-opt" onclick="setTheme('m3',this)" title="Material 3" style="width:36px;height:36px;border-radius:14px;border:none;background:linear-gradient(135deg,#D0BCFF,#EADDFF);cursor:pointer;font-size:11px">M3</button>
     </div>
     <h4>Background</h4>
     <div style="display:flex;gap:6px;margin-bottom:12px">
@@ -209,7 +230,7 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 </div>
 <script>
 function setTheme(theme, el) {
-  document.body.classList.remove('glass', 'neu');
+  document.body.classList.remove('glass', 'neu', 'm3');
   if (theme !== 'default') document.body.classList.add(theme);
   document.querySelectorAll('.theme-opt').forEach(o => o.classList.remove('active'));
   el.classList.add('active');
