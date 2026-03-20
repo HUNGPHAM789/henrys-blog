@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building an AI Assistant That Actually Remembers: The OpenClaw Memory System — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8; --card: #fff; --text: #1a1a1a; --muted: #6B7280;
+  --accent: #FF6B35; --accent-light: #FFF3EE; --border: #E5E5E5;
+  --green: #58CC02; --blue: #1CB0F6; --purple: #CE82FF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Comfortaa', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+.hero { width: 100%; height: 320px; background-size: cover; background-position: center; position: relative; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.7)); }
+.hero-text { position: absolute; bottom: 32px; left: 32px; right: 32px; color: white; }
+.hero-text h1 { font-size: 2rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+.hero-meta { font-size: 0.85rem; opacity: 0.8; }
+.hero-tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: var(--accent); color: white; margin-bottom: 12px; }
+nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; }
+nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+nav a:hover { color: var(--accent); }
+nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+article h2 { font-size: 1.4rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+article h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+article p { margin-bottom: 16px; font-size: 0.95rem; color: #374151; }
+article ul { margin: 0 0 16px 24px; }
+article li { margin-bottom: 8px; font-size: 0.93rem; color: #374151; }
+article a { color: var(--accent); text-decoration: underline; }
+article hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+article img { width: 100%; border-radius: 16px; margin: 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+article figure { margin: 20px 0; }
+article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
+.callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
+.bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
+.bookmark:hover { border-color: var(--accent); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin: 24px 20px; font-size: 0.9rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+.back-link:hover { color: var(--accent); }
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+@media (max-width: 600px) {
+  .hero { height: 240px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text { bottom: 20px; left: 16px; right: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/henrys-blog/" class="logo">Henry's Blog</a>
+  <a href="/henrys-blog/">Home</a>
+  <a href="/henrys-blog/#openclaw">OpenClaw</a>
+</nav>
+<div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-memory-system.png')"><div class="hero-overlay"></div><div class="hero-text"><span class="hero-tag">Automation</span><h1>Building an AI Assistant That Actually Remembers: The OpenClaw Memory System</h1><span class="hero-meta">2026-03-20</span></div></div>
+<a href="/henrys-blog/" class="back-link">← Back to blog</a>
+<article>
+<div class="callout"><span class="callout-icon">🧠</span><div class="callout-text">Every AI session starts fresh. OpenClaw's memory system gives your agent continuity — it remembers decisions, learns from mistakes, and picks up where it left off.</div></div><hr><h2>❌ The Problem</h2><p>ChatGPT, Claude, Gemini — they all forget everything between sessions. You repeat context. You re-explain decisions. You lose momentum. It's like hiring a brilliant contractor with amnesia.</p><div class="callout"><span class="callout-icon">🔄</span><div class="callout-text">SESSION 1: "We decided to use Supabase for auth"
+SESSION 2: "What database are we using?"
+SESSION 3: "Should we use Firebase or Supabase?"
+
+😤 Every. Single. Time.</div></div><hr><h2>💡 The OpenClaw Memory Architecture</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-layers.png" alt="Layered memory: SOUL → USER → Daily Notes → Long-term → Gotchas" loading="lazy"><figcaption>Layered memory: SOUL → USER → Daily Notes → Long-term → Gotchas</figcaption></figure><div class="callout"><span class="callout-icon">🗂️</span><div class="callout-text">MEMORY LAYERS
+━━━━━━━━━━━━━━━━━━━━
+
+📋 SOUL.md
+   Who the agent IS — personality, values, boundaries
+
+👤 USER.md
+   Who the human IS — preferences, projects, context
+
+📝 memory/YYYY-MM-DD.md
+   Daily notes — raw logs of what happened each day
+
+🧠 MEMORY.md
+   Long-term memory — curated insights, consolidated weekly
+
+⚡ memory/gotchas.md
+   "Never do this again" — mistakes that become permanent rules
+
+📊 memory/api-keys.md
+   All credentials in one place with rotation strategy
+
+📌 memory/knowledge-index.md
+   Pointer file — where to find everything</div></div><hr><h2>🔧 How It Works in Practice</h2><h3>Session Startup (automatic)</h3><p>Every new session, the agent reads: SOUL.md → USER.md → today's daily notes → MEMORY.md → api-keys.md. No human prompting needed. The agent wakes up knowing who it is, who you are, and what happened recently.</p><h3>During Work</h3><ul><li>Decisions get logged to daily notes: "[Decision] Video mode uses 4 stages"</li><li>Mistakes get logged to gotchas.md: "[2026-03-19] Vercel has 100 deploys/day limit"</li><li>New credentials get saved to 3 places (api-keys + config + knowledge-index)</li><li>Active tasks get written to memory/active-tasks.json for handoff</li></ul><h3>Self-Evolution</h3><p>The agent detects patterns in its own mistakes and proposes rule upgrades. Example: after 3 PowerShell escaping failures, it added a permanent rule: "Never inline complex JS in PowerShell — always write to a .js file first."</p><div class="callout"><span class="callout-icon">🧬</span><div class="callout-text">Pattern detected → Rule proposed → Human approves → Added to AGENTS.md with timestamp
+
+The agent literally rewrites its own operating manual.</div></div><hr><h2>📊 The Heartbeat System</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-heartbeat.png" alt="The heartbeat cycle: check → work → deploy → report → repeat" loading="lazy"><figcaption>The heartbeat cycle: check → work → deploy → report → repeat</figcaption></figure><div class="callout"><span class="callout-icon">💓</span><div class="callout-text">HEARTBEAT CYCLE (every 30 min)
+━━━━━━━━━━━━━━━━━━━━
+1. Check active-tasks.json → continue unfinished work
+2. Check project status → pick next phase
+3. Execute one phase of autonomous work
+4. Update project tracking
+5. Report to human only on: completion, error, or blocker
+
+Result: the agent works while you sleep 🌙</div></div><hr><h2>🔗 Tool Integration</h2><p>The memory system connects to everything:</p><ul><li>Supabase MCP — query the database directly ("how many lessons this week?")</li><li>Notion MCP — auto-create journal entries with rich formatting</li><li>GitHub CLI — commit, push, check CI status</li><li>Cron jobs — scheduled reminders, daily digests, health checks</li><li>Vercel API — deploy, check status, manage environment variables</li></ul><hr><h2>📈 Real Results</h2><div class="callout"><span class="callout-icon">📊</span><div class="callout-text">8 days of continuous development
+━━━━━━━━━━━━━━━━━━━━
+✅ 200+ commits across the project
+✅ Zero repeated decisions (all in MEMORY.md)
+✅ 11 gotchas preventing repeated mistakes
+✅ Autonomous work during human AFK periods
+✅ Project journal auto-generated in Notion
+✅ Agent upgraded its own rules 6 times</div></div><hr><h2>🚀 Getting Started</h2><p>OpenClaw is open source. The memory system works out of the box:</p><ul><li>Install OpenClaw → it creates SOUL.md, USER.md, MEMORY.md, AGENTS.md</li><li>Customize SOUL.md with your agent's personality</li><li>Fill USER.md with your context</li><li>The agent starts building memory from day one</li><li>After a week, it knows your preferences better than any chatbot ever could</li></ul><hr><div class="callout"><span class="callout-icon">💡</span><div class="callout-text">An AI assistant without memory is just autocomplete with extra steps. OpenClaw gives your agent a life story.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://docs.openclaw.ai" class="bookmark" target="_blank">https://docs.openclaw.ai</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
+</article>
+<footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+</body>
+</html>

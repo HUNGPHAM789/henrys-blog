@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8; --card: #fff; --text: #1a1a1a; --muted: #6B7280;
+  --accent: #FF6B35; --accent-light: #FFF3EE; --border: #E5E5E5;
+  --green: #58CC02; --blue: #1CB0F6; --purple: #CE82FF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Comfortaa', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+.hero { width: 100%; height: 320px; background-size: cover; background-position: center; position: relative; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.7)); }
+.hero-text { position: absolute; bottom: 32px; left: 32px; right: 32px; color: white; }
+.hero-text h1 { font-size: 2rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+.hero-meta { font-size: 0.85rem; opacity: 0.8; }
+.hero-tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: var(--accent); color: white; margin-bottom: 12px; }
+nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; }
+nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+nav a:hover { color: var(--accent); }
+nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+article h2 { font-size: 1.4rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+article h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+article p { margin-bottom: 16px; font-size: 0.95rem; color: #374151; }
+article ul { margin: 0 0 16px 24px; }
+article li { margin-bottom: 8px; font-size: 0.93rem; color: #374151; }
+article a { color: var(--accent); text-decoration: underline; }
+article hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+article img { width: 100%; border-radius: 16px; margin: 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+article figure { margin: 20px 0; }
+article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
+.callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
+.bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
+.bookmark:hover { border-color: var(--accent); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin: 24px 20px; font-size: 0.9rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+.back-link:hover { color: var(--accent); }
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+@media (max-width: 600px) {
+  .hero { height: 240px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text { bottom: 20px; left: 16px; right: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/henrys-blog/" class="logo">Henry's Blog</a>
+  <a href="/henrys-blog/">Home</a>
+  <a href="/henrys-blog/#openclaw">OpenClaw</a>
+</nav>
+<div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-74-commits.png')"><div class="hero-overlay"></div><div class="hero-text"><span class="hero-tag">Coding</span><h1>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer</h1><span class="hero-meta">2026-03-20</span></div></div>
+<a href="/henrys-blog/" class="back-link">← Back to blog</a>
+<article>
+<div class="callout"><span class="callout-icon">🚀</span><div class="callout-text">One human. One AI assistant. 74 commits. 4 lesson modes shipped. All in a single day.</div></div><hr><h2>❌ The Problem</h2><p>Building an EdTech platform solo is overwhelming. You need frontend, backend, AI integration, TTS, video processing, database design — and you need to ship fast before motivation dies. Traditional development: 1-2 features per week if you're lucky.</p><h2>📊 Before vs After OpenClaw</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-before-after.png" alt="Before vs After: Development with an AI pair programmer" loading="lazy"><figcaption>Before vs After: Development with an AI pair programmer</figcaption></figure><div class="callout"><span class="callout-icon">🐌</span><div class="callout-text">WITHOUT AI PAIR PROGRAMMER
+━━━━━━━━━━━━━━━━━━━━
+📅 1 week → 1-2 features
+🧑‍💻 Context switching between docs, Stack Overflow, testing
+😤 Bugs take hours to trace
+📝 No documentation gets written
+🔄 Manual deploys, manual testing</div></div><div class="callout"><span class="callout-icon">⚡</span><div class="callout-text">WITH OPENCLAW + JARVIS
+━━━━━━━━━━━━━━━━━━━━
+📅 1 day → 74 commits, 4 complete lesson modes
+🧑‍💻 Say what you want → AI writes, tests, deploys
+🐛 Bugs fixed in real-time during conversation
+📝 Auto-documented in memory + Notion journal
+🚀 Auto-push to GitHub → auto-deploy to Vercel</div></div><hr><h2>🔧 How It Works</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-pipeline.png" alt="The development pipeline: human describes → AI executes → auto-deploys" loading="lazy"><figcaption>The development pipeline: human describes → AI executes → auto-deploys</figcaption></figure><h3>Step 1: Boss describes the feature</h3><p>"Merge all question types into one practice stage — video on top, 1 question at a time"</p><h3>Step 2: Jarvis plans + executes</h3><ul><li>Reads the codebase to understand current architecture</li><li>Edits the Gemini prompt (API route) to restructure the output</li><li>Updates the lesson viewer (frontend) with new CSS + JS</li><li>Commits + pushes to GitHub in one atomic change</li></ul><h3>Step 3: Vercel auto-deploys</h3><p>Push to master → Vercel builds → live in ~2 minutes. Boss refreshes and tests.</p><h3>Step 4: Iterate in real-time</h3><p>"The matching game looks dull" → Jarvis redesigns with gradient bg, shake animation, pill score badge → pushed in 3 minutes.</p><hr><h2>🏗️ The Stack</h2><div class="callout"><span class="callout-icon">🏗️</span><div class="callout-text">┌─────────────────────────────────┐
+│  👤 Boss (Telegram)             │
+│         ↕️ natural language       │
+│  🤖 Jarvis (OpenClaw agent)     │
+│         ↕️ tools                  │
+│  ┌───────────────────────────┐  │
+│  │ Claude Code  │ Gemini CLI │  │
+│  │ GitHub CLI   │ Supabase   │  │
+│  │ Vercel API   │ Node.js    │  │
+│  └───────────────────────────┘  │
+│         ↕️ auto-deploy           │
+│  🌐 antera.vercel.app (live)    │
+└─────────────────────────────────┘</div></div><hr><h2>📈 Results</h2><div class="callout"><span class="callout-icon">🏆</span><div class="callout-text">74 commits │ 4 lesson modes │ 22+ files restyled │ YouTube transcript pipeline │ All in ~14 hours</div></div><ul><li>Standard mode: flip cards, matching games, quizzes, dialogues, speaking practice</li><li>Decision mode: branching roleplay with social score tracking</li><li>Video mode: YouTube URL → AI generates full interactive lesson with shadowing</li><li>IELTS mode: Part 1 &amp; 2 generators (auto-committed)</li><li>Bubbly UI redesign across entire app</li><li>Animated ant loading screen 🐜</li></ul><hr><h2>💡 Key Takeaway</h2><div class="callout"><span class="callout-icon">🧠</span><div class="callout-text">OpenClaw turns your AI assistant into a full development team. You describe what you want in plain language, and the agent handles code, testing, deployment, and documentation. The human stays in the driver's seat — making product decisions, not debugging semicolons.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a>
+</article>
+<footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+</body>
+</html>

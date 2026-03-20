@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turn Any YouTube Video into an ESL Lesson in 60 Seconds — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8; --card: #fff; --text: #1a1a1a; --muted: #6B7280;
+  --accent: #FF6B35; --accent-light: #FFF3EE; --border: #E5E5E5;
+  --green: #58CC02; --blue: #1CB0F6; --purple: #CE82FF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Comfortaa', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+.hero { width: 100%; height: 320px; background-size: cover; background-position: center; position: relative; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.7)); }
+.hero-text { position: absolute; bottom: 32px; left: 32px; right: 32px; color: white; }
+.hero-text h1 { font-size: 2rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
+.hero-meta { font-size: 0.85rem; opacity: 0.8; }
+.hero-tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: var(--accent); color: white; margin-bottom: 12px; }
+nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; }
+nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+nav a:hover { color: var(--accent); }
+nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+article h2 { font-size: 1.4rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+article h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+article p { margin-bottom: 16px; font-size: 0.95rem; color: #374151; }
+article ul { margin: 0 0 16px 24px; }
+article li { margin-bottom: 8px; font-size: 0.93rem; color: #374151; }
+article a { color: var(--accent); text-decoration: underline; }
+article hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+article img { width: 100%; border-radius: 16px; margin: 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+article figure { margin: 20px 0; }
+article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
+.callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
+.callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
+.bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
+.bookmark:hover { border-color: var(--accent); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin: 24px 20px; font-size: 0.9rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+.back-link:hover { color: var(--accent); }
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+@media (max-width: 600px) {
+  .hero { height: 240px; }
+  .hero-text h1 { font-size: 1.4rem; }
+  .hero-text { bottom: 20px; left: 16px; right: 16px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/henrys-blog/" class="logo">Henry's Blog</a>
+  <a href="/henrys-blog/">Home</a>
+  <a href="/henrys-blog/#openclaw">OpenClaw</a>
+</nav>
+<div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-youtube-esl.png')"><div class="hero-overlay"></div><div class="hero-text"><span class="hero-tag">Education</span><h1>Turn Any YouTube Video into an ESL Lesson in 60 Seconds</h1><span class="hero-meta">2026-03-20</span></div></div>
+<a href="/henrys-blog/" class="back-link">← Back to blog</a>
+<article>
+<div class="callout"><span class="callout-icon">🎬</span><div class="callout-text">Teachers paste a YouTube URL. 60 seconds later: a full interactive ESL lesson with shadowing, quizzes, and a cheat sheet.</div></div><hr><h2>❌ The Problem</h2><p>ESL teachers spend 2-4 hours creating a single lesson from a YouTube video. They manually transcribe, pick vocabulary, write questions, format handouts. Most give up and just play the video in class with no structure.</p><hr><h2>💡 The Breakthrough</h2><p>YouTube aggressively blocks scraping from cloud servers. We tried 4 methods:</p><div class="callout"><span class="callout-icon">🚫</span><div class="callout-text">❌ youtube-transcript library → blocked on Vercel
+❌ InnerTube API → blocked on Vercel
+❌ Direct caption scraping → IP-locked
+❌ Client-side fetch → CORS blocked</div></div><div class="callout"><span class="callout-icon">✅</span><div class="callout-text">✅ Gemini fileData API → feed the YouTube URL directly to Gemini.
+Gemini WATCHES the video and extracts the transcript.
+No scraping. No CORS. Works on Shorts, Live, anything.</div></div><p>"Sometimes the best solution isn't fighting the wall — it's walking around it."</p><hr><h2>📊 The Pipeline</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-pipeline.png" alt="YouTube → Gemini → Interactive ESL Lesson" loading="lazy"><figcaption>YouTube → Gemini → Interactive ESL Lesson</figcaption></figure><div class="callout"><span class="callout-icon">👩‍🏫</span><div class="callout-text">TEACHER FLOW (3 clicks)
+━━━━━━━━━━━━━━━━━━━━
+1️⃣  Paste YouTube URL
+2️⃣  Pick CEFR level (A1-C2)
+3️⃣  Click Generate
+
+🐜 Ant walks across screen with fun facts...
+
+✅ Full lesson ready in ~60 seconds</div></div><hr><h2>🎯 What Gets Generated</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-stages.png" alt="4 stages: Intro → Key Expressions → Practice → Cheat Sheet" loading="lazy"><figcaption>4 stages: Intro → Key Expressions → Practice → Cheat Sheet</figcaption></figure><h3>Stage 1: Intro</h3><ul><li>Full embedded YouTube video</li><li>AI-generated overview + learning goals</li></ul><h3>Stage 2: Key Expressions</h3><ul><li>2-column phrase cards with ▶️ play buttons</li><li>Each button plays the exact video clip where the phrase appears</li><li>Vietnamese translations + sentence context</li><li>Interactive matching game</li></ul><h3>Stage 3: Video Practice</h3><ul><li>Mini video player pinned on top (always visible)</li><li>3-4 shadowing cards: listen to native speaker → repeat</li><li>8-10 MCQ + fill-in-blank questions (one at a time)</li><li>3-4 sentence ordering questions</li><li>2-3 "phrases in context" questions</li><li>Total: 18-22 interactive items, all sequential</li></ul><h3>Stage 4: Cheat Sheet</h3><ul><li>All key phrases (English + Vietnamese)</li><li>Full vocabulary list with definitions</li><li>Communication tips from the video</li><li>Video player for rewatching</li></ul><hr><h2>🔧 Technical Architecture</h2><div class="callout"><span class="callout-icon">⚙️</span><div class="callout-text">YouTube URL
+    ↓
+Gemini 2.5 Flash (fileData API)
+    ↓ transcript + timestamps
+Clean Transcript API
+    ↓ sections, vocab, key phrases
+Generate Lesson API (Gemini)
+    ↓ structured HTML with interactive components
+Supabase (storage)
+    ↓
+Lesson Viewer (Next.js)
+    ↓ sequential quiz flow, TTS, video clips
+Student's phone 📱</div></div><hr><h2>📈 Impact</h2><div class="callout"><span class="callout-icon">📊</span><div class="callout-text">⏱️ 2-4 hours → 60 seconds
+📚 Works with ANY YouTube video
+🎯 Adapts difficulty to CEFR level
+💰 $0 cost (Gemini free tier)
+🌐 Vietnamese + English bilingual</div></div><hr><h2>🎥 Long Video Support</h2><p>For videos over 10 minutes, the system shows a section picker. Teachers select which parts to teach. Only those segments are used for lesson generation — keeping lessons focused and manageable.</p><hr><div class="callout"><span class="callout-icon">🐾</span><div class="callout-text">Built with OpenClaw + Gemini 2.5 Flash. The entire video lesson pipeline was designed, built, and deployed in a single evening session.</div></div><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
+</article>
+<footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+</body>
+</html>
