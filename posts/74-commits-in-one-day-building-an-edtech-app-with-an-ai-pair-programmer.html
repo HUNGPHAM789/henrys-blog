@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer — Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
 
 :root {
@@ -88,7 +89,7 @@ body.dark.neu footer { background: #2d2d2d; }
 body.dark.neu .font-panel { background: #2d2d2d; box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040; }
 
 /* ── Material 3 ── */
-body.m3 { background: #FEF7FF !important; background-image: none !important; }
+body.m3 { background: #FEF7FF !important; }
 body.m3 .card { background: #FFFBFE; border: none; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); }
 body.m3 .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
 body.m3 .card-body .tag { background: #EADDFF; color: #21005D; border-radius: 8px; }
@@ -177,7 +178,7 @@ article figure { margin: 20px 0; }
 article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
 article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
 .callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
-.callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
 .callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
 .bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
 .bookmark:hover { border-color: var(--accent); }
@@ -195,19 +196,19 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <div class="hero-wrapper"><div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-74-commits.png')"></div><div class="hero-info"><span class="hero-tag">Coding</span><h1>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer</h1><span class="hero-meta">2026-03-20</span></div></div>
 <a href="/henrys-blog/" class="back-link">← Back to blog</a>
 <article>
-<div class="callout"><span class="callout-icon">🚀</span><div class="callout-text">One human. One AI assistant. 74 commits. 4 lesson modes shipped. All in a single day.</div></div><hr><h2>❌ The Problem</h2><p>Building an EdTech platform solo is overwhelming. You need frontend, backend, AI integration, TTS, video processing, database design — and you need to ship fast before motivation dies. Traditional development: 1-2 features per week if you're lucky.</p><h2>📊 Before vs After OpenClaw</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-before-after.png" alt="Before vs After: Development with an AI pair programmer" loading="lazy"><figcaption>Before vs After: Development with an AI pair programmer</figcaption></figure><div class="callout"><span class="callout-icon">🐌</span><div class="callout-text">WITHOUT AI PAIR PROGRAMMER
+<div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">One human. One AI assistant. 74 commits. 4 lesson modes shipped. All in a single day.</div></div><hr><h2>❌ The Problem</h2><p>Building an EdTech platform solo is overwhelming. You need frontend, backend, AI integration, TTS, video processing, database design — and you need to ship fast before motivation dies. Traditional development: 1-2 features per week if you're lucky.</p><h2>📊 Before vs After OpenClaw</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-before-after.png" alt="Before vs After: Development with an AI pair programmer" loading="lazy"><figcaption>Before vs After: Development with an AI pair programmer</figcaption></figure><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">WITHOUT AI PAIR PROGRAMMER
 ━━━━━━━━━━━━━━━━━━━━
 📅 1 week → 1-2 features
 🧑‍💻 Context switching between docs, Stack Overflow, testing
 😤 Bugs take hours to trace
 📝 No documentation gets written
-🔄 Manual deploys, manual testing</div></div><div class="callout"><span class="callout-icon">⚡</span><div class="callout-text">WITH OPENCLAW + JARVIS
+🔄 Manual deploys, manual testing</div></div><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">WITH OPENCLAW + JARVIS
 ━━━━━━━━━━━━━━━━━━━━
 📅 1 day → 74 commits, 4 complete lesson modes
 🧑‍💻 Say what you want → AI writes, tests, deploys
 🐛 Bugs fixed in real-time during conversation
 📝 Auto-documented in memory + Notion journal
-🚀 Auto-push to GitHub → auto-deploy to Vercel</div></div><hr><h2>🔧 How It Works</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-pipeline.png" alt="The development pipeline: human describes → AI executes → auto-deploys" loading="lazy"><figcaption>The development pipeline: human describes → AI executes → auto-deploys</figcaption></figure><h3>Step 1: Boss describes the feature</h3><p>"Merge all question types into one practice stage — video on top, 1 question at a time"</p><h3>Step 2: Jarvis plans + executes</h3><ul><li>Reads the codebase to understand current architecture</li><li>Edits the Gemini prompt (API route) to restructure the output</li><li>Updates the lesson viewer (frontend) with new CSS + JS</li><li>Commits + pushes to GitHub in one atomic change</li></ul><h3>Step 3: Vercel auto-deploys</h3><p>Push to master → Vercel builds → live in ~2 minutes. Boss refreshes and tests.</p><h3>Step 4: Iterate in real-time</h3><p>"The matching game looks dull" → Jarvis redesigns with gradient bg, shake animation, pill score badge → pushed in 3 minutes.</p><hr><h2>🏗️ The Stack</h2><div class="callout"><span class="callout-icon">🏗️</span><div class="callout-text">┌─────────────────────────────────┐
+🚀 Auto-push to GitHub → auto-deploy to Vercel</div></div><hr><h2>🔧 How It Works</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-pipeline.png" alt="The development pipeline: human describes → AI executes → auto-deploys" loading="lazy"><figcaption>The development pipeline: human describes → AI executes → auto-deploys</figcaption></figure><h3>Step 1: Boss describes the feature</h3><p>"Merge all question types into one practice stage — video on top, 1 question at a time"</p><h3>Step 2: Jarvis plans + executes</h3><ul><li>Reads the codebase to understand current architecture</li><li>Edits the Gemini prompt (API route) to restructure the output</li><li>Updates the lesson viewer (frontend) with new CSS + JS</li><li>Commits + pushes to GitHub in one atomic change</li></ul><h3>Step 3: Vercel auto-deploys</h3><p>Push to master → Vercel builds → live in ~2 minutes. Boss refreshes and tests.</p><h3>Step 4: Iterate in real-time</h3><p>"The matching game looks dull" → Jarvis redesigns with gradient bg, shake animation, pill score badge → pushed in 3 minutes.</p><hr><h2>🏗️ The Stack</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">┌─────────────────────────────────┐
 │  👤 Boss (Telegram)             │
 │         ↕️ natural language       │
 │  🤖 Jarvis (OpenClaw agent)     │
@@ -219,17 +220,17 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 │  └───────────────────────────┘  │
 │         ↕️ auto-deploy           │
 │  🌐 antera.vercel.app (live)    │
-└─────────────────────────────────┘</div></div><hr><h2>📈 Results</h2><div class="callout"><span class="callout-icon">🏆</span><div class="callout-text">74 commits │ 4 lesson modes │ 22+ files restyled │ YouTube transcript pipeline │ All in ~14 hours</div></div><ul><li>Standard mode: flip cards, matching games, quizzes, dialogues, speaking practice</li><li>Decision mode: branching roleplay with social score tracking</li><li>Video mode: YouTube URL → AI generates full interactive lesson with shadowing</li><li>IELTS mode: Part 1 &amp; 2 generators (auto-committed)</li><li>Bubbly UI redesign across entire app</li><li>Animated ant loading screen 🐜</li></ul><hr><h2>💡 Key Takeaway</h2><div class="callout"><span class="callout-icon">🧠</span><div class="callout-text">OpenClaw turns your AI assistant into a full development team. You describe what you want in plain language, and the agent handles code, testing, deployment, and documentation. The human stays in the driver's seat — making product decisions, not debugging semicolons.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a>
+└─────────────────────────────────┘</div></div><hr><h2>📈 Results</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">74 commits │ 4 lesson modes │ 22+ files restyled │ YouTube transcript pipeline │ All in ~14 hours</div></div><ul><li>Standard mode: flip cards, matching games, quizzes, dialogues, speaking practice</li><li>Decision mode: branching roleplay with social score tracking</li><li>Video mode: YouTube URL → AI generates full interactive lesson with shadowing</li><li>IELTS mode: Part 1 &amp; 2 generators (auto-committed)</li><li>Bubbly UI redesign across entire app</li><li>Animated ant loading screen 🐜</li></ul><hr><h2>💡 Key Takeaway</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">OpenClaw turns your AI assistant into a full development team. You describe what you want in plain language, and the agent handles code, testing, deployment, and documentation. The human stays in the driver's seat — making product decisions, not debugging semicolons.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a>
 </article>
 <footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
-  <button class="switcher-btn" onclick="toggleSwitcher()">⚙️</button>
+  <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
     <h4>Mode</h4>
     <div class="sw-row">
-      <button class="sw-pill active" data-mode="light" onclick="setMode('light')">☀️ Light</button>
-      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')">🌙 Dark</button>
+      <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
+      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')"><i class="ph-duotone ph-moon"></i> Dark</button>
     </div>
     <h4>Theme</h4>
     <div class="sw-row">

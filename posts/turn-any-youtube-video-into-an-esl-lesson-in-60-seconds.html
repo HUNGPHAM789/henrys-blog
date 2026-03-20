@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Turn Any YouTube Video into an ESL Lesson in 60 Seconds — Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
 
 :root {
@@ -88,7 +89,7 @@ body.dark.neu footer { background: #2d2d2d; }
 body.dark.neu .font-panel { background: #2d2d2d; box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040; }
 
 /* ── Material 3 ── */
-body.m3 { background: #FEF7FF !important; background-image: none !important; }
+body.m3 { background: #FEF7FF !important; }
 body.m3 .card { background: #FFFBFE; border: none; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); }
 body.m3 .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
 body.m3 .card-body .tag { background: #EADDFF; color: #21005D; border-radius: 8px; }
@@ -177,7 +178,7 @@ article figure { margin: 20px 0; }
 article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
 article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
 .callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
-.callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
 .callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
 .bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
 .bookmark:hover { border-color: var(--accent); }
@@ -195,12 +196,12 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <div class="hero-wrapper"><div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-youtube-esl.png')"></div><div class="hero-info"><span class="hero-tag">Education</span><h1>Turn Any YouTube Video into an ESL Lesson in 60 Seconds</h1><span class="hero-meta">2026-03-20</span></div></div>
 <a href="/henrys-blog/" class="back-link">← Back to blog</a>
 <article>
-<div class="callout"><span class="callout-icon">🎬</span><div class="callout-text">Teachers paste a YouTube URL. 60 seconds later: a full interactive ESL lesson with shadowing, quizzes, and a cheat sheet.</div></div><hr><h2>❌ The Problem</h2><p>ESL teachers spend 2-4 hours creating a single lesson from a YouTube video. They manually transcribe, pick vocabulary, write questions, format handouts. Most give up and just play the video in class with no structure.</p><hr><h2>💡 The Breakthrough</h2><p>YouTube aggressively blocks scraping from cloud servers. We tried 4 methods:</p><div class="callout"><span class="callout-icon">🚫</span><div class="callout-text">❌ youtube-transcript library → blocked on Vercel
+<div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">Teachers paste a YouTube URL. 60 seconds later: a full interactive ESL lesson with shadowing, quizzes, and a cheat sheet.</div></div><hr><h2>❌ The Problem</h2><p>ESL teachers spend 2-4 hours creating a single lesson from a YouTube video. They manually transcribe, pick vocabulary, write questions, format handouts. Most give up and just play the video in class with no structure.</p><hr><h2>💡 The Breakthrough</h2><p>YouTube aggressively blocks scraping from cloud servers. We tried 4 methods:</p><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">❌ youtube-transcript library → blocked on Vercel
 ❌ InnerTube API → blocked on Vercel
 ❌ Direct caption scraping → IP-locked
-❌ Client-side fetch → CORS blocked</div></div><div class="callout"><span class="callout-icon">✅</span><div class="callout-text">✅ Gemini fileData API → feed the YouTube URL directly to Gemini.
+❌ Client-side fetch → CORS blocked</div></div><div class="callout"><i class="ph-duotone ph-check-circle callout-icon"></i><div class="callout-text">✅ Gemini fileData API → feed the YouTube URL directly to Gemini.
 Gemini WATCHES the video and extracts the transcript.
-No scraping. No CORS. Works on Shorts, Live, anything.</div></div><p>"Sometimes the best solution isn't fighting the wall — it's walking around it."</p><hr><h2>📊 The Pipeline</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-pipeline.png" alt="YouTube → Gemini → Interactive ESL Lesson" loading="lazy"><figcaption>YouTube → Gemini → Interactive ESL Lesson</figcaption></figure><div class="callout"><span class="callout-icon">👩‍🏫</span><div class="callout-text">TEACHER FLOW (3 clicks)
+No scraping. No CORS. Works on Shorts, Live, anything.</div></div><p>"Sometimes the best solution isn't fighting the wall — it's walking around it."</p><hr><h2>📊 The Pipeline</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-pipeline.png" alt="YouTube → Gemini → Interactive ESL Lesson" loading="lazy"><figcaption>YouTube → Gemini → Interactive ESL Lesson</figcaption></figure><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">TEACHER FLOW (3 clicks)
 ━━━━━━━━━━━━━━━━━━━━
 1️⃣  Paste YouTube URL
 2️⃣  Pick CEFR level (A1-C2)
@@ -208,7 +209,7 @@ No scraping. No CORS. Works on Shorts, Live, anything.</div></div><p>"Sometimes 
 
 🐜 Ant walks across screen with fun facts...
 
-✅ Full lesson ready in ~60 seconds</div></div><hr><h2>🎯 What Gets Generated</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-stages.png" alt="4 stages: Intro → Key Expressions → Practice → Cheat Sheet" loading="lazy"><figcaption>4 stages: Intro → Key Expressions → Practice → Cheat Sheet</figcaption></figure><h3>Stage 1: Intro</h3><ul><li>Full embedded YouTube video</li><li>AI-generated overview + learning goals</li></ul><h3>Stage 2: Key Expressions</h3><ul><li>2-column phrase cards with ▶️ play buttons</li><li>Each button plays the exact video clip where the phrase appears</li><li>Vietnamese translations + sentence context</li><li>Interactive matching game</li></ul><h3>Stage 3: Video Practice</h3><ul><li>Mini video player pinned on top (always visible)</li><li>3-4 shadowing cards: listen to native speaker → repeat</li><li>8-10 MCQ + fill-in-blank questions (one at a time)</li><li>3-4 sentence ordering questions</li><li>2-3 "phrases in context" questions</li><li>Total: 18-22 interactive items, all sequential</li></ul><h3>Stage 4: Cheat Sheet</h3><ul><li>All key phrases (English + Vietnamese)</li><li>Full vocabulary list with definitions</li><li>Communication tips from the video</li><li>Video player for rewatching</li></ul><hr><h2>🔧 Technical Architecture</h2><div class="callout"><span class="callout-icon">⚙️</span><div class="callout-text">YouTube URL
+✅ Full lesson ready in ~60 seconds</div></div><hr><h2>🎯 What Gets Generated</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-stages.png" alt="4 stages: Intro → Key Expressions → Practice → Cheat Sheet" loading="lazy"><figcaption>4 stages: Intro → Key Expressions → Practice → Cheat Sheet</figcaption></figure><h3>Stage 1: Intro</h3><ul><li>Full embedded YouTube video</li><li>AI-generated overview + learning goals</li></ul><h3>Stage 2: Key Expressions</h3><ul><li>2-column phrase cards with ▶️ play buttons</li><li>Each button plays the exact video clip where the phrase appears</li><li>Vietnamese translations + sentence context</li><li>Interactive matching game</li></ul><h3>Stage 3: Video Practice</h3><ul><li>Mini video player pinned on top (always visible)</li><li>3-4 shadowing cards: listen to native speaker → repeat</li><li>8-10 MCQ + fill-in-blank questions (one at a time)</li><li>3-4 sentence ordering questions</li><li>2-3 "phrases in context" questions</li><li>Total: 18-22 interactive items, all sequential</li></ul><h3>Stage 4: Cheat Sheet</h3><ul><li>All key phrases (English + Vietnamese)</li><li>Full vocabulary list with definitions</li><li>Communication tips from the video</li><li>Video player for rewatching</li></ul><hr><h2>🔧 Technical Architecture</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">YouTube URL
     ↓
 Gemini 2.5 Flash (fileData API)
     ↓ transcript + timestamps
@@ -220,21 +221,21 @@ Supabase (storage)
     ↓
 Lesson Viewer (Next.js)
     ↓ sequential quiz flow, TTS, video clips
-Student's phone 📱</div></div><hr><h2>📈 Impact</h2><div class="callout"><span class="callout-icon">📊</span><div class="callout-text">⏱️ 2-4 hours → 60 seconds
+Student's phone 📱</div></div><hr><h2>📈 Impact</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">⏱️ 2-4 hours → 60 seconds
 📚 Works with ANY YouTube video
 🎯 Adapts difficulty to CEFR level
 💰 $0 cost (Gemini free tier)
-🌐 Vietnamese + English bilingual</div></div><hr><h2>🎥 Long Video Support</h2><p>For videos over 10 minutes, the system shows a section picker. Teachers select which parts to teach. Only those segments are used for lesson generation — keeping lessons focused and manageable.</p><hr><div class="callout"><span class="callout-icon">🐾</span><div class="callout-text">Built with OpenClaw + Gemini 2.5 Flash. The entire video lesson pipeline was designed, built, and deployed in a single evening session.</div></div><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
+🌐 Vietnamese + English bilingual</div></div><hr><h2>🎥 Long Video Support</h2><p>For videos over 10 minutes, the system shows a section picker. Teachers select which parts to teach. Only those segments are used for lesson generation — keeping lessons focused and manageable.</p><hr><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">Built with OpenClaw + Gemini 2.5 Flash. The entire video lesson pipeline was designed, built, and deployed in a single evening session.</div></div><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
 </article>
 <footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
-  <button class="switcher-btn" onclick="toggleSwitcher()">⚙️</button>
+  <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
     <h4>Mode</h4>
     <div class="sw-row">
-      <button class="sw-pill active" data-mode="light" onclick="setMode('light')">☀️ Light</button>
-      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')">🌙 Dark</button>
+      <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
+      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')"><i class="ph-duotone ph-moon"></i> Dark</button>
     </div>
     <h4>Theme</h4>
     <div class="sw-row">

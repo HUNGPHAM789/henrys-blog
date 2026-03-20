@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Building an AI Assistant That Actually Remembers: The OpenClaw Memory System — Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
 
 :root {
@@ -88,7 +89,7 @@ body.dark.neu footer { background: #2d2d2d; }
 body.dark.neu .font-panel { background: #2d2d2d; box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040; }
 
 /* ── Material 3 ── */
-body.m3 { background: #FEF7FF !important; background-image: none !important; }
+body.m3 { background: #FEF7FF !important; }
 body.m3 .card { background: #FFFBFE; border: none; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); }
 body.m3 .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
 body.m3 .card-body .tag { background: #EADDFF; color: #21005D; border-radius: 8px; }
@@ -177,7 +178,7 @@ article figure { margin: 20px 0; }
 article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
 article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
 .callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
-.callout-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 2px; }
+.callout-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
 .callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
 .bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
 .bookmark:hover { border-color: var(--accent); }
@@ -195,11 +196,11 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <div class="hero-wrapper"><div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-memory-system.png')"></div><div class="hero-info"><span class="hero-tag">Automation</span><h1>Building an AI Assistant That Actually Remembers: The OpenClaw Memory System</h1><span class="hero-meta">2026-03-20</span></div></div>
 <a href="/henrys-blog/" class="back-link">← Back to blog</a>
 <article>
-<div class="callout"><span class="callout-icon">🧠</span><div class="callout-text">Every AI session starts fresh. OpenClaw's memory system gives your agent continuity — it remembers decisions, learns from mistakes, and picks up where it left off.</div></div><hr><h2>❌ The Problem</h2><p>ChatGPT, Claude, Gemini — they all forget everything between sessions. You repeat context. You re-explain decisions. You lose momentum. It's like hiring a brilliant contractor with amnesia.</p><div class="callout"><span class="callout-icon">🔄</span><div class="callout-text">SESSION 1: "We decided to use Supabase for auth"
+<div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">Every AI session starts fresh. OpenClaw's memory system gives your agent continuity — it remembers decisions, learns from mistakes, and picks up where it left off.</div></div><hr><h2>❌ The Problem</h2><p>ChatGPT, Claude, Gemini — they all forget everything between sessions. You repeat context. You re-explain decisions. You lose momentum. It's like hiring a brilliant contractor with amnesia.</p><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">SESSION 1: "We decided to use Supabase for auth"
 SESSION 2: "What database are we using?"
 SESSION 3: "Should we use Firebase or Supabase?"
 
-😤 Every. Single. Time.</div></div><hr><h2>💡 The OpenClaw Memory Architecture</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-layers.png" alt="Layered memory: SOUL → USER → Daily Notes → Long-term → Gotchas" loading="lazy"><figcaption>Layered memory: SOUL → USER → Daily Notes → Long-term → Gotchas</figcaption></figure><div class="callout"><span class="callout-icon">🗂️</span><div class="callout-text">MEMORY LAYERS
+😤 Every. Single. Time.</div></div><hr><h2>💡 The OpenClaw Memory Architecture</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-layers.png" alt="Layered memory: SOUL → USER → Daily Notes → Long-term → Gotchas" loading="lazy"><figcaption>Layered memory: SOUL → USER → Daily Notes → Long-term → Gotchas</figcaption></figure><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">MEMORY LAYERS
 ━━━━━━━━━━━━━━━━━━━━
 
 📋 SOUL.md
@@ -221,9 +222,9 @@ SESSION 3: "Should we use Firebase or Supabase?"
    All credentials in one place with rotation strategy
 
 📌 memory/knowledge-index.md
-   Pointer file — where to find everything</div></div><hr><h2>🔧 How It Works in Practice</h2><h3>Session Startup (automatic)</h3><p>Every new session, the agent reads: SOUL.md → USER.md → today's daily notes → MEMORY.md → api-keys.md. No human prompting needed. The agent wakes up knowing who it is, who you are, and what happened recently.</p><h3>During Work</h3><ul><li>Decisions get logged to daily notes: "[Decision] Video mode uses 4 stages"</li><li>Mistakes get logged to gotchas.md: "[2026-03-19] Vercel has 100 deploys/day limit"</li><li>New credentials get saved to 3 places (api-keys + config + knowledge-index)</li><li>Active tasks get written to memory/active-tasks.json for handoff</li></ul><h3>Self-Evolution</h3><p>The agent detects patterns in its own mistakes and proposes rule upgrades. Example: after 3 PowerShell escaping failures, it added a permanent rule: "Never inline complex JS in PowerShell — always write to a .js file first."</p><div class="callout"><span class="callout-icon">🧬</span><div class="callout-text">Pattern detected → Rule proposed → Human approves → Added to AGENTS.md with timestamp
+   Pointer file — where to find everything</div></div><hr><h2>🔧 How It Works in Practice</h2><h3>Session Startup (automatic)</h3><p>Every new session, the agent reads: SOUL.md → USER.md → today's daily notes → MEMORY.md → api-keys.md. No human prompting needed. The agent wakes up knowing who it is, who you are, and what happened recently.</p><h3>During Work</h3><ul><li>Decisions get logged to daily notes: "[Decision] Video mode uses 4 stages"</li><li>Mistakes get logged to gotchas.md: "[2026-03-19] Vercel has 100 deploys/day limit"</li><li>New credentials get saved to 3 places (api-keys + config + knowledge-index)</li><li>Active tasks get written to memory/active-tasks.json for handoff</li></ul><h3>Self-Evolution</h3><p>The agent detects patterns in its own mistakes and proposes rule upgrades. Example: after 3 PowerShell escaping failures, it added a permanent rule: "Never inline complex JS in PowerShell — always write to a .js file first."</p><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">Pattern detected → Rule proposed → Human approves → Added to AGENTS.md with timestamp
 
-The agent literally rewrites its own operating manual.</div></div><hr><h2>📊 The Heartbeat System</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-heartbeat.png" alt="The heartbeat cycle: check → work → deploy → report → repeat" loading="lazy"><figcaption>The heartbeat cycle: check → work → deploy → report → repeat</figcaption></figure><div class="callout"><span class="callout-icon">💓</span><div class="callout-text">HEARTBEAT CYCLE (every 30 min)
+The agent literally rewrites its own operating manual.</div></div><hr><h2>📊 The Heartbeat System</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-heartbeat.png" alt="The heartbeat cycle: check → work → deploy → report → repeat" loading="lazy"><figcaption>The heartbeat cycle: check → work → deploy → report → repeat</figcaption></figure><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">HEARTBEAT CYCLE (every 30 min)
 ━━━━━━━━━━━━━━━━━━━━
 1. Check active-tasks.json → continue unfinished work
 2. Check project status → pick next phase
@@ -231,24 +232,24 @@ The agent literally rewrites its own operating manual.</div></div><hr><h2>📊 T
 4. Update project tracking
 5. Report to human only on: completion, error, or blocker
 
-Result: the agent works while you sleep 🌙</div></div><hr><h2>🔗 Tool Integration</h2><p>The memory system connects to everything:</p><ul><li>Supabase MCP — query the database directly ("how many lessons this week?")</li><li>Notion MCP — auto-create journal entries with rich formatting</li><li>GitHub CLI — commit, push, check CI status</li><li>Cron jobs — scheduled reminders, daily digests, health checks</li><li>Vercel API — deploy, check status, manage environment variables</li></ul><hr><h2>📈 Real Results</h2><div class="callout"><span class="callout-icon">📊</span><div class="callout-text">8 days of continuous development
+Result: the agent works while you sleep 🌙</div></div><hr><h2>🔗 Tool Integration</h2><p>The memory system connects to everything:</p><ul><li>Supabase MCP — query the database directly ("how many lessons this week?")</li><li>Notion MCP — auto-create journal entries with rich formatting</li><li>GitHub CLI — commit, push, check CI status</li><li>Cron jobs — scheduled reminders, daily digests, health checks</li><li>Vercel API — deploy, check status, manage environment variables</li></ul><hr><h2>📈 Real Results</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">8 days of continuous development
 ━━━━━━━━━━━━━━━━━━━━
 ✅ 200+ commits across the project
 ✅ Zero repeated decisions (all in MEMORY.md)
 ✅ 11 gotchas preventing repeated mistakes
 ✅ Autonomous work during human AFK periods
 ✅ Project journal auto-generated in Notion
-✅ Agent upgraded its own rules 6 times</div></div><hr><h2>🚀 Getting Started</h2><p>OpenClaw is open source. The memory system works out of the box:</p><ul><li>Install OpenClaw → it creates SOUL.md, USER.md, MEMORY.md, AGENTS.md</li><li>Customize SOUL.md with your agent's personality</li><li>Fill USER.md with your context</li><li>The agent starts building memory from day one</li><li>After a week, it knows your preferences better than any chatbot ever could</li></ul><hr><div class="callout"><span class="callout-icon">💡</span><div class="callout-text">An AI assistant without memory is just autocomplete with extra steps. OpenClaw gives your agent a life story.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://docs.openclaw.ai" class="bookmark" target="_blank">https://docs.openclaw.ai</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
+✅ Agent upgraded its own rules 6 times</div></div><hr><h2>🚀 Getting Started</h2><p>OpenClaw is open source. The memory system works out of the box:</p><ul><li>Install OpenClaw → it creates SOUL.md, USER.md, MEMORY.md, AGENTS.md</li><li>Customize SOUL.md with your agent's personality</li><li>Fill USER.md with your context</li><li>The agent starts building memory from day one</li><li>After a week, it knows your preferences better than any chatbot ever could</li></ul><hr><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">An AI assistant without memory is just autocomplete with extra steps. OpenClaw gives your agent a life story.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://docs.openclaw.ai" class="bookmark" target="_blank">https://docs.openclaw.ai</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
 </article>
 <footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
-  <button class="switcher-btn" onclick="toggleSwitcher()">⚙️</button>
+  <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
     <h4>Mode</h4>
     <div class="sw-row">
-      <button class="sw-pill active" data-mode="light" onclick="setMode('light')">☀️ Light</button>
-      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')">🌙 Dark</button>
+      <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
+      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')"><i class="ph-duotone ph-moon"></i> Dark</button>
     </div>
     <h4>Theme</h4>
     <div class="sw-row">

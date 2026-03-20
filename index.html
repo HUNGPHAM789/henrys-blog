@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
 
 :root {
@@ -88,7 +89,7 @@ body.dark.neu footer { background: #2d2d2d; }
 body.dark.neu .font-panel { background: #2d2d2d; box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040; }
 
 /* ── Material 3 ── */
-body.m3 { background: #FEF7FF !important; background-image: none !important; }
+body.m3 { background: #FEF7FF !important; }
 body.m3 .card { background: #FFFBFE; border: none; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); }
 body.m3 .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
 body.m3 .card-body .tag { background: #EADDFF; color: #21005D; border-radius: 8px; }
@@ -246,7 +247,7 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
       </div>
     </a>
     <a href="posts/eyebrow-research.html" class="card" data-category="Research">
-      <div class="card-img" style="linear-gradient(135deg, #2D1F1A, #5C3317, #8B6914);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem">💅</div>
+      <div class="card-img" style="linear-gradient(135deg, #2D1F1A, #5C3317, #8B6914);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem"><i class="ph-duotone ph-sparkle" style="font-size:2.5rem;color:white"></i></div>
       <div class="card-body">
         <span class="tag tag-research">Research</span>
         <h3>Top 5 Xu Hướng Phun Xăm Lông Mày & Top 10 Cơ Sở TP.HCM 2026</h3>
@@ -258,12 +259,12 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
-  <button class="switcher-btn" onclick="toggleSwitcher()">⚙️</button>
+  <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
     <h4>Mode</h4>
     <div class="sw-row">
-      <button class="sw-pill active" data-mode="light" onclick="setMode('light')">☀️ Light</button>
-      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')">🌙 Dark</button>
+      <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
+      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')"><i class="ph-duotone ph-moon"></i> Dark</button>
     </div>
     <h4>Theme</h4>
     <div class="sw-row">
