@@ -140,7 +140,7 @@ body.linear .tab.active { background: rgba(255,107,53,0.12); border-color: rgba(
 body.linear article { background: transparent; border: none; border-radius: 0; box-shadow: none; padding: 40px 0 80px; }
 body.linear article h2 { color: #F1F1F4; }
 body.linear article h3 { color: #D4D4DC; }
-body.linear article p, body.linear article li { color: #B0B0BC; }
+body.linear article p, body.linear article li { color: #B0B0BC; font-size: 1.05rem; line-height: 1.85; }
 body.linear article a { color: #FF6B35; }
 body.linear article hr { border-color: rgba(255,255,255,0.06); }
 body.linear article code { background: rgba(255,255,255,0.06); color: #FF8C5A; border-radius: 4px; }
@@ -244,10 +244,10 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <body>
 <nav>
   <a href="/henrys-blog/" class="logo">Henry's Blog</a>
-  <a href="/henrys-blog/">Home</a>
+  <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
 </nav>
 <div class="hero-wrapper"><div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-youtube-esl.png')"></div><div class="hero-info"><span class="hero-tag">Education</span><h1>Turn Any YouTube Video into an ESL Lesson in 60 Seconds</h1><span class="hero-meta">2026-03-20</span></div></div>
-<a href="/henrys-blog/" class="back-link">← Back to blog</a>
+<a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
 <article>
 <div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">Teachers paste a YouTube URL. 60 seconds later: a full interactive ESL lesson with shadowing, quizzes, and a cheat sheet.</div></div><hr><h2><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> The Problem</h2><p>ESL teachers spend 2-4 hours creating a single lesson from a YouTube video. They manually transcribe, pick vocabulary, write questions, format handouts. Most give up and just play the video in class with no structure.</p><hr><h2><i class="ph-duotone ph-lightbulb-filament" style="font-size:1em;vertical-align:-0.1em"></i> The Breakthrough</h2><p>YouTube aggressively blocks scraping from cloud servers. We tried 4 methods:</p><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text"><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> youtube-transcript library → blocked on Vercel
 <i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> InnerTube API → blocked on Vercel
@@ -280,11 +280,16 @@ Student's phone <i class="ph-duotone ph-device-mobile" style="font-size:1em;vert
 <i class="ph-duotone ph-coins" style="font-size:1em;vertical-align:-0.1em"></i> $0 cost (Gemini free tier)
 <i class="ph-duotone ph-globe" style="font-size:1em;vertical-align:-0.1em"></i> Vietnamese + English bilingual</div></div><hr><h2><i class="ph-duotone ph-video-camera" style="font-size:1em;vertical-align:-0.1em"></i> Long Video Support</h2><p>For videos over 10 minutes, the system shows a section picker. Teachers select which parts to teach. Only those segments are used for lesson generation — keeping lessons focused and manageable.</p><hr><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">Built with OpenClaw + Gemini 2.5 Flash. The entire video lesson pipeline was designed, built, and deployed in a single evening session.</div></div><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
 </article>
-<footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+<footer data-en="&copy; 2026 Henry's Blog. Built with OpenClaw + Notion." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với OpenClaw + Notion.">&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
   <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
+    <h4>Language</h4>
+    <div class="sw-row">
+      <button class="sw-pill active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="sw-pill" data-lang="vi" onclick="setLang('vi')">VI</button>
+    </div>
     <h4>Mode</h4>
     <div class="sw-row">
       <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
@@ -343,6 +348,19 @@ function setMode(mode) {
   localStorage.setItem('blog-mode', mode);
 }
 
+// ── Language ──
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.body.classList.remove('lang-en', 'lang-vi');
+  document.body.classList.add('lang-' + lang);
+  document.querySelectorAll('[data-lang]').forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
+  // Toggle translatable elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'vi' ? el.dataset.vi : el.dataset.en;
+  });
+  localStorage.setItem('blog-lang', lang);
+}
+
 // ── Font ──
 function setFont(font, el) {
   document.documentElement.style.setProperty('--font', "'" + font + "', sans-serif");
@@ -364,6 +382,9 @@ const sMode = localStorage.getItem('blog-mode');
 if (sMode === 'dark') document.body.classList.add('dark');
 const sFont = localStorage.getItem('blog-font');
 if (sFont) document.documentElement.style.setProperty('--font', "'" + sFont + "', sans-serif");
+const sLang = localStorage.getItem('blog-lang') || 'en';
+if (sLang === 'vi') { document.documentElement.lang = 'vi'; document.body.classList.add('lang-vi'); }
+else { document.body.classList.add('lang-en'); }
 
 // Sync active states after DOM ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -373,6 +394,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sFont) document.querySelectorAll('.font-option').forEach(o => {
     const name = o.dataset.font;
     o.classList.toggle('active', name === sFont);
+  });
+  // Restore language
+  const rLang = localStorage.getItem('blog-lang') || 'en';
+  document.querySelectorAll('[data-lang]').forEach(o => o.classList.toggle('active', o.dataset.lang === rLang));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = rLang === 'vi' ? el.dataset.vi : el.dataset.en;
   });
 });
 </script>

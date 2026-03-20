@@ -140,7 +140,7 @@ body.linear .tab.active { background: rgba(255,107,53,0.12); border-color: rgba(
 body.linear article { background: transparent; border: none; border-radius: 0; box-shadow: none; padding: 40px 0 80px; }
 body.linear article h2 { color: #F1F1F4; }
 body.linear article h3 { color: #D4D4DC; }
-body.linear article p, body.linear article li { color: #B0B0BC; }
+body.linear article p, body.linear article li { color: #B0B0BC; font-size: 1.05rem; line-height: 1.85; }
 body.linear article a { color: #FF6B35; }
 body.linear article hr { border-color: rgba(255,255,255,0.06); }
 body.linear article code { background: rgba(255,255,255,0.06); color: #FF8C5A; border-radius: 4px; }
@@ -244,10 +244,10 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <body>
 <nav>
   <a href="/henrys-blog/" class="logo">Henry's Blog</a>
-  <a href="/henrys-blog/">Home</a>
+  <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
 </nav>
 <div class="hero-wrapper"><div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-74-commits.png')"></div><div class="hero-info"><span class="hero-tag">Coding</span><h1>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer</h1><span class="hero-meta">2026-03-20</span></div></div>
-<a href="/henrys-blog/" class="back-link">← Back to blog</a>
+<a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
 <article>
 <div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">One human. One AI assistant. 74 commits. 4 lesson modes shipped. All in a single day.</div></div><hr><h2><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> The Problem</h2><p>Building an EdTech platform solo is overwhelming. You need frontend, backend, AI integration, TTS, video processing, database design — and you need to ship fast before motivation dies. Traditional development: 1-2 features per week if you're lucky.</p><h2><i class="ph-duotone ph-chart-bar" style="font-size:1em;vertical-align:-0.1em"></i> Before vs After OpenClaw</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-before-after.png" alt="Before vs After: Development with an AI pair programmer" loading="lazy"><figcaption>Before vs After: Development with an AI pair programmer</figcaption></figure><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">WITHOUT AI PAIR PROGRAMMER
 ━━━━━━━━━━━━━━━━━━━━
@@ -275,11 +275,16 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 │  <i class="ph-duotone ph-globe" style="font-size:1em;vertical-align:-0.1em"></i> antera.vercel.app (live)    │
 └─────────────────────────────────┘</div></div><hr><h2><i class="ph-duotone ph-trend-up" style="font-size:1em;vertical-align:-0.1em"></i> Results</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">74 commits │ 4 lesson modes │ 22+ files restyled │ YouTube transcript pipeline │ All in ~14 hours</div></div><ul><li>Standard mode: flip cards, matching games, quizzes, dialogues, speaking practice</li><li>Decision mode: branching roleplay with social score tracking</li><li>Video mode: YouTube URL → AI generates full interactive lesson with shadowing</li><li>IELTS mode: Part 1 &amp; 2 generators (auto-committed)</li><li>Bubbly UI redesign across entire app</li><li>Animated ant loading screen <i class="ph-duotone ph-bug-beetle" style="font-size:1em;vertical-align:-0.1em"></i></li></ul><hr><h2><i class="ph-duotone ph-lightbulb-filament" style="font-size:1em;vertical-align:-0.1em"></i> Key Takeaway</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text">OpenClaw turns your AI assistant into a full development team. You describe what you want in plain language, and the agent handles code, testing, deployment, and documentation. The human stays in the driver's seat — making product decisions, not debugging semicolons.</div></div><a href="https://github.com/openclaw/openclaw" class="bookmark" target="_blank">https://github.com/openclaw/openclaw</a><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a>
 </article>
-<footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+<footer data-en="&copy; 2026 Henry's Blog. Built with OpenClaw + Notion." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với OpenClaw + Notion.">&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
   <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
+    <h4>Language</h4>
+    <div class="sw-row">
+      <button class="sw-pill active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="sw-pill" data-lang="vi" onclick="setLang('vi')">VI</button>
+    </div>
     <h4>Mode</h4>
     <div class="sw-row">
       <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
@@ -338,6 +343,19 @@ function setMode(mode) {
   localStorage.setItem('blog-mode', mode);
 }
 
+// ── Language ──
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.body.classList.remove('lang-en', 'lang-vi');
+  document.body.classList.add('lang-' + lang);
+  document.querySelectorAll('[data-lang]').forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
+  // Toggle translatable elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'vi' ? el.dataset.vi : el.dataset.en;
+  });
+  localStorage.setItem('blog-lang', lang);
+}
+
 // ── Font ──
 function setFont(font, el) {
   document.documentElement.style.setProperty('--font', "'" + font + "', sans-serif");
@@ -359,6 +377,9 @@ const sMode = localStorage.getItem('blog-mode');
 if (sMode === 'dark') document.body.classList.add('dark');
 const sFont = localStorage.getItem('blog-font');
 if (sFont) document.documentElement.style.setProperty('--font', "'" + sFont + "', sans-serif");
+const sLang = localStorage.getItem('blog-lang') || 'en';
+if (sLang === 'vi') { document.documentElement.lang = 'vi'; document.body.classList.add('lang-vi'); }
+else { document.body.classList.add('lang-en'); }
 
 // Sync active states after DOM ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -368,6 +389,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sFont) document.querySelectorAll('.font-option').forEach(o => {
     const name = o.dataset.font;
     o.classList.toggle('active', name === sFont);
+  });
+  // Restore language
+  const rLang = localStorage.getItem('blog-lang') || 'en';
+  document.querySelectorAll('[data-lang]').forEach(o => o.classList.toggle('active', o.dataset.lang === rLang));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = rLang === 'vi' ? el.dataset.vi : el.dataset.en;
   });
 });
 </script>

@@ -140,7 +140,7 @@ body.linear .tab.active { background: rgba(255,107,53,0.12); border-color: rgba(
 body.linear article { background: transparent; border: none; border-radius: 0; box-shadow: none; padding: 40px 0 80px; }
 body.linear article h2 { color: #F1F1F4; }
 body.linear article h3 { color: #D4D4DC; }
-body.linear article p, body.linear article li { color: #B0B0BC; }
+body.linear article p, body.linear article li { color: #B0B0BC; font-size: 1.05rem; line-height: 1.85; }
 body.linear article a { color: #FF6B35; }
 body.linear article hr { border-color: rgba(255,255,255,0.06); }
 body.linear article code { background: rgba(255,255,255,0.06); color: #FF8C5A; border-radius: 4px; }
@@ -269,7 +269,7 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <header>
   <div class="header-inner">
     <h1>Henry's <span>Blog</span></h1>
-    <p>Research, ideas, and things worth sharing</p>
+    <p data-en="Research, ideas, and things worth sharing" data-vi="Nghiên cứu, ý tưởng và những điều đáng chia sẻ">Research, ideas, and things worth sharing</p>
     <div class="tabs"><button class="tab active" onclick="filterPosts('All',this)">All</button><button class="tab " onclick="filterPosts('Automation',this)">Automation</button><button class="tab " onclick="filterPosts('Education',this)">Education</button><button class="tab " onclick="filterPosts('Coding',this)">Coding</button><button class="tab " onclick="filterPosts('Research',this)">Research</button></div>
   </div>
 </header>
@@ -307,13 +307,18 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
         <p class="meta">2026-03-16</p>
       </div>
     </a></div>
-  <div class="empty" id="empty">No posts in this category yet</div>
+  <div class="empty" id="empty" data-en="No posts in this category yet" data-vi="Chưa có bài viết trong danh mục này">No posts in this category yet</div>
 </div>
-<footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+<footer data-en="&copy; 2026 Henry's Blog. Built with OpenClaw + Notion." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với OpenClaw + Notion.">&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
   <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
+    <h4>Language</h4>
+    <div class="sw-row">
+      <button class="sw-pill active" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="sw-pill" data-lang="vi" onclick="setLang('vi')">VI</button>
+    </div>
     <h4>Mode</h4>
     <div class="sw-row">
       <button class="sw-pill active" data-mode="light" onclick="setMode('light')"><i class="ph-duotone ph-sun"></i> Light</button>
@@ -372,6 +377,19 @@ function setMode(mode) {
   localStorage.setItem('blog-mode', mode);
 }
 
+// ── Language ──
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.body.classList.remove('lang-en', 'lang-vi');
+  document.body.classList.add('lang-' + lang);
+  document.querySelectorAll('[data-lang]').forEach(o => o.classList.toggle('active', o.dataset.lang === lang));
+  // Toggle translatable elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'vi' ? el.dataset.vi : el.dataset.en;
+  });
+  localStorage.setItem('blog-lang', lang);
+}
+
 // ── Font ──
 function setFont(font, el) {
   document.documentElement.style.setProperty('--font', "'" + font + "', sans-serif");
@@ -393,6 +411,9 @@ const sMode = localStorage.getItem('blog-mode');
 if (sMode === 'dark') document.body.classList.add('dark');
 const sFont = localStorage.getItem('blog-font');
 if (sFont) document.documentElement.style.setProperty('--font', "'" + sFont + "', sans-serif");
+const sLang = localStorage.getItem('blog-lang') || 'en';
+if (sLang === 'vi') { document.documentElement.lang = 'vi'; document.body.classList.add('lang-vi'); }
+else { document.body.classList.add('lang-en'); }
 
 // Sync active states after DOM ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -402,6 +423,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sFont) document.querySelectorAll('.font-option').forEach(o => {
     const name = o.dataset.font;
     o.classList.toggle('active', name === sFont);
+  });
+  // Restore language
+  const rLang = localStorage.getItem('blog-lang') || 'en';
+  document.querySelectorAll('[data-lang]').forEach(o => o.classList.toggle('active', o.dataset.lang === rLang));
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = rLang === 'vi' ? el.dataset.vi : el.dataset.en;
   });
 });
 </script>
