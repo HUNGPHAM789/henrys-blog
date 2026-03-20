@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Henry's Blog</title>
+<title>MCP vs CLI: What Every Developer Should Know — Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
@@ -204,119 +204,53 @@ body.linear .empty { color: #6B6F76; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: var(--font); background: var(--bg); color: var(--text);
+  font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.8;
   background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
   background-size: 28px 28px;
-  transition: background-color 0.3s, color 0.3s;
 }
-
-/* Header */
-header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 48px 24px 24px; transition: background 0.3s; }
-.header-inner { max-width: 1100px; margin: 0 auto; }
-header h1 { font-size: 2rem; font-weight: 700; }
-header h1 span { color: var(--accent); }
-header p { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-top: 4px; }
-
-/* Category Tabs */
-.tabs { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
-.tab {
-  padding: 8px 20px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.15);
-  background: transparent; color: rgba(255,255,255,0.7); font-family: var(--font);
-  font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-}
-.tab:hover { border-color: rgba(255,255,255,0.4); color: white; }
-.tab.active { background: var(--accent); border-color: var(--accent); color: white; }
-
-/* Container */
-.container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
-
-/* Masonry Grid */
-.masonry { columns: 3; column-gap: 20px; }
-.card {
-  display: block; text-decoration: none; color: inherit;
-  background: var(--card); border: 1.5px solid var(--border); border-radius: 20px;
-  overflow: hidden; break-inside: avoid; margin-bottom: 20px;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.04); transition: all 0.25s;
-}
-.card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.card.hidden { display: none; }
-.card-img { width: 100%; background-size: cover; background-position: center; min-height: 160px; }
-.card:nth-child(1) .card-img { min-height: 220px; }
-.card:nth-child(2) .card-img { min-height: 180px; }
-.card:nth-child(3) .card-img { min-height: 200px; }
-.card-body { padding: 16px 18px 20px; }
-.tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; background: var(--accent); color: white; }
-.tag-coding { background: var(--purple); }
-.tag-education { background: var(--green); }
-.tag-automation { background: var(--blue); }
-.tag-research { background: #8B6914; }
-.card-body h3 { font-size: 0.95rem; font-weight: 700; margin-top: 10px; line-height: 1.45; }
-.meta { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
-.empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 0.95rem; display: none; }
-footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; margin-top: 20px; transition: background 0.3s; }
-
-@media (max-width: 900px) { .masonry { columns: 2; } }
-@media (max-width: 560px) {
-  .masonry { columns: 1; }
-  header { padding: 36px 16px 20px; }
-  header h1 { font-size: 1.6rem; }
-  .tabs { gap: 6px; }
-  .tab { padding: 6px 14px; font-size: 0.78rem; }
-}
+.hero-wrapper { max-width: 720px; margin: 24px auto 0; padding: 0 20px; }
+.hero { width: 100%; aspect-ratio: 4/3; max-height: 400px; background-size: cover; background-position: center; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.hero-info { padding: 20px 0 0; }
+.hero-info h1 { font-size: 2rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+.hero-meta { font-size: 0.85rem; color: var(--muted); }
+.hero-tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: var(--accent); color: white; margin-bottom: 12px; }
+nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; transition: background 0.3s; }
+nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+nav a:hover { color: var(--accent); }
+nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; background: var(--card); border-radius: 20px; margin-top: 20px; transition: background 0.3s; }
+article h2 { font-size: 1.4rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+article h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+article p { margin-bottom: 16px; font-size: 0.95rem; color: #374151; }
+article ul { margin: 0 0 16px 24px; }
+article li { margin-bottom: 8px; font-size: 0.93rem; color: #374151; }
+article a { color: var(--accent); text-decoration: underline; }
+article hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+article img { width: 100%; border-radius: 16px; margin: 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+article figure { margin: 20px 0; }
+article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
+.callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
+.callout-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+.callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
+.bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
+.bookmark:hover { border-color: var(--accent); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin: 24px 20px; font-size: 0.9rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+.back-link:hover { color: var(--accent); }
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; transition: background 0.3s; }
+@media (max-width: 600px) { .hero-wrapper { padding: 0 12px; margin-top: 16px; } .hero { aspect-ratio: 1/1; max-height: 320px; border-radius: 16px; } .hero-info h1 { font-size: 1.4rem; } article { margin-top: 0; border-radius: 0; } }
 </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <h1>Henry's <span>Blog</span></h1>
-    <p data-en="Research, ideas, and things worth sharing" data-vi="Nghiên cứu, ý tưởng và những điều đáng chia sẻ">Research, ideas, and things worth sharing</p>
-    <div class="tabs"><button class="tab active" onclick="filterPosts('All',this)">All</button><button class="tab " onclick="filterPosts('Automation',this)">Automation</button><button class="tab " onclick="filterPosts('Education',this)">Education</button><button class="tab " onclick="filterPosts('Coding',this)">Coding</button><button class="tab " onclick="filterPosts('Tech',this)">Tech</button><button class="tab " onclick="filterPosts('Research',this)">Research</button></div>
-  </div>
-</header>
-<div class="container">
-  <div class="masonry" id="masonry">
-    <a href="posts/building-an-ai-assistant-that-actually-remembers-the-openclaw-memory-system.html" class="card" data-category="Automation">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-memory-system.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-automation">Automation</span>
-        <h3>Building an AI Assistant That Actually Remembers: The OpenClaw Memory System</h3>
-        <p class="meta">2026-03-20</p>
-      </div>
-    </a>
-    <a href="posts/turn-any-youtube-video-into-an-esl-lesson-in-60-seconds.html" class="card" data-category="Education">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-youtube-esl.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-education">Education</span>
-        <h3>Turn Any YouTube Video into an ESL Lesson in 60 Seconds</h3>
-        <p class="meta">2026-03-20</p>
-      </div>
-    </a>
-    <a href="posts/74-commits-in-one-day-building-an-edtech-app-with-an-ai-pair-programmer.html" class="card" data-category="Coding">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-74-commits.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-coding">Coding</span>
-        <h3>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer</h3>
-        <p class="meta">2026-03-20</p>
-      </div>
-    </a>
-    <a href="posts/mcp-vs-cli-what-every-developer-should-know.html" class="card" data-category="Tech">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/mcp-vs-cli-cover.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-tech">Tech</span>
-        <h3>MCP vs CLI: What Every Developer Should Know</h3>
-        <p class="meta"></p>
-      </div>
-    </a>
-    <a href="posts/eyebrow-research.html" class="card" data-category="Research">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/eyebrow-cover.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-research">Research</span>
-        <h3>Top 5 Xu Hướng Phun Xăm Lông Mày & Top 10 Cơ Sở TP.HCM 2026</h3>
-        <p class="meta">2026-03-16</p>
-      </div>
-    </a></div>
-  <div class="empty" id="empty" data-en="No posts in this category yet" data-vi="Chưa có bài viết trong danh mục này">No posts in this category yet</div>
-</div>
+<nav>
+  <a href="/henrys-blog/" class="logo">Henry's Blog</a>
+  <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
+</nav>
+<div class="hero-wrapper"><div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/mcp-vs-cli-cover.png')"></div><div class="hero-info"><span class="hero-tag">Tech</span><h1>MCP vs CLI: What Every Developer Should Know</h1><span class="hero-meta"></span></div></div>
+<a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
+<article>
+<p>If you've been following the AI tooling space, you've probably heard "MCP" thrown around a lot lately. But what is it, really? And how is it different from the CLI tools we've been using for decades? Let me break it down.</p><hr><h2>The Old Way: CLI (Command Line Interface)</h2><p>CLI is the OG. You type a command, it runs, you get output. Simple, predictable, battle-tested.</p><p>Every tool speaks its own language. Git has git commands. Docker has docker commands. AWS has aws commands. You learn each one separately and chain them together with pipes and scripts.</p><h3>How CLI Works</h3><ul><li>You type a command in the terminal</li><li>The shell parses it and runs the program</li><li>The program does its thing and prints output (text)</li><li>You read the output and decide what to do next</li><li>Rinse and repeat — it's a human-in-the-loop process</li></ul><p>The key insight: CLI is designed for humans. The output is text meant for human eyes. The input is text typed by human fingers.</p><hr><h2>The New Way: MCP (Model Context Protocol)</h2><p>MCP is what happens when you design tool access for AI agents instead of humans. Created by Anthropic, it's a standard protocol that lets AI models talk to external tools — databases, APIs, file systems, browsers — through a unified interface.</p><h3>How MCP Works</h3><ul><li>An AI agent needs to use a tool (e.g., read a database)</li><li>It sends a structured JSON request through the MCP protocol</li><li>The MCP server translates that into the actual tool call</li><li>The tool responds with structured data (JSON, not raw text)</li><li>The AI processes the response and decides next steps automatically</li></ul><p>The key insight: MCP is designed for machines. The data flows as structured JSON. The AI doesn't need to parse messy text output — it gets clean, typed data it can reason about.</p><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/mcp-vs-cli-comparison.png" alt="CLI vs MCP: A side-by-side comparison of how each approach connects to tools" loading="lazy"><figcaption>CLI vs MCP: A side-by-side comparison of how each approach connects to tools</figcaption></figure><hr><h2>Side-by-Side: The Same Task, Two Ways</h2><h3>Task: "Find all open bugs and create a summary"</h3><p>With CLI (human does the work):</p><p>With MCP (AI does the work):</p><p>The difference? CLI requires you to be the glue between tools. MCP lets the AI be the glue.</p><hr><h2>When to Use What</h2><h3>Use CLI when:</h3><ul><li>You're doing quick one-off tasks</li><li>You need precise control over every step</li><li>You're writing shell scripts for automation</li><li>You want to understand exactly what's happening</li><li>The tool doesn't have an MCP server yet</li></ul><h3>Use MCP when:</h3><ul><li>You want AI agents to use tools autonomously</li><li>You're building AI-powered workflows</li><li>You need tools to work together seamlessly</li><li>You want structured data exchange (not text parsing)</li><li>You're connecting multiple tools in a pipeline</li></ul><hr><h2>Real-World Example: My Setup</h2><p>In my daily workflow, I use both. My AI assistant (Jarvis) connects to tools via MCP — GitHub, Supabase, Google Workspace, browser automation. When Jarvis needs to check a deployment, it doesn't run "curl https://myapp.vercel.app" and parse HTML. It calls the Vercel MCP server and gets structured deployment status.</p><p>But when I personally want to quick-check something? I pop open a terminal and type the CLI command. Faster for me, because I already know the syntax.</p><hr><h2>The Bigger Picture</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/mcp-vs-cli-architecture.png" alt="MCP architecture: one protocol connecting AI to all tools vs CLI's separate commands per tool" loading="lazy"><figcaption>MCP architecture: one protocol connecting AI to all tools vs CLI's separate commands per tool</figcaption></figure><p>MCP isn't replacing CLI. They solve different problems. CLI will always be the fastest way for an experienced developer to interact with tools directly. But as AI agents become more capable, MCP becomes the standard way those agents interact with the world.</p><p>Think about it this way:</p><ul><li>CLI = human-to-machine interface (you talk to tools)</li><li>MCP = machine-to-machine interface (AI talks to tools)</li><li>API = machine-to-machine but point-to-point (one connection at a time)</li><li>MCP = standardized API for ALL tools (one protocol, many tools)</li></ul><p>The future isn't CLI or MCP. It's both — CLI for direct control, MCP for AI autonomy. The developers who understand both will build the most powerful systems.</p><hr><h2>TL;DR</h2><ul><li>CLI: text commands for humans, one tool at a time, you parse the output</li><li>MCP: structured protocol for AI, unified interface, machines parse the data</li><li>Use CLI when YOU need to do something quick</li><li>Use MCP when your AI AGENT needs to use tools</li><li>They're complementary, not competing</li></ul>
+</article>
 <footer data-en="&copy; 2026 Henry's Blog. Built with OpenClaw + Notion." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với OpenClaw + Notion.">&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
 <div class="switcher">
@@ -439,19 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = rLang === 'vi' ? el.dataset.vi : el.dataset.en;
   });
 });
-</script>
-<script>
-function filterPosts(category, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  const cards = document.querySelectorAll('.card');
-  let shown = 0;
-  cards.forEach(c => {
-    if (category === 'All' || c.dataset.category === category) { c.classList.remove('hidden'); shown++; }
-    else { c.classList.add('hidden'); }
-  });
-  document.getElementById('empty').style.display = shown === 0 ? 'block' : 'none';
-}
 </script>
 </body>
 </html>
