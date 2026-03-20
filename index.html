@@ -4,15 +4,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Henry's Blog</title>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #FAFAF8; --card: #fff; --text: #1a1a1a; --muted: #6B7280;
   --accent: #FF6B35; --accent-light: #FFF3EE; --border: #E5E5E5;
   --green: #58CC02; --blue: #1CB0F6; --purple: #CE82FF;
+  --font: 'Comfortaa', sans-serif;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Comfortaa', sans-serif; background: var(--bg); color: var(--text); }
+body { font-family: var(--font); background: var(--bg); color: var(--text); }
+
+/* Font Switcher */
+.font-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
+.font-btn {
+  background: var(--text); color: white; border: none; border-radius: 999px;
+  width: 44px; height: 44px; font-size: 1.1rem; cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.2s;
+  font-family: var(--font);
+}
+.font-btn:hover { transform: scale(1.1); }
+.font-panel {
+  display: none; position: absolute; bottom: 54px; right: 0;
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  width: 220px; max-height: 360px; overflow-y: auto;
+}
+.font-panel.open { display: block; }
+.font-panel h4 { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.font-option {
+  display: block; width: 100%; padding: 8px 12px; border: 1.5px solid transparent;
+  border-radius: 10px; background: none; cursor: pointer; text-align: left;
+  font-size: 0.88rem; color: var(--text); transition: all 0.15s; margin-bottom: 2px;
+}
+.font-option:hover { background: var(--accent-light); border-color: var(--accent); }
+.font-option.active { background: var(--accent-light); border-color: var(--accent); font-weight: 700; }
 
 /* Header */
 header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 48px 24px 24px; }
@@ -126,7 +152,48 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
   <div class="empty" id="empty">No posts in this category yet 🐜</div>
 </div>
 <footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+<div class="font-switcher">
+  <button class="font-btn" onclick="toggleFontPanel()">Aa</button>
+  <div class="font-panel" id="fontPanel">
+    <h4>Font</h4>
+    <button class="font-option active" style="font-family:'Comfortaa'" onclick="setFont('Comfortaa',this)">Comfortaa</button>
+    <button class="font-option" style="font-family:'Plus Jakarta Sans'" onclick="setFont('Plus Jakarta Sans',this)">Jakarta Sans</button>
+    <button class="font-option" style="font-family:'Nunito'" onclick="setFont('Nunito',this)">Nunito</button>
+    <button class="font-option" style="font-family:'Inter'" onclick="setFont('Inter',this)">Inter</button>
+    <button class="font-option" style="font-family:'Poppins'" onclick="setFont('Poppins',this)">Poppins</button>
+    <button class="font-option" style="font-family:'DM Sans'" onclick="setFont('DM Sans',this)">DM Sans</button>
+    <button class="font-option" style="font-family:'Outfit'" onclick="setFont('Outfit',this)">Outfit</button>
+    <button class="font-option" style="font-family:'Space Grotesk'" onclick="setFont('Space Grotesk',this)">Space Grotesk</button>
+    <button class="font-option" style="font-family:'Sora'" onclick="setFont('Sora',this)">Sora</button>
+    <button class="font-option" style="font-family:'Urbanist'" onclick="setFont('Urbanist',this)">Urbanist</button>
+    <button class="font-option" style="font-family:'Quicksand'" onclick="setFont('Quicksand',this)">Quicksand</button>
+    <button class="font-option" style="font-family:'Rubik'" onclick="setFont('Rubik',this)">Rubik</button>
+    <button class="font-option" style="font-family:'Lexend'" onclick="setFont('Lexend',this)">Lexend</button>
+  </div>
+</div>
 <script>
+function toggleFontPanel() {
+  document.getElementById('fontPanel').classList.toggle('open');
+}
+function setFont(font, el) {
+  document.documentElement.style.setProperty('--font', "'" + font + "', sans-serif");
+  document.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  localStorage.setItem('blog-font', font);
+}
+// Restore saved font
+const saved = localStorage.getItem('blog-font');
+if (saved) {
+  document.documentElement.style.setProperty('--font', "'" + saved + "', sans-serif");
+  document.querySelectorAll('.font-option').forEach(o => {
+    if (o.textContent.trim() === saved || o.textContent.trim() === 'Jakarta Sans' && saved === 'Plus Jakarta Sans') o.classList.add('active');
+    else o.classList.remove('active');
+  });
+}
+// Close panel on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.font-switcher')) document.getElementById('fontPanel').classList.remove('open');
+});
 function filterPosts(category) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   event.target.classList.add('active');
