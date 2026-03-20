@@ -45,6 +45,24 @@ body {
 .font-option.active { background: var(--accent-light); border-color: var(--accent); font-weight: 700; }
 .bg-opt.active { border-color: var(--accent) !important; box-shadow: 0 0 0 2px var(--accent-light); }
 
+/* Glassmorphism theme */
+body.glass .card { background: rgba(255,255,255,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.6); }
+body.glass .card:hover { background: rgba(255,255,255,0.8); }
+body.glass .font-panel { background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+body.glass footer { background: rgba(255,255,255,0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+/* Neumorphism theme */
+body.neu { background: #e0e0e0 !important; background-image: none !important; }
+body.neu .card { background: #e0e0e0; border: none; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; border-radius: 24px; }
+body.neu .card:hover { box-shadow: 10px 10px 20px #b0b0b0, -10px -10px 20px #ffffff; transform: translateY(-2px); }
+body.neu .card-body .tag { box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.7); background: #e0e0e0; color: var(--text); }
+body.neu .tab { background: #e0e0e0; border: none; color: rgba(255,255,255,0.8); box-shadow: 3px 3px 6px rgba(0,0,0,0.3), -3px -3px 6px rgba(255,255,255,0.1); }
+body.neu .tab.active { box-shadow: inset 3px 3px 6px rgba(0,0,0,0.3), inset -3px -3px 6px rgba(255,255,255,0.1); }
+body.neu header { background: #2d2d2d; }
+body.neu footer { background: #e0e0e0; border: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.06); }
+body.neu .font-panel { background: #e0e0e0; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff; border: none; }
+body.neu .font-option:hover { background: #d0d0d0; }
+
 /* Header */
 header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 48px 24px 24px; }
 .header-inner { max-width: 1100px; margin: 0 auto; }
@@ -160,6 +178,12 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <div class="font-switcher">
   <button class="font-btn" onclick="toggleFontPanel()">Aa</button>
   <div class="font-panel" id="fontPanel">
+    <h4>Theme</h4>
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <button class="bg-opt theme-opt active" onclick="setTheme('default',this)" title="Default" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:white;cursor:pointer;font-size:11px;font-weight:700">Aa</button>
+      <button class="bg-opt theme-opt" onclick="setTheme('glass',this)" title="Glassmorphism" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:rgba(255,255,255,0.4);backdrop-filter:blur(4px);cursor:pointer;font-size:11px">🪟</button>
+      <button class="bg-opt theme-opt" onclick="setTheme('neu',this)" title="Neumorphism" style="width:36px;height:36px;border-radius:12px;border:none;background:#e0e0e0;box-shadow:3px 3px 6px #bebebe,-3px -3px 6px #ffffff;cursor:pointer;font-size:11px">🔘</button>
+    </div>
     <h4>Background</h4>
     <div style="display:flex;gap:6px;margin-bottom:12px">
       <button class="bg-opt active" onclick="setBg('plus',this)" title="Plus grid" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:#FAFAF8;background-image:url(&quot;data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 4v8M4 8h8' stroke='%23ccc' stroke-width='0.8' fill='none'/%3E%3C/svg%3E&quot;);cursor:pointer"></button>
@@ -184,11 +208,22 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
   </div>
 </div>
 <script>
+function setTheme(theme, el) {
+  document.body.classList.remove('glass', 'neu');
+  if (theme !== 'default') document.body.classList.add(theme);
+  document.querySelectorAll('.theme-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  localStorage.setItem('blog-theme', theme);
+}
+const savedTheme = localStorage.getItem('blog-theme');
+if (savedTheme && savedTheme !== 'default') document.body.classList.add(savedTheme);
+
+const svgPlus = "url(%22data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E%22)";
 const bgPatterns = {
-  plus: "url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E")",
-  dots: "radial-gradient(circle, #d1d5db 1px, transparent 1px)",
-  none: "none",
-  grid: "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)"
+  plus: svgPlus,
+  dots: 'radial-gradient(circle, #d1d5db 1px, transparent 1px)',
+  none: 'none',
+  grid: 'linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)'
 };
 const bgSizes = { plus: '28px 28px', dots: '24px 24px', none: 'auto', grid: '28px 28px' };
 function setBg(type, el) {
