@@ -43,6 +43,7 @@ body {
 }
 .font-option:hover { background: var(--accent-light); border-color: var(--accent); }
 .font-option.active { background: var(--accent-light); border-color: var(--accent); font-weight: 700; }
+.bg-opt.active { border-color: var(--accent) !important; box-shadow: 0 0 0 2px var(--accent-light); }
 
 /* Header */
 header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 48px 24px 24px; }
@@ -159,6 +160,13 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <div class="font-switcher">
   <button class="font-btn" onclick="toggleFontPanel()">Aa</button>
   <div class="font-panel" id="fontPanel">
+    <h4>Background</h4>
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <button class="bg-opt active" onclick="setBg('plus',this)" title="Plus grid" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:#FAFAF8;background-image:url(&quot;data:image/svg+xml,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 4v8M4 8h8' stroke='%23ccc' stroke-width='0.8' fill='none'/%3E%3C/svg%3E&quot;);cursor:pointer"></button>
+      <button class="bg-opt" onclick="setBg('dots',this)" title="Dots" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:#FAFAF8;background-image:radial-gradient(circle,%23d1d5db 1px,transparent 1px);background-size:12px 12px;cursor:pointer"></button>
+      <button class="bg-opt" onclick="setBg('none',this)" title="Clean" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:#FAFAF8;cursor:pointer"></button>
+      <button class="bg-opt" onclick="setBg('grid',this)" title="Grid lines" style="width:36px;height:36px;border-radius:10px;border:2px solid var(--border);background:#FAFAF8;background-image:linear-gradient(rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:12px 12px;cursor:pointer"></button>
+    </div>
     <h4>Font</h4>
     <button class="font-option active" style="font-family:'Comfortaa'" onclick="setFont('Comfortaa',this)">Comfortaa</button>
     <button class="font-option" style="font-family:'Plus Jakarta Sans'" onclick="setFont('Plus Jakarta Sans',this)">Jakarta Sans</button>
@@ -176,6 +184,26 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
   </div>
 </div>
 <script>
+const bgPatterns = {
+  plus: "url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E")",
+  dots: "radial-gradient(circle, #d1d5db 1px, transparent 1px)",
+  none: "none",
+  grid: "linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)"
+};
+const bgSizes = { plus: '28px 28px', dots: '24px 24px', none: 'auto', grid: '28px 28px' };
+function setBg(type, el) {
+  document.body.style.backgroundImage = bgPatterns[type];
+  document.body.style.backgroundSize = bgSizes[type];
+  document.querySelectorAll('.bg-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  localStorage.setItem('blog-bg', type);
+}
+// Restore saved bg
+const savedBg = localStorage.getItem('blog-bg');
+if (savedBg && bgPatterns[savedBg]) {
+  document.body.style.backgroundImage = bgPatterns[savedBg];
+  document.body.style.backgroundSize = bgSizes[savedBg];
+}
 function toggleFontPanel() {
   document.getElementById('fontPanel').classList.toggle('open');
 }
