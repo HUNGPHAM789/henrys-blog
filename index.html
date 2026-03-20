@@ -116,6 +116,59 @@ body.dark.m3 .callout { background: rgba(79,55,139,0.3); }
 body.dark.m3 .font-panel { background: #2B2930; border-color: #49454F; }
 body.dark.m3 .card-body .tag { background: #4F378B; color: #EADDFF; }
 
+/* ── Linear ── */
+body.linear { background: #0A0A0B !important; background-image: none !important; color: #E8E8ED; }
+body.linear .card { background: #16161A; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; box-shadow: none; }
+body.linear .card:hover { background: #1C1C22; border-color: rgba(94,106,210,0.3); transform: translateY(-2px); }
+body.linear .card-body h3 { color: #E8E8ED; }
+body.linear .card-body .meta { color: #6B6F76; }
+body.linear .card-body .tag { background: rgba(94,106,210,0.15); color: #8B8FF5; border-radius: 6px; font-weight: 600; }
+body.linear .card-body .tag-coding { background: rgba(166,94,210,0.15); color: #C084FC; }
+body.linear .card-body .tag-education { background: rgba(52,211,153,0.12); color: #6EE7B7; }
+body.linear .card-body .tag-automation { background: rgba(59,130,246,0.12); color: #93C5FD; }
+body.linear .card-body .tag-research { background: rgba(251,191,36,0.12); color: #FCD34D; }
+body.linear header { background: linear-gradient(180deg, #12121A 0%, #0A0A0B 100%); border-bottom: 1px solid rgba(255,255,255,0.06); }
+body.linear header h1 { color: #F1F1F4; }
+body.linear header h1 span { color: #5E6AD2; }
+body.linear header p { color: #6B6F76; }
+body.linear nav { background: rgba(10,10,11,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-color: rgba(255,255,255,0.06); }
+body.linear nav a, body.linear nav .logo { color: #E8E8ED; }
+body.linear nav .logo { color: #5E6AD2; }
+body.linear .tab { background: transparent; border-color: rgba(255,255,255,0.08); color: #6B6F76; }
+body.linear .tab:hover { color: #E8E8ED; border-color: rgba(255,255,255,0.15); }
+body.linear .tab.active { background: rgba(94,106,210,0.12); border-color: rgba(94,106,210,0.3); color: #8B8FF5; }
+body.linear article { background: #16161A; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
+body.linear article h2 { color: #F1F1F4; }
+body.linear article h3 { color: #D4D4DC; }
+body.linear article p, body.linear article li { color: #9898A6; }
+body.linear article a { color: #5E6AD2; }
+body.linear article hr { border-color: rgba(255,255,255,0.06); }
+body.linear article code { background: rgba(255,255,255,0.06); color: #C084FC; border-radius: 4px; }
+body.linear article img { border-radius: 10px; box-shadow: 0 0 0 1px rgba(255,255,255,0.06); }
+body.linear .hero { box-shadow: 0 0 0 1px rgba(255,255,255,0.06); }
+body.linear .hero-info h1 { color: #F1F1F4; }
+body.linear .hero-meta { color: #6B6F76; }
+body.linear .hero-tag { background: #5E6AD2; }
+body.linear .back-link { color: #6B6F76; }
+body.linear .back-link:hover { color: #5E6AD2; }
+body.linear .callout { background: rgba(94,106,210,0.08); border-color: rgba(94,106,210,0.15); }
+body.linear .callout-icon { color: #5E6AD2; }
+body.linear .callout-text { color: #9898A6; }
+body.linear .bookmark { border-color: rgba(255,255,255,0.08); color: #5E6AD2; }
+body.linear .bookmark:hover { border-color: rgba(94,106,210,0.3); }
+body.linear footer { background: #0A0A0B; border-color: rgba(255,255,255,0.06); color: #6B6F76; }
+body.linear .switcher-btn { background: #16161A; color: #E8E8ED; border: 1px solid rgba(255,255,255,0.08); box-shadow: none; }
+body.linear .switcher-btn:hover { border-color: rgba(94,106,210,0.4); }
+body.linear .switcher-panel { background: #16161A; border-color: rgba(255,255,255,0.08); }
+body.linear .switcher-panel h4 { color: #6B6F76; }
+body.linear .sw-pill { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); color: #9898A6; }
+body.linear .sw-pill:hover { border-color: rgba(255,255,255,0.15); }
+body.linear .sw-pill.active { background: rgba(94,106,210,0.15); border-color: rgba(94,106,210,0.3); color: #8B8FF5; }
+body.linear .font-option { color: #9898A6; }
+body.linear .font-option:hover { background: rgba(255,255,255,0.04); }
+body.linear .font-option.active { background: rgba(94,106,210,0.1); border-color: rgba(94,106,210,0.2); color: #8B8FF5; }
+body.linear .empty { color: #6B6F76; }
+
 /* ── Floating Switcher ── */
 .switcher { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
 .switcher-btn {
@@ -272,6 +325,7 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
       <button class="sw-pill" data-theme="glass" onclick="setTheme('glass')">Glass</button>
       <button class="sw-pill" data-theme="neu" onclick="setTheme('neu')">Neu</button>
       <button class="sw-pill" data-theme="m3" onclick="setTheme('m3')">Material</button>
+      <button class="sw-pill" data-theme="linear" onclick="setTheme('linear')">Linear</button>
     </div>
     <h4>Background</h4>
     <div class="sw-row">
@@ -305,7 +359,7 @@ function setBg(type) {
 
 // ── Theme ──
 function setTheme(theme) {
-  document.body.classList.remove('glass', 'neu', 'm3');
+  document.body.classList.remove('glass', 'neu', 'm3', 'linear');
   if (theme !== 'default') document.body.classList.add(theme);
   document.querySelectorAll('[data-theme]').forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
   localStorage.setItem('blog-theme', theme);
@@ -334,7 +388,7 @@ document.addEventListener('click', (e) => { if (!e.target.closest('.switcher')) 
 const sBg = localStorage.getItem('blog-bg');
 if (sBg && bgPatterns[sBg]) { document.body.style.backgroundImage = bgPatterns[sBg]; document.body.style.backgroundSize = bgSizes[sBg]; }
 const sTheme = localStorage.getItem('blog-theme');
-if (sTheme && sTheme !== 'default') document.body.classList.add(sTheme);
+if (sTheme && sTheme !== 'default') { document.body.classList.add(sTheme); }
 const sMode = localStorage.getItem('blog-mode');
 if (sMode === 'dark') document.body.classList.add('dark');
 const sFont = localStorage.getItem('blog-font');
