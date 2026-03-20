@@ -13,7 +13,11 @@
   --font: 'Comfortaa', sans-serif;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: var(--font); background: var(--bg); color: var(--text); }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+}
 
 /* Font Switcher */
 .font-switcher { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
