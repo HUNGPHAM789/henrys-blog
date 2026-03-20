@@ -4,26 +4,143 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Turn Any YouTube Video into an ESL Lesson in 60 Seconds — Henry's Blog</title>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
 :root {
   --bg: #FAFAF8; --card: #fff; --text: #1a1a1a; --muted: #6B7280;
   --accent: #FF6B35; --accent-light: #FFF3EE; --border: #E5E5E5;
   --green: #58CC02; --blue: #1CB0F6; --purple: #CE82FF;
+  --font: 'Comfortaa', sans-serif;
 }
+
+/* ── Dark Mode ── */
+body.dark {
+  --bg: #1a1a2e; --card: #16213e; --text: #e0e0e0; --muted: #8b95a5;
+  --accent: #FF8C5A; --accent-light: rgba(255,140,90,0.12); --border: #2a2a4a;
+}
+body.dark { color-scheme: dark; }
+body.dark article p, body.dark article li, body.dark .callout-text { color: #c0c8d4; }
+body.dark article code { background: #2a2a4a; color: #e0e0e0; }
+body.dark .callout { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.15); }
+body.dark .bookmark { border-color: var(--border); color: var(--accent); }
+body.dark nav { background: #16213e; border-color: #2a2a4a; }
+body.dark header { background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%); }
+body.dark footer { background: var(--bg); border-color: var(--border); color: var(--muted); }
+body.dark .back-link { color: var(--muted); }
+body.dark .back-link:hover { color: var(--accent); }
+body.dark .hero-tag { background: var(--accent); }
+body.dark img { opacity: 0.9; }
+
+/* ── Glassmorphism ── */
+body.glass .card, body.glass article { background: rgba(255,255,255,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.6); border-radius: 20px; }
+body.glass .card:hover { background: rgba(255,255,255,0.8); }
+body.glass nav { background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-color: rgba(255,255,255,0.4); }
+body.glass footer { background: rgba(255,255,255,0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+body.glass .font-panel { background: rgba(255,255,255,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+body.dark.glass .card, body.dark.glass article { background: rgba(22,33,62,0.6); border-color: rgba(255,255,255,0.1); }
+body.dark.glass .card:hover { background: rgba(22,33,62,0.8); }
+body.dark.glass nav { background: rgba(22,33,62,0.7); border-color: rgba(255,255,255,0.08); }
+body.dark.glass footer { background: rgba(22,33,62,0.5); }
+body.dark.glass .font-panel { background: rgba(22,33,62,0.85); border-color: rgba(255,255,255,0.1); }
+
+/* ── Neumorphism ── */
+body.neu { background: #e0e0e0 !important; background-image: none !important; }
+body.neu .card { background: #e0e0e0; border: none; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; border-radius: 24px; }
+body.neu .card:hover { box-shadow: 10px 10px 20px #b0b0b0, -10px -10px 20px #fff; transform: translateY(-2px); }
+body.neu nav { background: #e0e0e0; border: none; box-shadow: 0 4px 8px #bebebe; }
+body.neu article { background: #e0e0e0; border-radius: 24px; padding: 40px 32px 80px; box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #fff; }
+body.neu .card-body .tag { box-shadow: inset 2px 2px 4px rgba(0,0,0,0.1), inset -2px -2px 4px rgba(255,255,255,0.7); background: #e0e0e0; color: var(--text); }
+body.neu .tab { background: #e0e0e0; border: none; color: rgba(255,255,255,0.8); box-shadow: 3px 3px 6px rgba(0,0,0,0.3), -3px -3px 6px rgba(255,255,255,0.1); }
+body.neu .tab.active { box-shadow: inset 3px 3px 6px rgba(0,0,0,0.3), inset -3px -3px 6px rgba(255,255,255,0.1); }
+body.neu footer { background: #e0e0e0; border: none; box-shadow: inset 0 2px 8px rgba(0,0,0,0.06); }
+body.neu .font-panel { background: #e0e0e0; box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #fff; border: none; }
+body.dark.neu { background: #2d2d2d !important; }
+body.dark.neu .card { background: #2d2d2d; box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040; }
+body.dark.neu .card:hover { box-shadow: 10px 10px 20px #151515, -10px -10px 20px #454545; }
+body.dark.neu nav { background: #2d2d2d; box-shadow: 0 4px 8px #1a1a1a; }
+body.dark.neu article { background: #2d2d2d; box-shadow: inset 4px 4px 8px #1a1a1a, inset -4px -4px 8px #404040; }
+body.dark.neu footer { background: #2d2d2d; }
+body.dark.neu .font-panel { background: #2d2d2d; box-shadow: 8px 8px 16px #1a1a1a, -8px -8px 16px #404040; }
+
+/* ── Material 3 ── */
+body.m3 { background: #FEF7FF !important; background-image: none !important; }
+body.m3 .card { background: #FFFBFE; border: none; border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); }
+body.m3 .card:hover { box-shadow: 0 4px 8px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.1); transform: translateY(-2px); }
+body.m3 .card-body .tag { background: #EADDFF; color: #21005D; border-radius: 8px; }
+body.m3 .card-body .tag-coding { background: #F3E8FD; color: #4A148C; }
+body.m3 .card-body .tag-education { background: #E8F5E9; color: #1B5E20; }
+body.m3 .card-body .tag-automation { background: #E3F2FD; color: #0D47A1; }
+body.m3 .card-body .tag-research { background: #FFF8E1; color: #F57F17; }
+body.m3 header { background: #1C1B1F; }
+body.m3 nav { background: #FFFBFE; border-color: #E7E0EC; }
+body.m3 .tab { border-radius: 20px; }
+body.m3 .tab.active { background: #EADDFF; color: #21005D; border-color: #EADDFF; }
+body.m3 footer { background: #FEF7FF; border-color: #E7E0EC; }
+body.m3 article { background: #FFFBFE; border-radius: 16px; padding: 40px 32px 80px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+body.m3 .callout { background: #EADDFF; border-color: rgba(103,80,164,0.15); }
+body.m3 .font-panel { background: #FFFBFE; border: 1px solid #E7E0EC; border-radius: 16px; }
+body.m3 .font-btn { background: #6750A4; }
+body.dark.m3 { background: #1C1B1F !important; }
+body.dark.m3 .card { background: #2B2930; box-shadow: none; border: 1px solid #49454F; }
+body.dark.m3 nav { background: #2B2930; border-color: #49454F; }
+body.dark.m3 .tab.active { background: #4F378B; color: #EADDFF; border-color: #4F378B; }
+body.dark.m3 footer { background: #1C1B1F; border-color: #49454F; }
+body.dark.m3 article { background: #2B2930; box-shadow: none; }
+body.dark.m3 .callout { background: rgba(79,55,139,0.3); }
+body.dark.m3 .font-panel { background: #2B2930; border-color: #49454F; }
+body.dark.m3 .card-body .tag { background: #4F378B; color: #EADDFF; }
+
+/* ── Floating Switcher ── */
+.switcher { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
+.switcher-btn {
+  background: var(--text); color: var(--card); border: none; border-radius: 999px;
+  width: 48px; height: 48px; font-size: 1.2rem; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25); transition: transform 0.2s;
+  font-family: var(--font); display: flex; align-items: center; justify-content: center;
+}
+.switcher-btn:hover { transform: scale(1.1); }
+.switcher-panel {
+  display: none; position: absolute; bottom: 58px; right: 0;
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 14px; box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+  width: 240px; max-height: 440px; overflow-y: auto;
+}
+.switcher-panel.open { display: block; }
+.switcher-panel h4 { font-size: 0.7rem; color: var(--muted); margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700; }
+.sw-row { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.sw-pill {
+  padding: 6px 12px; border-radius: 999px; border: 2px solid var(--border);
+  background: var(--card); cursor: pointer; font-size: 0.72rem; font-weight: 600;
+  color: var(--text); font-family: var(--font); transition: all 0.15s;
+}
+.sw-pill:hover { border-color: var(--accent); }
+.sw-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
+.font-option {
+  display: block; width: 100%; padding: 7px 10px; border: 1.5px solid transparent;
+  border-radius: 10px; background: none; cursor: pointer; text-align: left;
+  font-size: 0.82rem; color: var(--text); transition: all 0.15s; margin-bottom: 1px;
+}
+.font-option:hover { background: var(--accent-light); }
+.font-option.active { background: var(--accent-light); border-color: var(--accent); font-weight: 700; }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Comfortaa', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.8;
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+}
 .hero { width: 100%; height: 320px; background-size: cover; background-position: center; position: relative; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.7)); }
 .hero-text { position: absolute; bottom: 32px; left: 32px; right: 32px; color: white; }
 .hero-text h1 { font-size: 2rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; }
 .hero-meta { font-size: 0.85rem; opacity: 0.8; }
 .hero-tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: var(--accent); color: white; margin-bottom: 12px; }
-nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; }
+nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; transition: background 0.3s; }
 nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
 nav a:hover { color: var(--accent); }
 nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
-article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; background: var(--card); border-radius: 20px; margin-top: 20px; transition: background 0.3s; }
 article h2 { font-size: 1.4rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
 article h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
 article p { margin-bottom: 16px; font-size: 0.95rem; color: #374151; }
@@ -42,19 +159,14 @@ article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-s
 .bookmark:hover { border-color: var(--accent); }
 .back-link { display: inline-flex; align-items: center; gap: 6px; margin: 24px 20px; font-size: 0.9rem; color: var(--muted); text-decoration: none; font-weight: 600; }
 .back-link:hover { color: var(--accent); }
-footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
-@media (max-width: 600px) {
-  .hero { height: 240px; }
-  .hero-text h1 { font-size: 1.4rem; }
-  .hero-text { bottom: 20px; left: 16px; right: 16px; }
-}
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; transition: background 0.3s; }
+@media (max-width: 600px) { .hero { height: 240px; } .hero-text h1 { font-size: 1.4rem; } .hero-text { bottom: 20px; left: 16px; right: 16px; } article { margin-top: 0; border-radius: 0; } }
 </style>
 </head>
 <body>
 <nav>
   <a href="/henrys-blog/" class="logo">Henry's Blog</a>
   <a href="/henrys-blog/">Home</a>
-  <a href="/henrys-blog/#openclaw">OpenClaw</a>
 </nav>
 <div class="hero" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-youtube-esl.png')"><div class="hero-overlay"></div><div class="hero-text"><span class="hero-tag">Education</span><h1>Turn Any YouTube Video into an ESL Lesson in 60 Seconds</h1><span class="hero-meta">2026-03-20</span></div></div>
 <a href="/henrys-blog/" class="back-link">← Back to blog</a>
@@ -91,5 +203,99 @@ Student's phone 📱</div></div><hr><h2>📈 Impact</h2><div class="callout"><sp
 🌐 Vietnamese + English bilingual</div></div><hr><h2>🎥 Long Video Support</h2><p>For videos over 10 minutes, the system shows a section picker. Teachers select which parts to teach. Only those segments are used for lesson generation — keeping lessons focused and manageable.</p><hr><div class="callout"><span class="callout-icon">🐾</span><div class="callout-text">Built with OpenClaw + Gemini 2.5 Flash. The entire video lesson pipeline was designed, built, and deployed in a single evening session.</div></div><a href="https://antera.vercel.app" class="bookmark" target="_blank">https://antera.vercel.app</a><a href="https://discord.com/invite/clawd" class="bookmark" target="_blank">https://discord.com/invite/clawd</a>
 </article>
 <footer>&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+
+<div class="switcher">
+  <button class="switcher-btn" onclick="toggleSwitcher()">⚙️</button>
+  <div class="switcher-panel" id="switcherPanel">
+    <h4>Mode</h4>
+    <div class="sw-row">
+      <button class="sw-pill active" data-mode="light" onclick="setMode('light')">☀️ Light</button>
+      <button class="sw-pill" data-mode="dark" onclick="setMode('dark')">🌙 Dark</button>
+    </div>
+    <h4>Theme</h4>
+    <div class="sw-row">
+      <button class="sw-pill active" data-theme="default" onclick="setTheme('default')">Default</button>
+      <button class="sw-pill" data-theme="glass" onclick="setTheme('glass')">Glass</button>
+      <button class="sw-pill" data-theme="neu" onclick="setTheme('neu')">Neu</button>
+      <button class="sw-pill" data-theme="m3" onclick="setTheme('m3')">Material</button>
+    </div>
+    <h4>Background</h4>
+    <div class="sw-row">
+      <button class="sw-pill active" data-bg="plus" onclick="setBg('plus')">＋</button>
+      <button class="sw-pill" data-bg="dots" onclick="setBg('dots')">•••</button>
+      <button class="sw-pill" data-bg="none" onclick="setBg('none')">Clean</button>
+      <button class="sw-pill" data-bg="grid" onclick="setBg('grid')">Grid</button>
+    </div>
+    <h4>Font</h4>
+    <button class="font-option active" data-font="Comfortaa" style="font-family:'Comfortaa'" onclick="setFont('Comfortaa',this)">Comfortaa</button><button class="font-option" data-font="Plus Jakarta Sans" style="font-family:'Plus Jakarta Sans'" onclick="setFont('Plus Jakarta Sans',this)">Jakarta Sans</button><button class="font-option" data-font="Nunito" style="font-family:'Nunito'" onclick="setFont('Nunito',this)">Nunito</button><button class="font-option" data-font="Inter" style="font-family:'Inter'" onclick="setFont('Inter',this)">Inter</button><button class="font-option" data-font="Poppins" style="font-family:'Poppins'" onclick="setFont('Poppins',this)">Poppins</button><button class="font-option" data-font="DM Sans" style="font-family:'DM Sans'" onclick="setFont('DM Sans',this)">DM Sans</button><button class="font-option" data-font="Outfit" style="font-family:'Outfit'" onclick="setFont('Outfit',this)">Outfit</button><button class="font-option" data-font="Space Grotesk" style="font-family:'Space Grotesk'" onclick="setFont('Space Grotesk',this)">Space Grotesk</button><button class="font-option" data-font="Sora" style="font-family:'Sora'" onclick="setFont('Sora',this)">Sora</button><button class="font-option" data-font="Urbanist" style="font-family:'Urbanist'" onclick="setFont('Urbanist',this)">Urbanist</button><button class="font-option" data-font="Quicksand" style="font-family:'Quicksand'" onclick="setFont('Quicksand',this)">Quicksand</button><button class="font-option" data-font="Rubik" style="font-family:'Rubik'" onclick="setFont('Rubik',this)">Rubik</button><button class="font-option" data-font="Lexend" style="font-family:'Lexend'" onclick="setFont('Lexend',this)">Lexend</button>
+  </div>
+</div>
+
+<script>
+// ── Background patterns ──
+const svgPlus = "url(%22data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E%22)";
+const bgPatterns = {
+  plus: svgPlus,
+  dots: 'radial-gradient(circle, #d1d5db 1px, transparent 1px)',
+  none: 'none',
+  grid: 'linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)'
+};
+const bgSizes = { plus: '28px 28px', dots: '24px 24px', none: 'auto', grid: '28px 28px' };
+
+function setBg(type) {
+  document.body.style.backgroundImage = bgPatterns[type] || 'none';
+  document.body.style.backgroundSize = bgSizes[type] || 'auto';
+  document.querySelectorAll('[data-bg]').forEach(o => o.classList.toggle('active', o.dataset.bg === type));
+  localStorage.setItem('blog-bg', type);
+}
+
+// ── Theme ──
+function setTheme(theme) {
+  document.body.classList.remove('glass', 'neu', 'm3');
+  if (theme !== 'default') document.body.classList.add(theme);
+  document.querySelectorAll('[data-theme]').forEach(o => o.classList.toggle('active', o.dataset.theme === theme));
+  localStorage.setItem('blog-theme', theme);
+}
+
+// ── Dark mode ──
+function setMode(mode) {
+  document.body.classList.toggle('dark', mode === 'dark');
+  document.querySelectorAll('[data-mode]').forEach(o => o.classList.toggle('active', o.dataset.mode === mode));
+  localStorage.setItem('blog-mode', mode);
+}
+
+// ── Font ──
+function setFont(font, el) {
+  document.documentElement.style.setProperty('--font', "'" + font + "', sans-serif");
+  document.querySelectorAll('.font-option').forEach(o => o.classList.remove('active'));
+  if (el) el.classList.add('active');
+  localStorage.setItem('blog-font', font);
+}
+
+// ── Panel toggle ──
+function toggleSwitcher() { document.getElementById('switcherPanel').classList.toggle('open'); }
+document.addEventListener('click', (e) => { if (!e.target.closest('.switcher')) { const p = document.getElementById('switcherPanel'); if (p) p.classList.remove('open'); } });
+
+// ── Restore saved prefs ──
+const sBg = localStorage.getItem('blog-bg');
+if (sBg && bgPatterns[sBg]) { document.body.style.backgroundImage = bgPatterns[sBg]; document.body.style.backgroundSize = bgSizes[sBg]; }
+const sTheme = localStorage.getItem('blog-theme');
+if (sTheme && sTheme !== 'default') document.body.classList.add(sTheme);
+const sMode = localStorage.getItem('blog-mode');
+if (sMode === 'dark') document.body.classList.add('dark');
+const sFont = localStorage.getItem('blog-font');
+if (sFont) document.documentElement.style.setProperty('--font', "'" + sFont + "', sans-serif");
+
+// Sync active states after DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  if (sBg) document.querySelectorAll('[data-bg]').forEach(o => o.classList.toggle('active', o.dataset.bg === sBg));
+  if (sTheme) document.querySelectorAll('[data-theme]').forEach(o => o.classList.toggle('active', o.dataset.theme === sTheme));
+  if (sMode) document.querySelectorAll('[data-mode]').forEach(o => o.classList.toggle('active', o.dataset.mode === sMode));
+  if (sFont) document.querySelectorAll('.font-option').forEach(o => {
+    const name = o.dataset.font;
+    o.classList.toggle('active', name === sFont);
+  });
+});
+</script>
 </body>
 </html>
