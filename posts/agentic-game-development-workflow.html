@@ -319,6 +319,78 @@ Result: <span class="code-val">playable browser game, ready in &lt;1 hour</span>
 
     <p>For an ESL platform like Antera, this means I could generate vocabulary games, grammar practice tools, and listening exercises as <em>actual playable browser games</em> — not just flashcards — in the time it takes to have a meeting about them.</p>
 
+    <h2>The 2D Sprite Pipeline — How It Actually Works</h2>
+
+    <p>Theory is one thing. Here's the actual step-by-step for generating 2D game sprites with AI:</p>
+
+    <div class="steps">
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Generate base character</h4>
+          <p>Imagen 4 prompt: <em>"pixel art warrior, front-facing, idle pose, transparent background, 64x64px, consistent style"</em> → outputs <code>character.png</code></p>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>Generate animation frames (image-to-image)</h4>
+          <p>Feed the base character back in as reference for each pose: idle breathe, walk left/right foot, jump. Same character, different pose per frame.</p>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Pack into sprite sheet</h4>
+          <p>Node.js + Sharp stitches all frames horizontally into one <code>spritesheet.png</code> + outputs an atlas JSON with frame coordinates.</p>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Import into game engine</h4>
+          <p>Phaser.js or Godot reads the sprite sheet + atlas directly. Character is playable.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Consistency Problem — Why LoRA Matters</h2>
+
+    <p>Here's the elephant in the room with AI sprite generation: <strong>frame-to-frame consistency</strong>.</p>
+
+    <p>When you ask Imagen to generate "pixel warrior walking" and then "pixel warrior jumping," you don't always get the same character. The face shifts slightly. The colors drift. The proportions change between frames. In a sprite sheet, that looks like the character is shapeshifting mid-animation — which is unplayable.</p>
+
+    <div class="callout">
+      <p class="callout-text"><strong>This is exactly why LoRA exists.</strong> LoRA (Low-Rank Adaptation) fine-tunes an image model on your specific character using 10–20 reference images. After training, every frame the model generates is guaranteed to look like <em>that</em> character — same face, same proportions, same color palette — regardless of pose.</p>
+    </div>
+
+    <div class="highlight-box">
+      <h3>Without LoRA vs With LoRA</h3>
+      <ul>
+        <li><strong>Without LoRA (Imagen/Gemini):</strong> Fast, free, but each frame drifts. Fine for rapid prototyping. Needs manual cleanup for production.</li>
+        <li><strong>With LoRA (Stable Diffusion):</strong> Every frame looks identical to your character. Production-ready consistency. Needs a GPU or cloud compute (~$0.40/hr on RunPod).</li>
+      </ul>
+    </div>
+
+    <p>This is exactly what Scenario.ai and Layer.ai sell: <strong>Stable Diffusion + LoRA training as a service</strong>. You upload your character art, they train a LoRA on it, and every asset they generate matches your style. That's their entire business model.</p>
+
+    <h3>The Stack Comparison</h3>
+
+    <div class="code-block"><code><span class="code-comment"># Budget pipeline (fast, free, slightly inconsistent)</span>
+<span class="code-key">Imagen 4</span>        → 2D sprite frames
+<span class="code-key">Sharp (Node.js)</span> → sprite sheet packer
+<span class="code-key">Meshy.ai API</span>   → 3D models ($20/mo, real API)
+Cost: <span class="code-val">~$20/mo + free Imagen credits</span>
+
+<span class="code-comment"># Pro pipeline (consistent, production-ready)</span>
+<span class="code-key">Stable Diffusion</span> + <span class="code-key">LoRA</span> → consistent frames (any pose)
+<span class="code-key">ComfyUI</span>          → automate the whole frame generation workflow
+<span class="code-key">Sharp</span>            → sprite sheet packer
+<span class="code-key">Meshy.ai API</span>    → 3D models
+Cost: <span class="code-val">GPU required (local or RunPod ~$0.40/hr)</span></code></div>
+
+    <p>For an indie developer or a solo app builder, start with the budget pipeline. It's good enough for prototypes and jam games. Move to the LoRA pipeline when you need production-quality consistency — or when a paying customer demands it.</p>
+
     <h2>Challenges to Know About</h2>
 
     <p>It's not all smooth sailing. Real challenges in agentic game dev right now:</p>
