@@ -391,6 +391,64 @@ Cost: <span class="code-val">GPU required (local or RunPod ~$0.40/hr)</span></co
 
     <p>For an indie developer or a solo app builder, start with the budget pipeline. It's good enough for prototypes and jam games. Move to the LoRA pipeline when you need production-quality consistency — or when a paying customer demands it.</p>
 
+    <h2>The Breakthrough: Banana Pro 2K Sprite Sheets</h2>
+
+    <p>After testing Imagen 4 at standard resolution, we pushed further — using <strong>Gemini 3 Pro Image (Banana Pro)</strong> at 2K resolution with a single-image grid approach. The results were a completely different league.</p>
+
+    <p>The core idea: instead of calling the image API 30 times (one per frame, with inevitable drift), you request <strong>one 2K image containing a full sprite sheet grid</strong>. The model generates all frames in the same context — same character, same colors, same proportions — because it's all one image.</p>
+
+    <div class="code-block"><code><span class="code-comment"># Single API call — 30 frames, 2K resolution, one consistent character</span>
+Prompt: <span class="code-str">"Pixel art sprite sheet. 5 columns x 6 rows, 30 frames.
+Thin gray 1px separator lines between cells.
+Blue wizard: blue hat with yellow stars, blue robe, white beard, brown staff.
+Row 1: idle x5. Row 2: walk cycle x5. Row 3: jump arc x5.
+Row 4: attack swing x5. Row 5: casting x5. Row 6: death fall x5.
+NO text labels. NO annotations. Clean white cell backgrounds."</span>
+
+Output: <span class="code-val">2048x2048px PNG — 6 animation sets, 30 frames, production quality</span></code></div>
+
+    <div class="highlight-box">
+      <h3>🎮 What the 2K Output Gave Us</h3>
+      <ul>
+        <li>✅ Highly consistent character across ALL 30 frames — same face, colors, proportions</li>
+        <li>✅ 6 complete animation sets: idle, walk, attack, cast, death</li>
+        <li>✅ Zero annotations or text labels baked in</li>
+        <li>✅ Clean white background — trivial to make transparent</li>
+        <li>✅ Clear grid lines — slicing is straightforward</li>
+        <li>✅ Assessed as "production-ready" — usable directly in Godot, Unity, Phaser</li>
+      </ul>
+    </div>
+
+    <p>Two small post-processing steps still needed: mirror the sheet horizontally to get right-facing movement, and adjust the anchor point on the death frame (character lies flat, shifting the bounding box). Both are one-liners in Sharp.</p>
+
+    <h2>The Post-Processing Pipeline (Slicer)</h2>
+
+    <p>The final piece of the engine: a Node.js slicer that takes the 2K sprite sheet and turns it into game-ready assets automatically.</p>
+
+    <div class="code-block"><code><span class="code-comment"># Full pipeline — one input, full game asset pack output</span>
+
+<span class="code-key">Input:</span>  wizard-spritesheet-2k.png  <span class="code-comment">(2048x2048, 5x6 grid)</span>
+
+<span class="code-key">Step 1:</span> Detect grid dimensions → calculate cell size (409x341px per frame)
+<span class="code-key">Step 2:</span> Slice into 30 individual PNGs
+<span class="code-key">Step 3:</span> Remove white background → transparent PNG per frame
+<span class="code-key">Step 4:</span> Generate mirrored set → right-facing versions
+<span class="code-key">Step 5:</span> Repack into horizontal sprite sheet per animation row
+<span class="code-key">Step 6:</span> Output atlas.json with frame coordinates + animation names
+
+<span class="code-key">Output:</span>
+  frames/idle_01.png ... idle_05.png
+  frames/walk_01.png ... walk_05.png
+  frames/attack_01.png ... attack_05.png
+  spritesheet-final.png  <span class="code-comment">(transparent bg, game-ready)</span>
+  atlas.json             <span class="code-comment">(Phaser/Godot compatible)</span></code></div>
+
+    <p>This entire pipeline — from text prompt to playable character — runs in under 60 seconds and costs less than a cent per character. The image generation is the only real cost, and Banana Pro handles it in one call.</p>
+
+    <div class="callout">
+      <p class="callout-text"><strong>The engine is coming together:</strong> Banana Pro 2K generates the sprite sheet → Sharp slicer post-processes it → atlas.json drops straight into Phaser or Godot. No LoRA needed, no GPU, no $300/mo platform subscription. Just a prompt and a slicer script.</p>
+    </div>
+
     <h2>Challenges to Know About</h2>
 
     <p>It's not all smooth sailing. Real challenges in agentic game dev right now:</p>
