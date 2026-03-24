@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Self-Improvement: How AI Systems Learn to Upgrade Themselves — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0A0F1E 30%,#130B2E 60%,#1A0533 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#0A0F1E 40%,#130B2E 80%);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.evolution-loop{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:28px}
+.loop-step{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;text-align:center;min-width:130px}
+.loop-step .icon{font-size:1.5rem;margin-bottom:6px}
+.loop-step h4{color:#E2E8F0;font-size:.82rem;margin-bottom:2px}
+.loop-step p{color:#64748B;font-size:.72rem;margin:0}
+.loop-arrow{color:#D4705A;font-size:1.4rem;padding:0 6px}
+.project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.proj-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px}
+.proj-card h4{color:#E2E8F0;font-size:.9rem;margin-bottom:6px}
+.proj-card p{color:#64748B;font-size:.78rem;margin:0 0 8px}
+.proj-card .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600}
+.tag-coral{background:rgba(212,112,90,0.2);color:#D4705A;border:1px solid rgba(212,112,90,0.3)}
+.tag-blue{background:rgba(59,130,246,0.2);color:#60A5FA;border:1px solid rgba(59,130,246,0.3)}
+.tag-green{background:rgba(16,185,129,0.2);color:#34D399;border:1px solid rgba(16,185,129,0.3)}
+.tag-purple{background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.3)}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.evolution-loop{flex-direction:column;align-items:stretch}.loop-arrow{transform:rotate(90deg)}.project-cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Self-Evolution · AI Research</span>
+  <h1>Agent Self-Improvement: How AI Systems Learn to Upgrade Themselves</h1>
+  <p class="hero-hook">Andrej Karpathy's autoresearch showed that AI can optimize AI — 11% efficiency gains in days, zero human intervention. Jarvis already does a version of this.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 9 min read</p>
+</div>
+
+<div class="container">
+
+  <p>In March 2026, Andrej Karpathy (the researcher who trained GPT-2 and co-founded OpenAI) open-sourced a project that sent the AI community into orbit: <strong>autoresearch</strong>. The idea: give an AI agent a codebase and a metric to optimize, let it run experiments automatically, and watch it find improvements humans hadn't discovered.</p>
+
+  <p>The results were startling. The system found 20–29 effective optimizations in days. Training efficiency improved by 11%. The agent wasn't just running code — it was conducting machine learning research autonomously.</p>
+
+  <p>But here's what most people missed: Jarvis already does a primitive version of this. The OpenClaw self-evolution protocol has been running since March 2026. This post explains the field, what Jarvis does, and how to take it further.</p>
+
+  <h2>The Hierarchy of Self-Improvement</h2>
+
+  <p>AI self-improvement exists on a spectrum from simple to profound:</p>
+
+  <ul>
+    <li><strong>Level 1 — Prompt optimization:</strong> The agent improves its own system prompts based on which ones produce better outputs. Already happening with OpenClaw's AutoResearch sandbox.</li>
+    <li><strong>Level 2 — Tool configuration:</strong> The agent adjusts which tools it uses and how. Jarvis adds new MCP servers, updates TOOLS.md, improves AGENTS.md.</li>
+    <li><strong>Level 3 — Code evolution:</strong> The agent modifies its own codebase to add capabilities. SICA (Self-Improving Coding Agent) demonstrates this — it edits its own code and runs benchmarks to measure improvement.</li>
+    <li><strong>Level 4 — Training optimization:</strong> Karpathy's autoresearch territory — the agent modifies model training code to improve model performance. This requires GPU access and is beyond personal assistant territory for now.</li>
+  </ul>
+
+  <p>For Jarvis and OpenClaw users, Levels 1 and 2 are immediately practical. Level 3 is the near-term frontier.</p>
+
+  <h2>Karpathy's AutoResearch: The Breakthrough</h2>
+
+  <p><strong>GitHub:</strong> The concept was demonstrated in multiple open-source projects; the community collected resources at github.com/alvinunreal/awesome-autoresearch</p>
+
+  <p>The key insight Karpathy articulated is what he called the <strong>Verifiable Domain Thesis</strong>: AI systems can recursively self-improve in domains where outcomes are unambiguously measurable. Code has this property — you run the code, the tests pass or fail, the benchmark score goes up or down. There's no ambiguity.</p>
+
+  <p>The autoresearch loop works like this:</p>
+  <ol>
+    <li>Agent reads the current codebase and understands what metric to optimize</li>
+    <li>Agent generates a hypothesis: "What if I change X to Y?"</li>
+    <li>Agent implements the change and runs an evaluation</li>
+    <li>If the metric improves, the change is kept. If not, it's reverted.</li>
+    <li>Agent documents what worked and what didn't, and generates the next hypothesis</li>
+    <li>Loop repeats hundreds of times until diminishing returns</li>
+  </ol>
+
+  <p>This is exactly how human researchers work — except the AI runs experiments in minutes instead of weeks.</p>
+
+  <h2>EvoAgentX — The Framework for Self-Evolving Agents</h2>
+  <p><strong>GitHub:</strong> github.com/EvoAgentX/EvoAgentX · <strong>Stars:</strong> 2,000+</p>
+
+  <p>EvoAgentX is an open-source framework purpose-built for building, evaluating, and evolving LLM-based agents. It has three standout features:</p>
+
+  <ul>
+    <li><strong>Automated workflow construction:</strong> Given a task description, EvoAgentX builds the agent workflow automatically — no manual configuration.</li>
+    <li><strong>Integrated evaluation:</strong> Built-in evaluation harnesses that measure agent performance on defined metrics.</li>
+    <li><strong>Self-evolution engine:</strong> Iteratively improve the agent's prompts, tools, and workflow based on evaluation results.</li>
+  </ul>
+
+  <p>For OpenClaw: EvoAgentX provides the infrastructure to turn Jarvis's current manual self-evolution protocol (detect patterns → propose upgrades → Boss approves → apply) into a semi-automated system where Jarvis proposes and tests improvements independently before presenting the best ones for approval.</p>
+
+  <h2>Gödel Agent — Real-Time Self-Modification</h2>
+  <p><strong>Published at:</strong> ACL 2025 · <strong>GitHub:</strong> Available in the EvoAgentX ecosystem</p>
+
+  <p>The Gödel Agent (named after mathematician Kurt Gödel, famous for incompleteness theorems) takes self-improvement to an extreme: it modifies its own task-solving policies and learning algorithms <em>at runtime</em>, using a technique called monkey patching — dynamically replacing Python functions while the agent is running.</p>
+
+  <p>The philosophical implications are interesting: an agent that can rewrite its own decision-making process is qualitatively different from one that just updates its prompts. It's closer to how evolution works — not just learning within fixed architecture, but changing the architecture itself.</p>
+
+  <p>For practical OpenClaw use: Gödel Agent is research territory, not production-ready. But understanding the concept helps design Jarvis's evolution system with the right architecture — one where reasoning strategies can be swapped out, not just parameters tuned.</p>
+
+  <div class="infographic">
+    <h3>🧬 The Self-Improvement Loop</h3>
+    <p class="subtitle">How Jarvis evolves itself — the OpenClaw evolution protocol in action</p>
+    <div class="evolution-loop">
+      <div class="loop-step">
+        <div class="icon">👁️</div>
+        <h4>Observe</h4>
+        <p>Detect friction patterns, repeated mistakes, inefficiencies</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">💡</div>
+        <h4>Propose</h4>
+        <p>Generate a concrete improvement: new rule, new tool, new workflow</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">🧪</div>
+        <h4>Test</h4>
+        <p>Run the change in a sandbox (autoresearch-openclaw/)</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">📊</div>
+        <h4>Score</h4>
+        <p>Evaluate: did this improve accuracy, speed, or quality?</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">✅</div>
+        <h4>Apply</h4>
+        <p>Boss approves → merge to AGENTS.md, TOOLS.md, or code</p>
+      </div>
+    </div>
+
+    <div class="project-cards">
+      <div class="proj-card">
+        <h4>🔬 Karpathy autoresearch</h4>
+        <p>ML training optimization, 11% efficiency gains in days</p>
+        <span class="tag tag-coral">Research</span>
+      </div>
+      <div class="proj-card">
+        <h4>⚙️ EvoAgentX</h4>
+        <p>Framework for building self-evolving agent workflows</p>
+        <span class="tag tag-blue">Framework</span>
+      </div>
+      <div class="proj-card">
+        <h4>🤖 SICA</h4>
+        <p>Self-modifying coding agent, +benchmark gains autonomously</p>
+        <span class="tag tag-green">Agent</span>
+      </div>
+      <div class="proj-card">
+        <h4>🌱 OpenClaw Evolver</h4>
+        <p>Jarvis's own evolution system in autoresearch-openclaw/</p>
+        <span class="tag tag-purple">Active</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>What Jarvis's Self-Evolution Looks Like Right Now</h2>
+
+  <p>The OpenClaw self-evolution protocol is real and active. Here's what it has already produced:</p>
+
+  <ul>
+    <li><strong>AGENTS.md upgrades:</strong> 15+ documented improvements over 2 weeks — parallel subagent rules, Plan-Mode gate, credential hygiene standards, gotchas documentation</li>
+    <li><strong>AutoResearch sandbox:</strong> The autoresearch-openclaw/ directory runs Karpathy-inspired optimization loops on Jarvis's .md files using Gemini free tier — 74.1 → 77.0 score, saved 3,767 bytes</li>
+    <li><strong>Coding patterns:</strong> Sibling component rules (fix all variants when fixing one), route verification (grep before pushing), large file generation (split into phases)</li>
+    <li><strong>Tool stack evolution:</strong> Aider watch mode, Gemini CLI integration, Magic MCP for UI — all discovered and integrated through observed patterns</li>
+  </ul>
+
+  <p>This is already impressive for a system that's been running for less than 2 weeks. The gap between current Jarvis and a fully self-improving system is mostly infrastructure: automated scoring, sandbox evaluation, and a better proposal/approval workflow.</p>
+
+  <h2>The Next Evolution: Semi-Automated Improvement</h2>
+
+  <p>The current protocol is: Jarvis observes a pattern → writes a "📝 Noted:" in daily logs → at end of session proposes upgrades → Boss approves → Jarvis applies. This works but requires Boss to be in the loop for every change.</p>
+
+  <p>A better system would:</p>
+  <ol>
+    <li>Let Jarvis propose and test improvements autonomously in the sandbox</li>
+    <li>Present Boss with a weekly "evolution report" — what was tested, what improved, what didn't</li>
+    <li>Boss approves the winning changes in bulk, not one at a time</li>
+    <li>Critical system changes (SOUL.md, security rules) still require explicit approval</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>Boss Henry's role in self-evolution:</strong> Not technical. The evolution protocol should surface improvements as clear, plain-language proposals: "I noticed I was failing to check sibling components 3 times this week. I added a rule to AGENTS.md that requires grep verification before any component fix. Here's the diff — approve?" One tap to approve, one tap to reject. That's it.</p>
+  </div>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Already Doing This</div>
+    <h3>Verdict: Self-evolution is Jarvis's most important long-term capability — invest in it</h3>
+    <p>The OpenClaw evolution system is working but manual. The next step is semi-automation using the EvoAgentX framework for structured evaluation and the autoresearch sandbox for testing changes before applying them.</p>
+    <p><strong>Immediate action:</strong> Build a weekly "evolution report" script that summarizes what Jarvis learned, what patterns it detected, and what it wants to change. Present to Boss as a single approval session, not ad-hoc updates.</p>
+    <p><strong>Longer term:</strong> Integrate EvoAgentX evaluation harnesses to give self-improvement proposals a score, not just a description. Turns "I think this is better" into "this improved task completion rate by 12%."</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/alvinunreal/awesome-autoresearch" target="_blank">Awesome AutoResearch — github.com/alvinunreal/awesome-autoresearch</a></li>
+      <li><a href="https://github.com/EvoAgentX/EvoAgentX" target="_blank">EvoAgentX — github.com/EvoAgentX/EvoAgentX</a></li>
+      <li><a href="https://github.com/EvoAgentX/Awesome-Self-Evolving-Agents" target="_blank">Awesome Self-Evolving Agents — github.com/EvoAgentX/Awesome-Self-Evolving-Agents</a></li>
+      <li><a href="https://github.com/aiming-lab/Agent0" target="_blank">Agent0 — github.com/aiming-lab/Agent0</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Long-Task Tracking and Agent Notification Systems — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0A1629 40%,#0F2040 70%,#0A2B52 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#0A1629 40%,#0F2040 80%);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.lifecycle{display:flex;flex-direction:column;gap:0;margin-bottom:24px}
+.lc-row{display:grid;grid-template-columns:auto 1fr;gap:0;align-items:stretch}
+.lc-icon-col{display:flex;flex-direction:column;align-items:center;width:48px}
+.lc-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.lc-line{flex:1;width:2px;background:rgba(255,255,255,0.1);margin:0 auto}
+.lc-content{padding:0 0 20px 12px}
+.lc-content h4{color:#E2E8F0;font-size:.9rem;margin-bottom:4px}
+.lc-content p{color:#64748B;font-size:.8rem;margin:0}
+.lc-content code{background:rgba(255,255,255,0.08);color:#CBD5E1;font-size:.78rem;padding:2px 6px}
+.icon-start{background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.3)}
+.icon-run{background:rgba(59,130,246,0.2);border:1px solid rgba(59,130,246,0.3)}
+.icon-check{background:rgba(245,158,11,0.2);border:1px solid rgba(245,158,11,0.3)}
+.icon-done{background:rgba(212,112,90,0.2);border:1px solid rgba(212,112,90,0.3)}
+.notify-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:24px}
+.notify-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;text-align:center}
+.notify-card .icon{font-size:1.6rem;margin-bottom:6px}
+.notify-card h4{color:#E2E8F0;font-size:.85rem;margin-bottom:4px}
+.notify-card p{color:#64748B;font-size:.75rem;margin:0}
+.notify-card .pill{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600;margin-top:6px}
+.pill-active{background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.25)}
+.pill-available{background:rgba(59,130,246,0.15);color:#60A5FA;border:1px solid rgba(59,130,246,0.25)}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.notify-options{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Task Tracking · Notifications</span>
+  <h1>Long-Task Tracking and Agent Notification Systems</h1>
+  <p class="hero-hook">You shouldn't have to ask "are you done?" — a well-designed agent tells you the moment it finishes, and never leaves work dangling without a status update.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+  <p>There's a specific hell that comes with autonomous AI agents: you send them off on a task, and then you have no idea what they're doing. Is it stuck? Did it fail silently? Did it finish and not tell you? Are you waiting for nothing?</p>
+
+  <p>This is the notification problem. For simple synchronous tools — press button, get result — it doesn't matter. But for AI agents that take 5–30 minutes on complex tasks, poor notification design means Boss Henry is either constantly checking in (losing the value of delegation) or missing completed work (creating invisible bottlenecks).</p>
+
+  <p>This post covers the patterns and tools that solve long-task visibility for AI agent systems like OpenClaw.</p>
+
+  <h2>The OpenClaw Notification System</h2>
+
+  <p>Jarvis already has a working notification system built around Telegram and <code>notify-boss.js</code>. Here's what exists:</p>
+
+  <ul>
+    <li><strong>notify-boss.js:</strong> Sends a Telegram message directly to Boss Henry. Used at the end of long tasks.</li>
+    <li><strong>run-claude.js:</strong> Wires Claude Code subagents to automatically notify on completion (success or failure) with elapsed time.</li>
+    <li><strong>Mission Control dashboard:</strong> <code>localhost:3333</code> shows active agents, scheduled jobs, project status, and event log.</li>
+    <li><strong>Heartbeat system:</strong> Periodic polling of HEARTBEAT.md to check for pending tasks and push updates.</li>
+    <li><strong>active-tasks.json:</strong> Handoff file for tasks that are waiting or paused while Boss is AFK.</li>
+  </ul>
+
+  <p>This is already good. But there are gaps: subagent failures sometimes go unnoticed, task queues can pile up without Boss knowing, and there's no structured SLA for "task should complete in X minutes — alert if not."</p>
+
+  <h2>The Three Levels of Task Notification</h2>
+
+  <h3>Level 1: Completion Notification</h3>
+  <p>The minimum: tell Boss when a long task is done. This is already implemented via notify-boss.js and run-claude.js. Every task that takes >1 minute must call this on completion. Non-negotiable rule in AGENTS.md.</p>
+
+  <h3>Level 2: Progress Updates for Very Long Tasks</h3>
+  <p>For tasks that take 5+ minutes, silence is uncomfortable even with a completion promise. The pattern: send a "started" notification with an estimated time, then a "done" notification at the end. For 10+ minute tasks, add a midpoint heartbeat: "still working, 50% done, ~5 more minutes."</p>
+
+  <p>This is the difference between waiting for an Uber with a real-time map and waiting for a cab you called 20 minutes ago and aren't sure is coming.</p>
+
+  <h3>Level 3: Failure and Recovery Notification</h3>
+  <p>The hardest case: a task fails mid-way. Jarvis runs out of context, a subagent crashes, an API returns an error, or the task encounters an edge case it can't handle. Without an explicit failure notification, Boss only discovers the failure when he checks in — which could be hours later.</p>
+
+  <p>The solution: wrap every long task in a try/catch equivalent with automatic failure notification including:</p>
+  <ul>
+    <li>What the task was</li>
+    <li>What stage it failed at</li>
+    <li>What the error was (in plain English)</li>
+    <li>What Boss needs to do, if anything</li>
+  </ul>
+
+  <h2>Tools for Task Tracking Beyond Notifications</h2>
+
+  <h3>Mission Control Dashboard (existing)</h3>
+  <p>The MC dashboard at <code>localhost:3333</code> is already the best real-time view of what Jarvis is doing. It shows active agents, their status, scheduled jobs, and recent events. For Boss Henry, this is the "at a glance" view.</p>
+
+  <p>Current gap: the dashboard shows agents and jobs, but not fine-grained task progress within a single agent run. A blog post series like this one shows up as one "running" agent, not "post 6 of 10 complete."</p>
+
+  <h3>Temporal — Production Workflow Orchestration</h3>
+  <p><strong>GitHub:</strong> github.com/temporalio/temporal · <strong>Stars:</strong> 12,000+</p>
+
+  <p>Temporal is the production-grade solution to long-task tracking at scale. It's used by Stripe, Netflix, and Uber for orchestrating complex workflows that run for minutes, hours, or even days. Features:</p>
+  <ul>
+    <li><strong>Durable execution:</strong> If your process crashes midway, Temporal automatically resumes from where it left off</li>
+    <li><strong>Workflow visibility:</strong> Every task has a full execution history — what happened, when, what the results were</li>
+    <li><strong>Timeouts and retries:</strong> Define exactly how long a step should take, how many retries before failure, and what to do on timeout</li>
+    <li><strong>Human-in-the-loop:</strong> Workflows can pause and wait for human input, then resume automatically</li>
+  </ul>
+
+  <p>For OpenClaw: Temporal is the long-term architecture for managing complex agent workflows. Not needed today, but understanding it shapes how you design the current system. The key pattern to borrow: every task has explicit states (queued, running, waiting, completed, failed), and state transitions trigger notifications.</p>
+
+  <h3>BullMQ — Task Queues for Node.js</h3>
+  <p><strong>GitHub:</strong> github.com/taskforcesh/bullmq · <strong>Stars:</strong> 6,000+</p>
+
+  <p>BullMQ is a battle-tested Redis-based queue system for Node.js. If OpenClaw ever needs a proper task queue — where tasks are added, processed by workers, and tracked — BullMQ is the right choice. It has built-in retry logic, rate limiting, delay scheduling, and event callbacks for task state changes.</p>
+
+  <p>For Jarvis: a BullMQ queue could replace the current combination of active-tasks.json + HEARTBEAT.md for managing ongoing tasks. Tasks enter the queue, workers (subagents) process them, results are stored, notifications fire on state changes.</p>
+
+  <div class="infographic">
+    <h3>📋 The Task Lifecycle for Jarvis</h3>
+    <p class="subtitle">Every long task should follow this pattern — no silent failures, no polling required</p>
+    <div class="lifecycle">
+      <div class="lc-row">
+        <div class="lc-icon-col">
+          <div class="lc-icon icon-start">🚀</div>
+          <div class="lc-line"></div>
+        </div>
+        <div class="lc-content">
+          <h4>1. Task Dispatched</h4>
+          <p>Log to <code>active-tasks.json</code>. Notify Boss: "Running [task], ~X min. I'm still here for questions."</p>
+        </div>
+      </div>
+      <div class="lc-row">
+        <div class="lc-icon-col">
+          <div class="lc-icon icon-run">⚙️</div>
+          <div class="lc-line"></div>
+        </div>
+        <div class="lc-content">
+          <h4>2. Task Running</h4>
+          <p>Log to Mission Control (<code>mc-update.js</code>). For 10+ min tasks: send progress update at ~50%.</p>
+        </div>
+      </div>
+      <div class="lc-row">
+        <div class="lc-icon-col">
+          <div class="lc-icon icon-check">🔍</div>
+          <div class="lc-line"></div>
+        </div>
+        <div class="lc-content">
+          <h4>3. Verify Output</h4>
+          <p>Always verify: does the file exist? Did the deploy succeed? Did the API return 200? Never trust agent self-reports.</p>
+        </div>
+      </div>
+      <div class="lc-row">
+        <div class="lc-icon-col">
+          <div class="lc-icon icon-done">✅</div>
+        </div>
+        <div class="lc-content">
+          <h4>4. Notify Completion</h4>
+          <p>Call <code>notify-boss.js</code> with: what was done, what was verified, what Boss should check if any. Remove from <code>active-tasks.json</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notify-options">
+      <div class="notify-card">
+        <div class="icon">📱</div>
+        <h4>Telegram Bot</h4>
+        <p>Primary channel. notify-boss.js sends directly to Boss's phone.</p>
+        <span class="pill pill-active">✓ Active</span>
+      </div>
+      <div class="notify-card">
+        <div class="icon">🖥️</div>
+        <h4>Mission Control</h4>
+        <p>Dashboard at localhost:3333. Visual status for all agents.</p>
+        <span class="pill pill-active">✓ Active</span>
+      </div>
+      <div class="notify-card">
+        <div class="icon">💾</div>
+        <h4>active-tasks.json</h4>
+        <p>Handoff file for paused/waiting tasks. Heartbeat picks up.</p>
+        <span class="pill pill-active">✓ Active</span>
+      </div>
+      <div class="notify-card">
+        <div class="icon">🔔</div>
+        <h4>Webhook / n8n</h4>
+        <p>Route task events to any channel (Slack, email, SMS).</p>
+        <span class="pill pill-available">Add Later</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Designing Good Notification Messages</h2>
+
+  <p>A bad completion notification: "Done." (What's done? Is it working? What do I do next?)</p>
+
+  <p>A good completion notification:</p>
+  <ul>
+    <li>✅ <strong>What was done:</strong> "10 blog posts written and pushed to henrys-blog"</li>
+    <li>🔍 <strong>What was verified:</strong> "Git push succeeded, posts visible at /posts/ directory"</li>
+    <li>🌐 <strong>Where to check:</strong> "Live at hungpham789.github.io/henrys-blog/"</li>
+    <li>⚠️ <strong>Any caveats:</strong> "2 posts had placeholder images — update manually"</li>
+    <li>⏱️ <strong>Elapsed time:</strong> "Took 28 minutes total"</li>
+  </ul>
+
+  <p>This format gives Boss everything needed to decide "great, moving on" or "need to follow up on X" — in a single glance without opening any other tool.</p>
+
+  <h2>The Silence Problem</h2>
+
+  <p>The worst pattern: Jarvis starts a task, goes silent for 20 minutes, then either finishes or fails — and Boss doesn't know which.</p>
+
+  <p>The AGENTS.md rule is clear: "Boss should NEVER have to ask 'are you done?'" This is a design principle, not just a courtesy. Pushing completion state removes the cognitive overhead of tracking what Jarvis is doing, which is exactly the point of having an agent.</p>
+
+  <div class="callout">
+    <p><strong>Practical rule:</strong> Any task that takes >1 minute needs a notify-boss.js call at the end. This is already in AGENTS.md as non-negotiable. For tasks that take >5 minutes, add a "started" notification too. For tasks that take >10 minutes, check in at the midpoint. This 3-tier system covers 99% of cases without notification fatigue.</p>
+  </div>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — System is Good, Polish It</div>
+    <h3>Verdict: Notification infrastructure is solid — make failure notifications explicit</h3>
+    <p>The completion notification system with notify-boss.js is working well. The gap is failure and timeout notifications — tasks that fail silently or take much longer than expected.</p>
+    <p><strong>Do this week:</strong> Add a try/catch wrapper in run-claude.js that sends a failure notification with error details if a subagent exits with an error code.</p>
+    <p><strong>Consider later:</strong> BullMQ for task queue management if/when the number of concurrent Jarvis tasks increases beyond what active-tasks.json handles cleanly. Temporal for production Antera workflows.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/temporalio/temporal" target="_blank">Temporal — github.com/temporalio/temporal</a></li>
+      <li><a href="https://github.com/taskforcesh/bullmq" target="_blank">BullMQ — github.com/taskforcesh/bullmq</a></li>
+      <li><a href="https://docs.temporal.io/develop/go/observability" target="_blank">Temporal observability docs — docs.temporal.io</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

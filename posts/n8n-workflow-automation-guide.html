@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>n8n: The Open-Source Automation Engine That Should Power Your AI Workflows — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0D1F0D 40%,#0A2B0A 70%,#0B3B0B 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#0D1F0D 40%,#0A2B0A 80%);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.workflow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px}
+.wf-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:18px}
+.wf-card .trigger{color:#6EE7B7;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.wf-card h4{color:#E2E8F0;font-size:.9rem;margin-bottom:8px}
+.wf-card .steps-mini{display:flex;flex-direction:column;gap:4px}
+.wf-card .mini-step{background:rgba(255,255,255,0.04);border-radius:5px;padding:5px 8px;color:#94A3B8;font-size:.75rem}
+.vs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start;margin-bottom:0}
+.vs-col{background:rgba(255,255,255,0.04);border-radius:10px;padding:16px}
+.vs-col h5{font-size:.85rem;margin-bottom:8px}
+.vs-col h5.n8n{color:#6EE7B7}
+.vs-col h5.zapier{color:#60A5FA}
+.vs-col ul{list-style:none;padding:0;margin:0}
+.vs-col li{color:#94A3B8;font-size:.78rem;margin-bottom:4px;padding-left:0}
+.vs-label{display:flex;align-items:center;justify-content:center;color:#64748B;font-weight:700;font-size:.85rem}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.steps{margin:24px 0}
+.step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.step-num{background:#D4705A;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:2px}
+.step-content h4{font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.step-content p{color:#6B7280;font-size:.9rem;margin:0}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.workflow-grid{grid-template-columns:1fr}.vs-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Automation · n8n</span>
+  <h1>n8n: The Open-Source Automation Engine That Should Power Your AI Workflows</h1>
+  <p class="hero-hook">150,000 GitHub stars and growing. n8n is what Zapier wishes it was: self-hosted, code-capable, AI-native, and completely free.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+  <p>Zapier costs $20–100/month. Make is $9–16/month. And they're both cloud-only — your automation data flows through their servers, not yours. For most users, that's fine. For a solo builder with an AI assistant handling sensitive teaching data, student records, and business workflows, there's a better answer.</p>
+
+  <p><strong>n8n</strong> (pronounced "n-eight-n") is the open-source automation platform that gives you Zapier's capabilities with none of the cost and all of the control. 150,000 GitHub stars — one of the fastest-growing developer tools of 2025. This is not a compromise choice: n8n is genuinely better for technical users than the paid alternatives.</p>
+
+  <h2>What n8n Actually Does</h2>
+
+  <p>n8n is a visual workflow builder. You create workflows by connecting "nodes" — each node is an action or trigger from a specific app. Nodes are connected by edges that define data flow and conditional logic. The result is a workflow that runs automatically when triggered.</p>
+
+  <p>Example: When a new student signs up on Antera (Supabase trigger) → create a Notion page for their notes → add them to a Google Calendar event → send a welcome message via Gmail → notify Jarvis via webhook → post to Telegram. That's 5 steps, 5 different apps, zero code.</p>
+
+  <p>Where n8n beats Zapier:</p>
+  <ul>
+    <li><strong>Self-hosted:</strong> Your data stays on your machine. No monthly bill, no rate limits you didn't set.</li>
+    <li><strong>Code nodes:</strong> Any step can run arbitrary JavaScript or Python. When visual isn't enough, code.</li>
+    <li><strong>AI agent mode:</strong> n8n has built-in LLM nodes — connect to Claude, Gemini, or any model to add AI decision-making to workflows.</li>
+    <li><strong>400+ integrations:</strong> Comparable to Zapier's library. Covers everything Boss Henry needs: Zoom, Google Workspace, Supabase, Telegram, GitHub, Notion, Slack.</li>
+    <li><strong>Webhook support:</strong> Any workflow can be triggered by a webhook — meaning Jarvis can trigger n8n workflows with a single HTTP call.</li>
+  </ul>
+
+  <h2>The Jarvis + n8n Integration Pattern</h2>
+
+  <p>Here's the key insight: n8n and Jarvis are not alternatives — they're complementary. Jarvis handles intelligence (reasoning, planning, writing, coding). n8n handles plumbing (moving data between services, triggering actions, scheduling recurring jobs).</p>
+
+  <p>The pattern:</p>
+  <ul>
+    <li>Jarvis decides what needs to happen (e.g., "generate monthly teaching report")</li>
+    <li>Jarvis calls an n8n webhook to trigger the data collection workflow</li>
+    <li>n8n gathers data from Zoom API, counts sessions, pulls calendar events</li>
+    <li>n8n passes the structured data back to Jarvis via webhook response</li>
+    <li>Jarvis formats the report in natural language and sends it via Telegram</li>
+  </ul>
+
+  <p>This separates concerns cleanly: n8n is the data plumber, Jarvis is the brain. Each does what it's best at.</p>
+
+  <h2>Five Workflows to Build on Day One</h2>
+
+  <h3>1. Monthly ESL Report Generator</h3>
+  <p>Trigger: 1st of each month at 9am. Actions: Pull Zoom sessions via API → count per class → generate summary data → POST to Jarvis webhook → Jarvis formats and sends to Telegram for Boss review.</p>
+
+  <h3>2. New Antera Student Onboarding</h3>
+  <p>Trigger: Supabase webhook on new user signup. Actions: Create Notion page → add to welcome email sequence → notify Boss → update student tracking spreadsheet.</p>
+
+  <h3>3. Blog Post Pipeline</h3>
+  <p>Trigger: Notion page status changes to "Ready to Publish." Actions: Export Notion content → convert to HTML → push to Git → deploy to GitHub Pages → Telegram notification → social media post draft.</p>
+
+  <h3>4. Weekly Summary Report</h3>
+  <p>Trigger: Every Friday at 6pm. Actions: Query Supabase for weekly Antera metrics → pull GitHub commit log → gather completed tasks from Jarvis → format weekly recap → send to Telegram.</p>
+
+  <h3>5. Backup and Archive</h3>
+  <p>Trigger: Daily at 2am. Actions: Export Supabase tables to JSON → upload to Google Drive → verify upload → clean up local temp files → notify on any failures.</p>
+
+  <div class="infographic">
+    <h3>⚡ n8n vs Zapier — The Real Comparison</h3>
+    <p class="subtitle">For Boss Henry's use case, n8n wins on every dimension that matters</p>
+    <div class="vs-row">
+      <div class="vs-col">
+        <h5 class="n8n">n8n (recommended)</h5>
+        <ul>
+          <li>✅ Free (self-hosted)</li>
+          <li>✅ Data stays local</li>
+          <li>✅ JavaScript/Python code nodes</li>
+          <li>✅ AI agent nodes (LLM calls)</li>
+          <li>✅ 400+ integrations</li>
+          <li>✅ Webhook triggers</li>
+          <li>✅ No task limits</li>
+          <li>⚠️ Needs self-hosting setup</li>
+        </ul>
+      </div>
+      <div class="vs-label">vs</div>
+      <div class="vs-col">
+        <h5 class="zapier">Zapier</h5>
+        <ul>
+          <li>❌ $20–100/month</li>
+          <li>❌ Data through their servers</li>
+          <li>⚠️ Code only in premium tiers</li>
+          <li>✅ AI integration (newer)</li>
+          <li>✅ 7,000+ integrations</li>
+          <li>✅ Webhook triggers</li>
+          <li>❌ Task limits per plan</li>
+          <li>✅ Zero setup needed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <p style="color:#64748B;font-size:.82rem;text-align:center;margin-bottom:16px">Example workflows for Boss Henry</p>
+      <div class="workflow-grid">
+        <div class="wf-card">
+          <div class="trigger">🗓️ Monthly Trigger</div>
+          <h4>ESL Report</h4>
+          <div class="steps-mini">
+            <div class="mini-step">📹 Zoom → session counts</div>
+            <div class="mini-step">📊 Format → Jarvis</div>
+            <div class="mini-step">📱 Telegram → Boss review</div>
+          </div>
+        </div>
+        <div class="wf-card">
+          <div class="trigger">🆕 Supabase Trigger</div>
+          <h4>Student Onboarding</h4>
+          <div class="steps-mini">
+            <div class="mini-step">📝 Create Notion page</div>
+            <div class="mini-step">📧 Welcome email</div>
+            <div class="mini-step">🔔 Notify Jarvis</div>
+          </div>
+        </div>
+        <div class="wf-card">
+          <div class="trigger">📅 Weekly Trigger</div>
+          <h4>Progress Report</h4>
+          <div class="steps-mini">
+            <div class="mini-step">📈 Pull Antera metrics</div>
+            <div class="mini-step">🔧 GitHub commits</div>
+            <div class="mini-step">📱 Summary to Telegram</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Setting Up n8n on the Jarvis Machine</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Install via npm</h4>
+        <p><code>npm install -g n8n</code> — runs on Node.js, already installed. Start with <code>n8n</code> — opens at localhost:5678.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Configure credentials</h4>
+        <p>Add Google OAuth (already set up for other scripts), Zoom API credentials, Supabase API key, Telegram Bot token — all stored securely in n8n's credential vault.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Create the first workflow</h4>
+        <p>Start with the weekly summary — it's the most general and immediately useful. Add a webhook trigger, pull data from each source, POST to Jarvis's notify endpoint.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Wire Jarvis ↔ n8n webhooks</h4>
+        <p>n8n exposes webhooks; Jarvis can POST to them. Add a <code>scripts/n8n-trigger.js</code> helper that makes it trivial to trigger any n8n workflow by name.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>Add to startup (optional)</h4>
+        <p>Set n8n to run as a Windows service so it's always available. Use PM2 or the Windows Task Scheduler to start it on login.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>The no-code angle:</strong> Once n8n is installed and credentials are configured, Boss Henry could build and modify workflows himself through the visual UI — no coding required. This is a meaningful upgrade to Boss's capability to automate things independently, without waiting for Jarvis to script everything.</p>
+  </div>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Install This Month</div>
+    <h3>Verdict: n8n is the missing automation layer for the Jarvis stack</h3>
+    <p>Right now, every automation in the Jarvis ecosystem is a Node.js script or an agent task. n8n would give those automations visual dashboards, easier editing, retry logic, scheduling, and 400+ built-in app integrations.</p>
+    <p><strong>Start with:</strong> Install n8n locally. Build the monthly ESL report workflow. This alone saves 30 minutes/month and proves the pattern.</p>
+    <p><strong>Then:</strong> Migrate recurring automation scripts from ad-hoc Node.js to n8n workflows. Better visibility, easier to edit, runs without touching code.</p>
+    <p><strong>Long term:</strong> n8n becomes the "IFTTT layer" between Jarvis and the outside world — Jarvis tells n8n what to do, n8n executes the mechanical parts.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/n8n-io/n8n" target="_blank">n8n GitHub — github.com/n8n-io/n8n</a></li>
+      <li><a href="https://docs.n8n.io" target="_blank">n8n Documentation — docs.n8n.io</a></li>
+      <li><a href="https://github.com/activepieces/activepieces" target="_blank">Activepieces (alternative) — github.com/activepieces/activepieces</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

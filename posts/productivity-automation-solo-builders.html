@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Productivity Automation Stack for Solo Builders: Calendar, Email, and Tasks on Autopilot — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0F1923 40%,#0A2235 70%,#0B2D44 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#0F1923 40%,#0A2235 80%);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.stack-table{width:100%;border-collapse:collapse}
+.stack-table th{background:#1a1a2e;color:#94A3B8;padding:10px 14px;text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+.stack-table td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:#CBD5E1;font-size:.85rem;vertical-align:top}
+.stack-table tr:last-child td{border-bottom:none}
+.stack-table .tool-name{color:#E2E8F0;font-weight:600}
+.stack-table .cost{font-size:.78rem}
+.cost-free{color:#34D399}
+.cost-paid{color:#FBBF24}
+.cost-trial{color:#60A5FA}
+.flow-diagram{background:rgba(255,255,255,0.03);border-radius:10px;padding:20px;margin-top:20px;border:1px solid rgba(255,255,255,0.07)}
+.flow-title{color:#64748B;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;text-align:center}
+.flow-row{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.flow-node{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 12px;color:#CBD5E1;font-size:.78rem;text-align:center}
+.flow-node.highlight{background:rgba(212,112,90,0.12);border-color:rgba(212,112,90,0.3);color:#D4705A;font-weight:600}
+.flow-arrow{color:#4B5563;font-size:.9rem}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.infographic{padding:24px 16px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Productivity · Automation</span>
+  <h1>The Productivity Automation Stack for Solo Builders</h1>
+  <p class="hero-hook">Calendar, email, and tasks — the three drains on every solo builder's day. Here's how Jarvis automates all three for Boss Henry.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 9 min read</p>
+</div>
+
+<div class="container">
+
+  <p>Solo builders are builders who also do their own sales, customer support, operations, content, and finances. You're the entire company. The only way to stay in flow is to ruthlessly eliminate admin overhead — and the tools available in 2025 make this more possible than ever before.</p>
+
+  <p>This post is specific to Boss Henry's situation: ESL teacher + app developer + blogger + AI experimenter. But the principles apply to any solo builder who uses an AI assistant. Let's go through the stack layer by layer.</p>
+
+  <h2>Layer 1: Calendar Automation</h2>
+
+  <h3>The Problem</h3>
+  <p>For an ESL teacher, the calendar is critical. Classes repeat on fixed schedules, but makeup sessions, rescheduling, and end-of-month reporting all require calendar-aware intelligence. Right now, Jarvis knows Boss Henry's timezone but doesn't have live calendar access baked into its default workflow.</p>
+
+  <h3>The Solution: Google Calendar MCP + AI Scheduling</h3>
+  <p>The Google Workspace MCP skill is already installed. With it active, Jarvis can:</p>
+  <ul>
+    <li>Check today's schedule before starting any session (already logged in HEARTBEAT)</li>
+    <li>Auto-create reminder events when tasks are added to the active-tasks system</li>
+    <li>Pull class schedule data for the monthly ESL report without manual lookup</li>
+    <li>Block focus time automatically when Jarvis is running long tasks</li>
+  </ul>
+
+  <h3>Tools That Go Further</h3>
+  <p><strong>Reclaim AI</strong> (reclaim.ai) is the most intelligent calendar manager available. It learns your priorities and automatically schedules tasks, deep work blocks, and meeting prep. It integrates with Google Calendar and connects to Notion, Asana, and Todoist. The magic is that when your schedule changes, Reclaim reshuffles everything automatically — you never manually move calendar blocks again.</p>
+
+  <p><strong>Cron/Notion Calendar</strong> (now built into Notion) is worth mentioning for Boss Henry specifically because Notion is already in the workflow. Events can be linked directly to project pages — your ESL class event links to the class notes, your Antera sprint event links to the sprint board.</p>
+
+  <h2>Layer 2: Email Automation</h2>
+
+  <h3>The ESL Teaching Email Reality</h3>
+  <p>ESL teachers deal with a specific email pattern: student questions, parent inquiries, class scheduling, payment reminders, and monthly reports to class groups. The volume isn't massive, but it's consistent and recurring — perfect for AI automation.</p>
+
+  <h3>Gmail MCP + Jarvis = Zero Email Overhead</h3>
+  <p>With the Google Workspace MCP active, Jarvis can:</p>
+  <ul>
+    <li>Draft monthly class reports in Boss Henry's voice — sent to Jarvis as a task, reviewed, then sent</li>
+    <li>Auto-categorize incoming emails by student/class/priority</li>
+    <li>Flag any email that needs urgent response during the next Telegram check-in</li>
+    <li>Create calendar events from scheduling emails automatically</li>
+  </ul>
+
+  <h3>n8n — The Open-Source Automation Backbone</h3>
+  <p><strong>GitHub:</strong> github.com/n8n-io/n8n · <strong>Stars:</strong> 150,000+</p>
+
+  <p>n8n hit 150,000 GitHub stars in 2025, making it one of the most popular self-hosted automation tools ever. It's a visual workflow builder — connect any app to any other app through a drag-and-drop interface. No code required.</p>
+
+  <p>For Boss Henry, n8n could replace several manual workflows:</p>
+  <ul>
+    <li>Zoom recording → Google Drive upload → teaching report generation → Telegram notification</li>
+    <li>New student email → Supabase record → welcome message → calendar event</li>
+    <li>Monthly invoice generation → payment tracking → follow-up reminders</li>
+  </ul>
+
+  <p>n8n is self-hosted (free), has an AI agent mode (it can use LLMs to make decisions in workflows), and has 400+ app integrations. It's the automation infrastructure Jarvis could trigger rather than running all automation in the agent itself.</p>
+
+  <h3>Activepieces — The No-Code n8n</h3>
+  <p><strong>GitHub:</strong> github.com/activepieces/activepieces · <strong>Stars:</strong> 12,000+</p>
+
+  <p>If n8n feels too technical, Activepieces is the more accessible alternative. Same concept (visual workflow builder, 450+ integrations) but designed for less technical users. It has built-in AI tools for adding LLM decision-making to workflows, and a managed cloud tier that requires zero DevOps.</p>
+
+  <h2>Layer 3: Task Management</h2>
+
+  <h3>The Current System</h3>
+  <p>Jarvis uses a combination of HEARTBEAT.md (reminders), memory/active-tasks.json (in-progress work), and Notion (project planning). This works but lacks a single task view that Boss Henry can consult without opening multiple tools.</p>
+
+  <h3>Todoist + Jarvis Integration</h3>
+  <p><strong>API:</strong> developer.todoist.com · <strong>Jarvis integration:</strong> MCP via Zapier or direct API</p>
+
+  <p>Todoist's API is clean and well-documented. With a simple integration script, Jarvis could:</p>
+  <ul>
+    <li>Create tasks in Todoist when new items are added to active-tasks.json</li>
+    <li>Mark tasks complete in Todoist when Jarvis finishes them</li>
+    <li>Read today's Todoist tasks as part of the morning briefing</li>
+    <li>Sync Todoist priorities with Jarvis's planning</li>
+  </ul>
+
+  <p>The advantage of Todoist over Notion for tasks: it's faster to open, has excellent mobile apps, and has natural language date parsing ("add: finish Antera auth flow tomorrow 3pm").</p>
+
+  <div class="infographic">
+    <h3>⚡ Boss Henry's Automation Stack</h3>
+    <p class="subtitle">The full productivity automation picture — what's active, what to add</p>
+    <div style="overflow-x:auto">
+      <table class="stack-table">
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>Tool</th>
+            <th>What It Does</th>
+            <th>Cost</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Calendar</td>
+            <td class="tool-name">Google Calendar MCP</td>
+            <td>Read/write events, schedule awareness for Jarvis</td>
+            <td class="cost cost-free">Free</td>
+            <td>✓ Installed</td>
+          </tr>
+          <tr>
+            <td>Calendar</td>
+            <td class="tool-name">Reclaim AI</td>
+            <td>Smart scheduling, auto-reschedule, focus blocks</td>
+            <td class="cost cost-paid">Free tier</td>
+            <td>Add Soon</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td class="tool-name">Gmail MCP</td>
+            <td>Read/draft/send emails via Jarvis</td>
+            <td class="cost cost-free">Free</td>
+            <td>✓ Installed</td>
+          </tr>
+          <tr>
+            <td>Automation</td>
+            <td class="tool-name">n8n</td>
+            <td>Visual workflow builder, 400+ integrations</td>
+            <td class="cost cost-free">Free (self-hosted)</td>
+            <td>Install</td>
+          </tr>
+          <tr>
+            <td>Tasks</td>
+            <td class="tool-name">Todoist API</td>
+            <td>Task sync between Jarvis and mobile app</td>
+            <td class="cost cost-free">Free tier</td>
+            <td>Build Script</td>
+          </tr>
+          <tr>
+            <td>Reporting</td>
+            <td class="tool-name">Zoom API (existing)</td>
+            <td>Monthly class session count, report generation</td>
+            <td class="cost cost-free">Free</td>
+            <td>✓ Active</td>
+          </tr>
+          <tr>
+            <td>Notifications</td>
+            <td class="tool-name">Telegram Bot</td>
+            <td>All Jarvis notifications via notify-boss.js</td>
+            <td class="cost cost-free">Free</td>
+            <td>✓ Active</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-title">📋 Monthly ESL Report — Automated Flow</div>
+      <div class="flow-row">
+        <div class="flow-node">1st of month</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight">Jarvis triggers</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">Zoom API: count sessions</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-arrow" style="transform:rotate(90deg);color:#D4705A">↓</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node">Google Drive: archive recordings</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight">Jarvis formats report</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">Telegram: Boss reviews</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-arrow" style="transform:rotate(90deg);color:#D4705A">↓</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node">Boss approves (one tap)</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight">Send to Facebook groups</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">Done ✓</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>The Bigger Picture: From Task Management to Life Management</h2>
+
+  <p>The tools above handle the mechanics. But the real shift is philosophical: stop managing tasks yourself and start managing Jarvis who manages tasks for you.</p>
+
+  <p>This means:</p>
+  <ul>
+    <li><strong>Single input channel:</strong> Everything goes to Jarvis via Telegram. One place, always available.</li>
+    <li><strong>Jarvis as task router:</strong> Incoming tasks go to the right system (Todoist for personal, Notion for project, active-tasks.json for in-progress Jarvis work)</li>
+    <li><strong>Proactive surfacing:</strong> Jarvis doesn't wait to be asked — it pushes the right information at the right time via heartbeat checks</li>
+    <li><strong>Automated reporting:</strong> Weekly summary of what was done, what's pending, what needs Boss's decision</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>The ESL teacher multiplier:</strong> The Zoom recording automation alone is worth 30 minutes per month. The email drafting for student communications is worth another 20. The calendar scheduling removes 2–3 weekly check-ins. Total: 3–4 hours/month of admin that just disappears. That's 40+ hours/year back for teaching, building, or rest.</p>
+  </div>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Build This Incrementally</div>
+    <h3>Verdict: The automation stack is 60% built — finish the last 40%</h3>
+    <p>Gmail MCP, Calendar MCP, Telegram notifications, and Zoom API are all active. The gaps are n8n for complex multi-step workflows, Todoist sync for task visibility on mobile, and the actual completion of the Zoom automation workflow.</p>
+    <p><strong>This week:</strong> Finish the Zoom → Google Drive → Report → Telegram workflow. It's 90% done based on existing scripts.</p>
+    <p><strong>This month:</strong> Install n8n locally. Build one n8n workflow for the ESL reporting cycle. This becomes the template for all future automation.</p>
+    <p><strong>Skip for now:</strong> Reclaim AI (adds complexity without matching Jarvis's contextual intelligence). Activepieces (n8n covers the use case).</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/n8n-io/n8n" target="_blank">n8n GitHub — github.com/n8n-io/n8n</a></li>
+      <li><a href="https://github.com/activepieces/activepieces" target="_blank">Activepieces — github.com/activepieces/activepieces</a></li>
+      <li><a href="https://developer.todoist.com" target="_blank">Todoist API — developer.todoist.com</a></li>
+      <li><a href="https://github.com/super-productivity/super-productivity" target="_blank">Super Productivity — github.com/super-productivity/super-productivity</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

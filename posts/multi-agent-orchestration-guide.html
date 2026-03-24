@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-Agent Orchestration: How to Build AI Teams That Actually Work — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0F2027 40%,#203A43 70%,#2C5364 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:600px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#1a1a2e 50%,#0F2027);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.framework-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.fw-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px}
+.fw-card h4{color:#E2E8F0;font-size:1rem;margin-bottom:4px}
+.fw-card .stars{color:#F59E0B;font-size:.8rem;margin-bottom:8px}
+.fw-card p{color:#94A3B8;font-size:.82rem;margin:0 0 10px}
+.fw-card .tag{display:inline-block;background:rgba(212,112,90,0.2);color:#D4705A;border:1px solid rgba(212,112,90,0.3);padding:2px 8px;border-radius:8px;font-size:.72rem;font-weight:600}
+.fw-card .tag.blue{background:rgba(59,130,246,0.2);color:#60A5FA;border-color:rgba(59,130,246,0.3)}
+.fw-card .tag.green{background:rgba(16,185,129,0.2);color:#34D399;border-color:rgba(16,185,129,0.3)}
+.fw-card .tag.purple{background:rgba(139,92,246,0.2);color:#A78BFA;border-color:rgba(139,92,246,0.3)}
+.arch-diagram{background:rgba(255,255,255,0.03);border-radius:12px;padding:24px;margin-top:24px;border:1px solid rgba(255,255,255,0.08)}
+.arch-title{color:#64748B;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px;text-align:center}
+.arch-flow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.arch-node{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:8px 14px;color:#E2E8F0;font-size:.82rem;text-align:center}
+.arch-node.orchestrator{background:rgba(212,112,90,0.15);border-color:rgba(212,112,90,0.4);color:#D4705A;font-weight:600}
+.arch-arrow{color:#4B5563;font-size:1.2rem}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.steps{counter-reset:step;margin:24px 0}
+.step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.step-num{background:#D4705A;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:2px}
+.step-content h4{font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.step-content p{color:#6B7280;font-size:.9rem;margin:0}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.framework-grid{grid-template-columns:1fr}.arch-flow{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">AI Agents · Orchestration</span>
+  <h1>Multi-Agent Orchestration: How to Build AI Teams That Actually Work</h1>
+  <p class="hero-hook">One agent is good. Five specialized agents working in parallel is what gets complex jobs done in minutes, not hours.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 9 min read</p>
+</div>
+
+<div class="container">
+
+  <p>There's a ceiling to what a single AI agent can do. It gets overloaded with too many tasks, loses track of context, and makes sloppy mistakes when juggling too much. The solution the AI world landed on in 2024–2025: stop trying to make one super-agent and instead build a team of specialized agents that coordinate.</p>
+
+  <p>This is multi-agent orchestration — and it's the architecture behind the best AI workflows you're seeing right now. OpenClaw already does this with subagents. This post explains the leading frameworks and patterns, so you understand what's being built and why it matters for Jarvis.</p>
+
+  <h2>The Core Idea: Divide and Conquer</h2>
+
+  <p>Multi-agent orchestration is exactly what it sounds like: one <strong>orchestrator agent</strong> breaks down a goal into sub-tasks, delegates them to <strong>worker agents</strong>, collects results, and synthesizes a final output. Each worker agent is specialized — one does research, another writes code, a third handles formatting or deployment.</p>
+
+  <p>The power comes from parallelization. A single agent writing a 10-part blog series would take hours and lose coherence. Ten writing agents each tackling one post simultaneously, coordinated by an orchestrator? That's what you're reading right now — this entire series was produced this way.</p>
+
+  <h2>The Top Frameworks: What's Available</h2>
+
+  <h3>CrewAI — Role-Based Agent Teams</h3>
+  <p><strong>GitHub:</strong> github.com/crewAIInc/crewAI · <strong>Stars:</strong> 41,000+</p>
+
+  <p>CrewAI models agents as team members with roles. You define a "Researcher," a "Writer," and an "Editor" agent — each with their own goal, background, and tools. CrewAI handles the coordination: it passes outputs between agents, manages the workflow, and ensures each agent only sees what it needs to see.</p>
+
+  <p>CrewAI is Python-first but has a visual builder. It's the most popular choice for building "software company" style agent teams where each agent has a clear job function.</p>
+
+  <h3>AutoGen (Microsoft) — Conversational Agent Collaboration</h3>
+  <p><strong>GitHub:</strong> github.com/microsoft/autogen · <strong>Stars:</strong> 52,000+</p>
+
+  <p>AutoGen takes a conversational approach: agents talk to each other to collaborate. You set up a "group chat" of agents, and they solve problems through dialogue — asking each other questions, critiquing outputs, and refining until they converge on a solution.</p>
+
+  <p>This is particularly good for tasks that require debate and refinement: code review, strategic planning, or iterative problem-solving. AutoGen is more flexible than CrewAI but requires more setup to control agent behavior.</p>
+
+  <h3>OpenAI Swarm — Lightweight Handoffs</h3>
+  <p><strong>GitHub:</strong> github.com/openai/swarm · <strong>Stars:</strong> 18,000+</p>
+
+  <p>Swarm is OpenAI's experimental framework for multi-agent coordination. It focuses on two primitives: <strong>agents</strong> (with instructions and tools) and <strong>handoffs</strong> (passing control from one agent to another). The beauty is simplicity — no complex orchestration logic, just clear routing rules.</p>
+
+  <p>Swarm is lightweight and easy to understand. It's educational and works well for straightforward workflows. Not for complex enterprise deployments, but perfect for solo builders learning multi-agent patterns.</p>
+
+  <h3>LangGraph — State Machine Orchestration</h3>
+  <p><strong>GitHub:</strong> github.com/langchain-ai/langgraph · <strong>Stars:</strong> 8,000+</p>
+
+  <p>LangGraph lets you define agent workflows as directed graphs — nodes are agents or functions, edges are conditions or routes. This gives you precise control over agent behavior with support for loops, conditional branching, and human-in-the-loop checkpoints.</p>
+
+  <p>It's more complex than CrewAI or Swarm, but also more powerful and debuggable. ByteDance's Deer-Flow (which went viral with 35,000 stars in 24 hours) is built on LangGraph.</p>
+
+  <div class="infographic">
+    <h3>⚙️ Multi-Agent Framework Comparison</h3>
+    <p class="subtitle">Choose based on your use case and team size</p>
+    <div class="framework-grid">
+      <div class="fw-card">
+        <h4>CrewAI</h4>
+        <div class="stars">⭐ 41,000+</div>
+        <p>Role-based teams. Best for structured workflows with clear agent responsibilities.</p>
+        <span class="tag">Beginner-Friendly</span>
+      </div>
+      <div class="fw-card">
+        <h4>AutoGen</h4>
+        <div class="stars">⭐ 52,000+</div>
+        <p>Conversational collaboration. Best for tasks needing debate and iteration.</p>
+        <span class="tag blue">Microsoft</span>
+      </div>
+      <div class="fw-card">
+        <h4>OpenAI Swarm</h4>
+        <div class="stars">⭐ 18,000+</div>
+        <p>Lightweight handoffs. Best for simple routing and learning agent patterns.</p>
+        <span class="tag green">Lightweight</span>
+      </div>
+      <div class="fw-card">
+        <h4>LangGraph</h4>
+        <div class="stars">⭐ 8,000+</div>
+        <p>State machine graphs. Best for complex conditional workflows needing full control.</p>
+        <span class="tag purple">Advanced</span>
+      </div>
+    </div>
+
+    <div class="arch-diagram">
+      <div class="arch-title">🏗️ Typical OpenClaw Multi-Agent Architecture</div>
+      <div class="arch-flow">
+        <div class="arch-node orchestrator">Jarvis<br>(Orchestrator)</div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">Research<br>Agent</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-node">Writing<br>Agent</div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-node">Deploy<br>Agent</div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node orchestrator">Final<br>Output</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Why This Matters for OpenClaw Right Now</h2>
+
+  <p>OpenClaw already has a basic multi-agent system: the main Jarvis agent can spawn subagents using a coding-agent skill, and subagents report back when done. This is the Swarm model — simple handoffs.</p>
+
+  <p>But it's limited. Right now:</p>
+  <ul>
+    <li>Subagents can't collaborate with each other — they work in isolation</li>
+    <li>The orchestrator (Jarvis) has to manually coordinate everything</li>
+    <li>There's no shared state between subagents — no way for the research agent to hand off to the writing agent directly</li>
+    <li>Parallelization is manual — you have to spawn agents one by one</li>
+  </ul>
+
+  <p>Adopting a proper orchestration framework like CrewAI or even a lightweight LangGraph setup would make Jarvis dramatically more capable for complex tasks like this blog series, Antera feature builds, and ESL content generation.</p>
+
+  <h2>Practical Patterns That Work Today</h2>
+
+  <h3>The Pipeline Pattern</h3>
+  <p>Agent A → Agent B → Agent C. Each agent takes the previous agent's output and refines it. Great for content creation: Research → Write → Edit → Publish.</p>
+
+  <h3>The Fan-Out Pattern</h3>
+  <p>Orchestrator splits a task into N parallel sub-tasks, sends to N agents simultaneously, waits for all results, then merges. Exactly what produced this blog series. Best for tasks with independent parts.</p>
+
+  <h3>The Debate Pattern</h3>
+  <p>Two agents take opposing positions on a decision (e.g., "use mem0" vs. "use LlamaIndex") and debate until they converge. Excellent for architecture decisions and code reviews.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Start with Swarm patterns in OpenClaw</h4>
+        <p>OpenClaw's existing subagent system is already Swarm-compatible. Document your agent handoff patterns in AGENTS.md first.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Install CrewAI for complex workflows</h4>
+        <p><code>pip install crewai</code>. Define your agent roles for recurring workflows: blog production, Antera feature development, ESL content creation.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Build a shared task queue</h4>
+        <p>Use a simple JSON file or Supabase table to track agent tasks, statuses, and handoffs — your Mission Control dashboard already shows this.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Define agent boundaries strictly</h4>
+        <p>The most common failure mode is agent overlap — two agents doing the same thing. Write explicit agent charters: "Research agent ONLY searches, never writes."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Real example from this post:</strong> The entire 10-post blog series you're reading was produced by a single orchestrator (Jarvis) that delegated research, writing, and publishing to specialized subagents — all running in parallel. Total wall-clock time: under 30 minutes for work that would take a human writer 2–3 days.</p>
+  </div>
+
+  <h2>The Honest Problems with Multi-Agent Systems</h2>
+
+  <p><strong>Debugging is hard.</strong> When a multi-agent workflow fails, figuring out which agent caused the problem and why is much harder than debugging a single script. Logging everything is non-negotiable.</p>
+
+  <p><strong>Coordination overhead adds up.</strong> Passing context between agents, waiting for results, merging outputs — this adds latency and token costs. Simple tasks are often better done by a single capable agent.</p>
+
+  <p><strong>Agents hallucinate about other agents.</strong> In conversational systems, agents sometimes fabricate what other agents said. Always validate critical handoffs with actual data, not just agent summaries.</p>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Already Using This</div>
+    <h3>Verdict: OpenClaw's subagent model is the right foundation — level it up</h3>
+    <p>OpenClaw already does multi-agent coordination. The gap is in structured orchestration, parallel execution, and shared state. The next upgrade: build a lightweight CrewAI-style workflow system for Jarvis's most common complex tasks.</p>
+    <p><strong>Start with:</strong> CrewAI for content workflows (blog, ESL materials). LangGraph for complex Antera feature builds that need multiple review cycles.</p>
+    <p><strong>Skip for now:</strong> AutoGen — the conversational debate model adds complexity without clear payoff for Jarvis's use cases today.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/crewAIInc/crewAI" target="_blank">CrewAI GitHub — github.com/crewAIInc/crewAI</a></li>
+      <li><a href="https://github.com/microsoft/autogen" target="_blank">AutoGen (Microsoft) — github.com/microsoft/autogen</a></li>
+      <li><a href="https://github.com/openai/swarm" target="_blank">OpenAI Swarm — github.com/openai/swarm</a></li>
+      <li><a href="https://github.com/langchain-ai/langgraph" target="_blank">LangGraph — github.com/langchain-ai/langgraph</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

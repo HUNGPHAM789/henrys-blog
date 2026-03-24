@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Best Memory Systems for AI Agents in 2025 — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem;display:flex;align-items:center;gap:6px}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+
+.hero{background:linear-gradient(135deg,#0D1117 0%,#1a1a2e 40%,#16213E 70%,#0F3460 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:700px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:600px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px;padding-top:8px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+
+/* Dark infographic section */
+.infographic{background:linear-gradient(135deg,#0D1117,#1a1a2e);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:24px;font-size:1.2rem;text-align:center}
+.infographic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:0}
+.info-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px;text-align:center}
+.info-card .icon{font-size:2rem;margin-bottom:10px}
+.info-card h4{color:#E2E8F0;font-size:.95rem;margin-bottom:8px}
+.info-card p{color:#94A3B8;font-size:.82rem;margin:0}
+.info-card .badge{display:inline-block;background:#D4705A;color:#fff;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:8px}
+.info-card .badge.blue{background:#3B82F6}
+.info-card .badge.green{background:#10B981}
+.info-card .badge.purple{background:#8B5CF6}
+
+.comparison-table{width:100%;border-collapse:collapse;margin:24px 0}
+.comparison-table th{background:#1a1a2e;color:#E2E8F0;padding:12px 16px;text-align:left;font-size:.85rem}
+.comparison-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.06);color:#CBD5E1;font-size:.85rem}
+.comparison-table tr:last-child td{border-bottom:none}
+.comparison-table tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.tick{color:#10B981}
+.cross{color:#EF4444}
+
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+
+.steps{counter-reset:step;margin:24px 0}
+.step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.step-num{background:#D4705A;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:2px}
+.step-content h4{font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.step-content p{color:#6B7280;font-size:.9rem;margin:0}
+
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.infographic{padding:24px 16px}.infographic-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">AI Agents · Memory</span>
+  <h1>The Best Memory Systems for AI Agents in 2025</h1>
+  <p class="hero-hook">Without memory, every AI conversation starts from zero. These tools give Jarvis and agents like it a brain that actually remembers.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+  <p>Here's the dirty truth about AI agents: most of them have the memory of a goldfish. Every new conversation, every new session — they forget everything. They don't know your name, your preferences, what you built last week, or what broke yesterday. You have to re-explain your entire context every single time.</p>
+
+  <p>For a simple chatbot, that's annoying. For a personal AI assistant like Jarvis — one that's supposed to run your life, track your projects, and remember your ESL students' names — it's a dealbreaker.</p>
+
+  <p>That's exactly why memory systems for AI agents became one of the hottest areas in open-source AI development in 2024–2025. Developers built specialized tools to give agents persistent, searchable, long-term memory. This post covers the best ones, what they actually do, and whether you should use them with OpenClaw.</p>
+
+  <h2>What Is Agent Memory, Exactly?</h2>
+
+  <p>When an AI talks to you, it can only "see" what's in its current context window — typically 100,000 to 200,000 tokens. Once the conversation ends or the window fills up, older information is gone. There are two solutions:</p>
+
+  <ul>
+    <li><strong>Short-term memory:</strong> Everything in the current conversation window. Fast, temporary, automatic.</li>
+    <li><strong>Long-term memory:</strong> Saved facts, preferences, and history stored in a database that the agent retrieves when needed. This is what we're building here.</li>
+  </ul>
+
+  <p>Long-term memory typically uses <strong>vector databases</strong> — a type of database that stores information as mathematical representations, making it possible to search by meaning rather than exact keywords. You can ask "what did I say about my teaching schedule?" and the agent will find relevant memories even if you phrased it differently before.</p>
+
+  <h2>The Top 3 Memory Systems Worth Your Attention</h2>
+
+  <h3>1. mem0 — The Swiss Army Knife of Agent Memory</h3>
+  <p><strong>GitHub:</strong> github.com/mem0ai/mem0 · <strong>Stars:</strong> ~28,000+</p>
+
+  <p>mem0 (pronounced "mem-zero") is purpose-built memory infrastructure for AI agents. It works as an add-on layer: your agent generates a response, and mem0 automatically extracts important facts — names, preferences, tasks, decisions — and stores them in a searchable database. Next conversation, it retrieves relevant memories and injects them into the context automatically.</p>
+
+  <p>What makes mem0 special is its <strong>smart extraction</strong>. It doesn't just dump entire conversation logs into a database. It understands that "Henry prefers Vietnamese fonts for his blog" is worth remembering, while "okay" is not. This keeps memories lean and relevant.</p>
+
+  <p>mem0 supports multiple storage backends: local files, PostgreSQL, Supabase, Redis, and more. It has a managed cloud tier (mem0.ai) and a fully self-hosted open-source option. The Python client is clean and the documentation is excellent.</p>
+
+  <h3>2. MemGPT — Memory Paging for Long Contexts</h3>
+  <p><strong>GitHub:</strong> github.com/cpacker/MemGPT · <strong>Stars:</strong> ~12,000+</p>
+
+  <p>MemGPT takes a different approach inspired by how operating systems manage memory paging. It gives the agent a "main context" (fast, active memory) and an "archival storage" (slower, searchable long-term memory). The agent can move information between them using special function calls — essentially saying "archive this for later" or "search my archives for X."</p>
+
+  <p>The clever part: MemGPT turns the LLM itself into a memory manager. The agent decides what to remember and when to retrieve it, making it more adaptive than systems that blindly store everything. This is closer to how humans manage attention and recall.</p>
+
+  <p>MemGPT works best for agents that have very long-running tasks or conversations — things like research assistants, personal tutors, or project managers that need to recall context from weeks ago.</p>
+
+  <h3>3. Letta (MemGPT's Evolution) — Production-Ready Agent Memory</h3>
+  <p><strong>GitHub:</strong> github.com/letta-ai/letta · <strong>Stars:</strong> ~15,000+</p>
+
+  <p>Letta is the production evolution of MemGPT. Same core architecture but built for deployment: REST API, multi-agent support, tool integration, and a web UI for visualizing what your agent remembers. If MemGPT is a research prototype, Letta is the product you'd actually ship.</p>
+
+  <p>Letta supports persistent agents — agents that run continuously, accumulate memories over time, and can be queried via API. For OpenClaw users, this is the most production-ready option for building a Jarvis-style assistant that genuinely improves with use.</p>
+
+  <div class="infographic">
+    <h3>🧠 Memory System Comparison</h3>
+    <div style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Approach</th>
+            <th>Self-Hosted</th>
+            <th>Best For</th>
+            <th>Setup Difficulty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:#E2E8F0">mem0</strong></td>
+            <td>Smart fact extraction + vector search</td>
+            <td><span class="tick">✓</span></td>
+            <td>Jarvis / OpenClaw integration</td>
+            <td>Easy ⭐</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#E2E8F0">MemGPT</strong></td>
+            <td>OS-style memory paging</td>
+            <td><span class="tick">✓</span></td>
+            <td>Long-running research agents</td>
+            <td>Medium ⭐⭐</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#E2E8F0">Letta</strong></td>
+            <td>Persistent agents + REST API</td>
+            <td><span class="tick">✓</span></td>
+            <td>Production Jarvis deployment</td>
+            <td>Medium ⭐⭐</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#E2E8F0">LangChain Memory</strong></td>
+            <td>Conversation buffer/summary</td>
+            <td><span class="tick">✓</span></td>
+            <td>Simple chatbots</td>
+            <td>Easy ⭐</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#E2E8F0">LlamaIndex</strong></td>
+            <td>RAG + knowledge indexing</td>
+            <td><span class="tick">✓</span></td>
+            <td>Document-heavy agents</td>
+            <td>Hard ⭐⭐⭐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="infographic-grid" style="margin-top:24px">
+      <div class="info-card">
+        <div class="icon">⚡</div>
+        <h4>Short-Term Memory</h4>
+        <p>Current conversation window. Automatic. Limited to ~200k tokens.</p>
+        <span class="badge green">Always Active</span>
+      </div>
+      <div class="info-card">
+        <div class="icon">💾</div>
+        <h4>Long-Term Memory</h4>
+        <p>Extracted facts stored in vector DB. Searchable forever.</p>
+        <span class="badge blue">Requires Tool</span>
+      </div>
+      <div class="info-card">
+        <div class="icon">🔍</div>
+        <h4>Episodic Memory</h4>
+        <p>Specific past events and conversations, retrievable by context.</p>
+        <span class="badge purple">Advanced</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Why This Matters for Jarvis / OpenClaw</h2>
+
+  <p>Right now, Jarvis (the OpenClaw assistant) stores memory as plain Markdown files: <code>MEMORY.md</code>, daily notes in <code>memory/YYYY-MM-DD.md</code>, and domain-specific files like <code>memory/antera.md</code>. This works — but it's manual. Jarvis has to explicitly write things down to remember them, and retrieval means re-reading entire files every session.</p>
+
+  <p>A proper memory system like mem0 or Letta would change this dramatically:</p>
+
+  <ul>
+    <li><strong>Automatic capture:</strong> Important facts extracted from every conversation without Jarvis manually writing notes</li>
+    <li><strong>Semantic search:</strong> Instead of reading 500 lines of MEMORY.md, Jarvis queries "what do I know about Henry's teaching schedule?" and gets the 3 most relevant facts</li>
+    <li><strong>Memory across agents:</strong> If you spawn multiple sub-agents (coding agent, blog agent, etc.), they can all share the same memory store</li>
+    <li><strong>Memory evolution:</strong> Old facts can be updated when new information contradicts them ("Henry changed his blog accent color to coral")</li>
+  </ul>
+
+  <h2>How to Integrate mem0 with OpenClaw</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Install mem0</h4>
+        <p>Run <code>pip install mem0ai</code> in your Python environment. Or use the hosted API at mem0.ai — free tier available.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Initialize with your OpenClaw user ID</h4>
+        <p>Each user has a unique memory store. For Jarvis: <code>memory.add("Henry prefers direct answers", user_id="henry")</code></p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Retrieve relevant memories before responding</h4>
+        <p>Before each response: <code>relevant = memory.search("current topic", user_id="henry")</code> — inject top results into the system prompt.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Auto-extract after each conversation</h4>
+        <p>Pass the full conversation to <code>memory.add(messages, user_id="henry")</code> — mem0 extracts and stores what matters automatically.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h4>Build a mem0 MCP server for OpenClaw</h4>
+        <p>Expose mem0's search/add API as MCP tools so Jarvis can call them natively without any code changes to the agent itself.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>💡 Quick win for Boss Henry:</strong> Even without full integration, you can use mem0's hosted API as a lightweight knowledge base for Jarvis. Store key facts about your teaching schedule, student names, and Antera project decisions — then have Jarvis query it via a simple script before each response.</p>
+  </div>
+
+  <h2>The Honest Trade-offs</h2>
+
+  <p><strong>mem0 is great for facts, terrible for context.</strong> It remembers "Henry teaches 3 ESL classes on Thursdays" but loses the rich narrative context of why that matters or how it connects to your Zoom automation workflow. Sometimes the full MEMORY.md is more valuable because it tells a story.</p>
+
+  <p><strong>Vector search has a precision problem.</strong> Sometimes it retrieves memories that are semantically similar but contextually wrong. "Henry hates filler content in blogs" might get retrieved when you ask about "Henry's preference for direct answers" — close, but not the same thing.</p>
+
+  <p><strong>There's a real cost to running your own vector DB.</strong> Supabase's pgvector extension is free and works well, but you'll need to manage it. For most OpenClaw users, the managed mem0.ai API is the pragmatic choice.</p>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Use This</div>
+    <h3>Verdict: mem0 is the clear winner for OpenClaw integration</h3>
+    <p>It's the most practical memory system for a personal assistant setup like Jarvis. Clean API, smart extraction, supports Supabase as the backend (which Jarvis already uses), and has an MCP-friendly architecture.</p>
+    <p><strong>Priority:</strong> High. The current MEMORY.md system works but it's manual and brittle. mem0 would make Jarvis dramatically smarter over time with zero extra effort from Boss Henry.</p>
+    <p><strong>Next step:</strong> Build a <code>mem0-mcp</code> server that exposes search/add as MCP tools. Claude Code can wire this in a single session.</p>
+  </div>
+
+  <h2>Further Reading</h2>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/mem0ai/mem0" target="_blank">mem0 GitHub — github.com/mem0ai/mem0</a></li>
+      <li><a href="https://github.com/cpacker/MemGPT" target="_blank">MemGPT GitHub — github.com/cpacker/MemGPT</a></li>
+      <li><a href="https://github.com/letta-ai/letta" target="_blank">Letta GitHub — github.com/letta-ai/letta</a></li>
+      <li><a href="https://github.com/WujiangXu/A-mem" target="_blank">A-Mem: Agentic Memory — github.com/WujiangXu/A-mem</a></li>
+      <li><a href="https://github.com/MemTensor/MemOS" target="_blank">MemOS: Memory OS for LLMs — github.com/MemTensor/MemOS</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

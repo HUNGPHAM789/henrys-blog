@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top 10 MCP Servers Every AI Agent Should Have — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0B0D1A 40%,#111827 70%,#0F3460 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0B0D1A,#111827 40%,#0F2027 80%,#0B0D1A);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.mcp-list{display:flex;flex-direction:column;gap:12px}
+.mcp-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.mcp-num{background:rgba(212,112,90,0.2);border:1px solid rgba(212,112,90,0.3);color:#D4705A;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0}
+.mcp-info h4{color:#E2E8F0;font-size:.95rem;margin-bottom:2px}
+.mcp-info p{color:#64748B;font-size:.8rem;margin:0}
+.mcp-status{padding:4px 10px;border-radius:8px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.mcp-status.installed{background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.25)}
+.mcp-status.available{background:rgba(59,130,246,0.15);color:#60A5FA;border:1px solid rgba(59,130,246,0.25)}
+.mcp-status.paid{background:rgba(245,158,11,0.15);color:#FBBF24;border:1px solid rgba(245,158,11,0.25)}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.mcp-item{grid-template-columns:auto 1fr;grid-template-rows:auto auto}.mcp-status{grid-column:2}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">MCP · Integrations</span>
+  <h1>Top 10 MCP Servers Every AI Agent Should Have</h1>
+  <p class="hero-hook">MCP turns your AI agent from a chatbot into an operator — able to search the web, query databases, write files, and trigger actions across your entire tool stack.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 10 min read</p>
+</div>
+
+<div class="container">
+
+  <p>Model Context Protocol (MCP) is one of the most important standards to come out of the AI agent world in 2024. Anthropic released it as an open standard, and within months it had become the universal plugin system for AI agents — every major framework (Claude Code, OpenCode, LibreChat, AnythingLLM) now supports it.</p>
+
+  <p>The idea is simple but powerful: instead of hardcoding tools into an AI model, you run lightweight servers that expose tools via a standardized API. Your AI agent connects to these servers and can call any tool — search the web, query Supabase, control a browser, send a Telegram message — without any custom integration code.</p>
+
+  <p>Jarvis runs on OpenClaw and already has several MCP servers configured. But there are gaps. This post covers the 10 most valuable MCP servers, which ones are already installed, and which ones Boss should add next.</p>
+
+  <h2>What MCP Actually Does</h2>
+
+  <p>Without MCP, every AI tool integration is a custom job. You write code to call the GitHub API, code to call the Supabase API, code to control a browser — and you maintain all of it separately. When you switch AI models, you rewrite everything.</p>
+
+  <p>With MCP, you run a server once and any MCP-compatible agent can use it. The agent sees a list of available tools: <code>search_web</code>, <code>query_database</code>, <code>navigate_browser</code>. It calls them like function calls. The server handles the actual API communication. You configure it once, use it forever.</p>
+
+  <p>For OpenClaw users, MCP is how Jarvis extends its capabilities without changing its core code. Every new MCP server is a new superpower for Jarvis.</p>
+
+  <h2>The 10 MCP Servers That Matter Most</h2>
+
+  <h3>1. Supabase MCP</h3>
+  <p>Lets your agent query, insert, update, and delete data in Supabase directly. For Jarvis: essential for managing Antera student data, ESL lesson content, and blog post records. Already installed with 20+ database tools. This is the highest-value MCP server for any serious project.</p>
+
+  <h3>2. GitHub MCP</h3>
+  <p>Reads repositories, creates issues, opens pull requests, searches code, and manages files directly from the agent. Instead of manually pushing to GitHub, Jarvis can open a PR automatically after building a feature. The official GitHub MCP server was released in 2025 and has become the standard.</p>
+
+  <h3>3. Playwright / Browser-Tools MCP</h3>
+  <p>Gives your agent a real browser. Navigate to URLs, click buttons, fill forms, take screenshots, extract text. The browser-tools MCP (which connects to a Chrome extension) is already installed on the Jarvis machine. For web scraping, testing, or automating any browser-based workflow.</p>
+
+  <h3>4. Filesystem MCP</h3>
+  <p>Controlled read/write access to local files. Your agent can read configuration files, write output, manage project directories. More secure than raw shell access — you define exactly which directories are accessible. Essential for any coding agent workflow.</p>
+
+  <h3>5. Tavily Search MCP</h3>
+  <p>Real-time web search optimized for AI agents. Unlike a basic search API, Tavily returns clean, structured results with full article content — not just links. Already available as a skill on the Jarvis machine. Use this instead of raw web scraping for research tasks.</p>
+
+  <h3>6. Notion MCP</h3>
+  <p>Read and write Notion pages, databases, and blocks. For Boss Henry: the Antera project notes, blog content, and ESL planning materials are all in Notion. Currently configured but using <code>scripts/notion.js</code> as a fallback due to MCP auth issues. Worth fixing — native Notion MCP would make content workflows much smoother.</p>
+
+  <h3>7. Google Drive / Calendar MCP</h3>
+  <p>Access Google Docs, Sheets, Calendar events, and Drive files. For the ESL teaching workflow: automatically read Zoom session data, update the teaching report Google Sheet, and check calendar for upcoming class schedules. The Google Workspace MCP skill is already on the Jarvis machine.</p>
+
+  <h3>8. Zapier MCP</h3>
+  <p>Access to 7,000+ apps through Zapier's automation platform. If something doesn't have its own MCP server, it probably has a Zapier integration. Think of this as the "long tail" MCP — Mailchimp, Slack, HubSpot, Typeform, Calendly. The trade-off: slower than native integrations and requires a Zapier subscription.</p>
+
+  <h3>9. Memory MCP (mem0 or similar)</h3>
+  <p>Persist and retrieve memories across sessions. As covered in the memory systems post, a memory MCP server would let Jarvis automatically store important facts from every conversation and retrieve them semantically. This is the biggest missing piece in the current OpenClaw setup.</p>
+
+  <h3>10. Firecrawl MCP</h3>
+  <p>Turn any website into clean, structured data for AI consumption. Firecrawl handles JavaScript-rendered pages, pagination, and anti-scraping measures that break simple fetchers. For research tasks, competitor analysis, or pulling content from sites that don't have APIs. 82,000+ GitHub stars — one of the fastest-growing tools in the space.</p>
+
+  <div class="infographic">
+    <h3>🔌 MCP Server Status for Jarvis</h3>
+    <p class="subtitle">10 servers — what's installed, what's available, what's next</p>
+    <div class="mcp-list">
+      <div class="mcp-item">
+        <div class="mcp-num">1</div>
+        <div class="mcp-info"><h4>Supabase MCP</h4><p>Database queries, logs, edge functions — 20 tools</p></div>
+        <span class="mcp-status installed">✓ Installed</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">2</div>
+        <div class="mcp-info"><h4>GitHub MCP</h4><p>Repos, PRs, issues, code search, file management</p></div>
+        <span class="mcp-status available">Install Next</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">3</div>
+        <div class="mcp-info"><h4>Browser-Tools MCP</h4><p>Chrome DevTools, screenshots, DOM inspection</p></div>
+        <span class="mcp-status installed">✓ Installed</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">4</div>
+        <div class="mcp-info"><h4>Filesystem MCP</h4><p>Controlled file read/write in defined directories</p></div>
+        <span class="mcp-status installed">✓ Installed</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">5</div>
+        <div class="mcp-info"><h4>Tavily Search MCP</h4><p>Real-time web search with full article content</p></div>
+        <span class="mcp-status installed">✓ Skill Installed</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">6</div>
+        <div class="mcp-info"><h4>Notion MCP</h4><p>Pages, databases, blocks — project notes &amp; blog</p></div>
+        <span class="mcp-status installed">⚠ Auth Issues</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">7</div>
+        <div class="mcp-info"><h4>Google Workspace MCP</h4><p>Gmail, Calendar, Drive, Docs, Sheets</p></div>
+        <span class="mcp-status installed">✓ Skill Installed</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">8</div>
+        <div class="mcp-info"><h4>Zapier MCP</h4><p>7,000+ apps — the long-tail integrations layer</p></div>
+        <span class="mcp-status paid">Needs Auth</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">9</div>
+        <div class="mcp-info"><h4>Memory MCP (mem0)</h4><p>Persist facts across sessions, semantic retrieval</p></div>
+        <span class="mcp-status available">Build This</span>
+      </div>
+      <div class="mcp-item">
+        <div class="mcp-num">10</div>
+        <div class="mcp-info"><h4>Firecrawl MCP</h4><p>Website-to-structured-data for JS-heavy pages</p></div>
+        <span class="mcp-status available">Install Next</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>How to Install an MCP Server in OpenClaw</h2>
+
+  <p>OpenClaw uses the <code>mcporter</code> CLI for MCP server management. The config lives at <code>~/.openclaw/workspace/config/mcporter.json</code>. For Claude Code, the config is at <code>~/.claude/mcp.json</code>.</p>
+
+  <p>The typical installation flow:</p>
+
+  <ol>
+    <li>Find the MCP server package (most are on npm or PyPI)</li>
+    <li>Add it to your mcporter config: <code>mcporter add &lt;server-name&gt;</code></li>
+    <li>Configure authentication (API keys, OAuth tokens)</li>
+    <li>Test with: <code>mcporter call &lt;server&gt; &lt;tool&gt;</code></li>
+    <li>Add to Claude Code config if you want Claude Code subagents to use it</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>Pro tip:</strong> The GitHub MCP server and Firecrawl MCP server are the two highest-priority additions for Jarvis right now. GitHub MCP would let Jarvis open PRs and manage the Antera repo without CLI wrangling. Firecrawl would supercharge research tasks like this blog series — no more wrestling with JavaScript-heavy pages.</p>
+  </div>
+
+  <h2>The Security Question</h2>
+
+  <p>Every MCP server you install is a potential attack surface. A malicious website could contain a prompt injection that tricks Jarvis into calling the Filesystem MCP to read sensitive files. A misconfigured database MCP could expose Supabase credentials.</p>
+
+  <p>Key rules:</p>
+  <ul>
+    <li><strong>Principle of least privilege:</strong> Filesystem MCP should only access specific directories, not your entire disk</li>
+    <li><strong>Audit tool calls:</strong> Log every MCP tool call — who called it, with what arguments, and what it returned</li>
+    <li><strong>Read-only by default:</strong> Start with read-only tools; add write permissions deliberately</li>
+    <li><strong>Separate credentials:</strong> Each MCP server should have its own limited API key, not admin/root access</li>
+  </ul>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Priority Upgrades</div>
+    <h3>Verdict: The MCP layer is already strong — 3 key gaps to fill</h3>
+    <p>The Jarvis MCP stack is already solid for the core workflow. The three additions that would have the highest impact:</p>
+    <p><strong>1. GitHub MCP</strong> — Would save 5–10 CLI commands per Antera feature cycle. Install this week.</p>
+    <p><strong>2. Memory MCP (mem0)</strong> — The biggest qualitative improvement to Jarvis's capabilities. Build a wrapper this month.</p>
+    <p><strong>3. Firecrawl MCP</strong> — Replace manual web fetching in research workflows. Free tier covers Jarvis's needs.</p>
+    <p>Fix the Notion MCP auth issue separately — likely just needs a fresh OAuth token.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://modelcontextprotocol.io" target="_blank">Model Context Protocol official site — modelcontextprotocol.io</a></li>
+      <li><a href="https://github.com/modelcontextprotocol" target="_blank">MCP GitHub org — github.com/modelcontextprotocol</a></li>
+      <li><a href="https://github.com/microsoft/mcp-for-beginners" target="_blank">MCP for Beginners (Microsoft) — github.com/microsoft/mcp-for-beginners</a></li>
+      <li><a href="https://github.com/mendableai/firecrawl" target="_blank">Firecrawl GitHub — github.com/mendableai/firecrawl</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

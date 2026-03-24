@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browser Automation + AI: How to Give Your Agent Eyes and Hands on the Web — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0F2027 40%,#1B2A3B 70%,#0D3B4F 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#0F2027 40%,#1B2A3B 80%);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.tool-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:18px}
+.tool-card .icon{font-size:1.8rem;margin-bottom:8px}
+.tool-card h4{color:#E2E8F0;font-size:.95rem;margin-bottom:4px}
+.tool-card .stars{color:#F59E0B;font-size:.78rem;margin-bottom:8px}
+.tool-card p{color:#64748B;font-size:.8rem;margin:0 0 10px}
+.tool-card .pill{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600}
+.pill-coral{background:rgba(212,112,90,0.2);color:#D4705A;border:1px solid rgba(212,112,90,0.3)}
+.pill-blue{background:rgba(59,130,246,0.2);color:#60A5FA;border:1px solid rgba(59,130,246,0.3)}
+.pill-green{background:rgba(16,185,129,0.2);color:#34D399;border:1px solid rgba(16,185,129,0.3)}
+.usecase-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.uc-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:14px}
+.uc-item h5{color:#CBD5E1;font-size:.85rem;margin-bottom:4px}
+.uc-item p{color:#4B5563;font-size:.78rem;margin:0}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.steps{margin:24px 0}
+.step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.step-num{background:#D4705A;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;flex-shrink:0;margin-top:2px}
+.step-content h4{font-weight:600;color:#1a1a1a;margin-bottom:4px}
+.step-content p{color:#6B7280;font-size:.9rem;margin:0}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.tool-grid{grid-template-columns:1fr}.usecase-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Browser Automation · AI</span>
+  <h1>Browser Automation + AI: Give Your Agent Eyes and Hands on the Web</h1>
+  <p class="hero-hook">The moment your AI agent can navigate a real browser, an entire category of workflows that were impossible become trivial.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+  <p>There are two kinds of AI agent tasks: things where an API exists, and things where you have to use a real browser. The first category is well-served — Supabase has an API, GitHub has an API, Google Calendar has an API. But what about pulling data from a Vietnamese government education website? Or filling out a form that predates the API era? Or checking if your Antera deployment looks right on mobile?</p>
+
+  <p>That's where browser automation comes in. In 2024–2025, the combination of AI + browser automation went from experimental to production-ready. The tools are good now. Let's cover the ones that matter.</p>
+
+  <h2>Three Approaches to AI Browser Automation</h2>
+
+  <p>Not all browser automation is the same. There are three distinct approaches, and understanding the difference saves you from picking the wrong tool:</p>
+
+  <h3>Approach 1: Scripted Automation (Playwright + AI code generation)</h3>
+  <p>You use AI to write Playwright scripts, then run them deterministically. This is the most reliable approach — once the script is written and working, it works every time. Playwright is Microsoft's modern browser testing library that works with Chromium, Firefox, and WebKit.</p>
+
+  <p>Best for: recurring workflows where the page structure doesn't change. Upload Zoom recordings, fill standard forms, check that Antera renders correctly on different screen sizes.</p>
+
+  <h3>Approach 2: MCP Browser Control (browser-tools MCP)</h3>
+  <p>The browser-tools MCP server connects your AI agent to a live Chrome browser via Chrome DevTools Protocol. Your agent can navigate pages, click elements, take screenshots, and read the DOM — all through MCP tool calls, in real time, as part of a larger workflow.</p>
+
+  <p>Best for: ad-hoc tasks where you want Jarvis to "go check X" during a session. Visual audits, form submissions, reading pages that block scrapers.</p>
+
+  <h3>Approach 3: Autonomous Browser Agents (browser-use / Playwright AI agents)</h3>
+  <p>The AI agent takes natural language instructions and controls a browser autonomously using computer vision and DOM analysis. You say "go to this site, find the login form, enter these credentials, navigate to settings, download the export." The agent figures out how to do it without a pre-written script.</p>
+
+  <p>Best for: one-off tasks on unfamiliar sites, research workflows, sites that change their structure frequently.</p>
+
+  <h2>The Tools in Detail</h2>
+
+  <h3>browser-use — The Autonomous Agent Pioneer</h3>
+  <p><strong>GitHub:</strong> github.com/browser-use/browser-use · <strong>Stars:</strong> 78,000+</p>
+
+  <p>browser-use hit 78,000 GitHub stars because it solved the hard problem: making websites navigable by AI without pre-written scripts. It uses a combination of DOM analysis and computer vision to understand page structure, then uses an LLM to decide what to click, type, or navigate.</p>
+
+  <p>The experience is genuinely impressive. You give it a task in plain English — "log into my account on site X and download the monthly report" — and it figures out how to do it. It handles pagination, modals, CAPTCHAs (mostly), and dynamic JavaScript content.</p>
+
+  <p>For Boss Henry: this is the tool that could automate the Zoom recording download and categorization workflow entirely. Log in to Zoom, navigate to recordings, identify recordings by class name, trigger downloads — all from a single Jarvis command.</p>
+
+  <h3>Playwright MCP Server</h3>
+  <p><strong>GitHub:</strong> github.com/microsoft/playwright-mcp · <strong>Stars:</strong> 12,000+</p>
+
+  <p>Microsoft's official MCP server for Playwright. This is the right choice when you want deterministic, scriptable browser control through MCP — not autonomous AI navigation, but precise programmatic control that your agent can call like any other tool.</p>
+
+  <p>The Playwright MCP exposes tools like <code>navigate</code>, <code>click</code>, <code>fill</code>, <code>screenshot</code>, <code>get_text</code>. Your Claude Code or OpenCode agent can call these directly during a task, without spawning a separate browser automation process.</p>
+
+  <p>Already available for the browser-tools MCP on the Jarvis machine. The Playwright MCP is the upgrade — cleaner API, better error handling, and direct integration with Claude Code's MCP client.</p>
+
+  <h3>Firecrawl — The Data Extraction Layer</h3>
+  <p><strong>GitHub:</strong> github.com/mendableai/firecrawl · <strong>Stars:</strong> 82,000+</p>
+
+  <p>Firecrawl isn't a browser automation tool — it's a web data extraction service. The difference matters: Firecrawl turns any webpage into clean, structured markdown or JSON that AI can work with. It handles JavaScript rendering, pagination, and anti-scraping measures.</p>
+
+  <p>Use Firecrawl when you want to <em>read</em> web content, not <em>interact</em> with it. Research, content extraction, competitor analysis, monitoring web pages for changes.</p>
+
+  <p>Firecrawl has a generous free tier and an MCP server. It pairs perfectly with browser-use: Firecrawl reads the data, browser-use takes the actions.</p>
+
+  <div class="infographic">
+    <h3>🌐 Browser Automation Tools for Jarvis</h3>
+    <p class="subtitle">Three tools for three different automation scenarios</p>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="icon">🤖</div>
+        <h4>browser-use</h4>
+        <div class="stars">⭐ 78,000+</div>
+        <p>Autonomous AI browser agent. Natural language → browser actions.</p>
+        <span class="pill pill-coral">Autonomous</span>
+      </div>
+      <div class="tool-card">
+        <div class="icon">🎭</div>
+        <h4>Playwright MCP</h4>
+        <div class="stars">⭐ 12,000+</div>
+        <p>Deterministic browser control via MCP. Script once, run reliably.</p>
+        <span class="pill pill-blue">Scripted</span>
+      </div>
+      <div class="tool-card">
+        <div class="icon">🔥</div>
+        <h4>Firecrawl</h4>
+        <div class="stars">⭐ 82,000+</div>
+        <p>Webpage → clean data. JS rendering, pagination, anti-scraping.</p>
+        <span class="pill pill-green">Data Extraction</span>
+      </div>
+    </div>
+
+    <div class="usecase-grid">
+      <div class="uc-item">
+        <h5>📹 Zoom recording download</h5>
+        <p>browser-use logs in, finds recordings, triggers downloads</p>
+      </div>
+      <div class="uc-item">
+        <h5>📊 Visual regression testing</h5>
+        <p>Playwright MCP screenshots Antera, compares to baseline</p>
+      </div>
+      <div class="uc-item">
+        <h5>🔍 Competitor research</h5>
+        <p>Firecrawl extracts content from competitor sites to markdown</p>
+      </div>
+      <div class="uc-item">
+        <h5>📝 Form automation</h5>
+        <p>browser-use fills recurring forms with current data</p>
+      </div>
+      <div class="uc-item">
+        <h5>📱 Mobile UI audit</h5>
+        <p>Playwright MCP checks Antera at various viewport sizes</p>
+      </div>
+      <div class="uc-item">
+        <h5>📰 Content monitoring</h5>
+        <p>Firecrawl monitors key pages for content changes</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>The ESL Teacher Workflow That Browser Automation Unlocks</h2>
+
+  <p>Boss Henry's monthly teaching workflow is currently 7 manual steps. Here's what AI + browser automation could reduce it to:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h4>Jarvis triggers browser-use to log into Zoom</h4>
+        <p>Natural language instruction: "Log into Zoom and navigate to the recordings page for this month." browser-use handles authentication and navigation.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h4>Playwright MCP downloads recordings</h4>
+        <p>Deterministic script: click each recording matching class name pattern, trigger download, save to designated folder.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h4>Jarvis reads zoom-report.js output</h4>
+        <p>The existing zoom.js script counts sessions per class. Jarvis combines this with the downloaded recordings list.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h4>Jarvis generates report and notifies Boss via Telegram</h4>
+        <p>The report arrives as a formatted message. Boss reviews, approves, and it's sent to Facebook groups. Total manual time: under 2 minutes.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Current status:</strong> The browser-tools MCP is installed on the Jarvis machine. The Zoom API scripts exist. The missing piece is browser-use for the authentication step — Zoom's OAuth flow doesn't work cleanly with pure API calls, but browser-use can handle it. This is a high-value workflow automation sitting one installation away.</p>
+  </div>
+
+  <h2>The Limitations to Know Before You Start</h2>
+
+  <p><strong>CAPTCHAs are the enemy.</strong> browser-use can handle simple CAPTCHAs but complex ones (reCAPTCHA v3, hCaptcha) will block autonomous agents. Sites that actively resist automation need workarounds.</p>
+
+  <p><strong>Dynamic sites break scripted approaches.</strong> If a site redesigns its UI, all your Playwright scripts need updating. The autonomous approach (browser-use) handles this better but is slower and more expensive.</p>
+
+  <p><strong>Browser sessions are resource-intensive.</strong> Running a real Chrome browser uses 200–500MB RAM. For lightweight extraction, Firecrawl's headless approach is much more efficient.</p>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — Start with Firecrawl</div>
+    <h3>Verdict: Install Firecrawl MCP this week, browser-use for the Zoom workflow next</h3>
+    <p><strong>Firecrawl:</strong> Install the MCP server now. It immediately improves every research task Jarvis does — cleaner data, no scraping issues, handles JS pages. Free tier is sufficient.</p>
+    <p><strong>browser-use:</strong> The Zoom recording automation workflow is the #1 use case. Install browser-use, build the script, and save Boss 30 minutes every month permanently.</p>
+    <p><strong>Playwright MCP:</strong> Add this as a replacement for the current browser-tools MCP. Better API, more reliable, official Microsoft support.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/browser-use/browser-use" target="_blank">browser-use GitHub — github.com/browser-use/browser-use</a></li>
+      <li><a href="https://github.com/microsoft/playwright-mcp" target="_blank">Playwright MCP — github.com/microsoft/playwright-mcp</a></li>
+      <li><a href="https://github.com/mendableai/firecrawl" target="_blank">Firecrawl — github.com/mendableai/firecrawl</a></li>
+      <li><a href="https://playwright.dev/docs/test-agents" target="_blank">Playwright AI Agents docs — playwright.dev/docs/test-agents</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>

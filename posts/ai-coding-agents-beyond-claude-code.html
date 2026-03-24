@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Coding Agents Beyond Claude Code: Aider, Gemini CLI, OpenCode Compared — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a1a;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#1a1a2e 30%,#0F2027 60%,#091521 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705A;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:600px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#1B2631 50%,#0D1117);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.agent-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:20px}
+.agent-card .name{color:#E2E8F0;font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.agent-card .stars{color:#F59E0B;font-size:.8rem;margin-bottom:12px}
+.agent-card .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.agent-card .label{color:#64748B;font-size:.8rem}
+.agent-card .value{color:#CBD5E1;font-size:.8rem;font-weight:500}
+.agent-card .value.green{color:#34D399}
+.agent-card .value.yellow{color:#FBBF24}
+.agent-card .value.red{color:#F87171}
+.radar-wrap{background:rgba(255,255,255,0.03);border-radius:12px;padding:24px;margin-top:24px;border:1px solid rgba(255,255,255,0.08)}
+.radar-title{color:#64748B;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px;text-align:center}
+.score-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.score-label{color:#94A3B8;font-size:.82rem;width:120px;flex-shrink:0}
+.score-bar-wrap{flex:1;background:rgba(255,255,255,0.06);border-radius:4px;height:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.score-val{color:#94A3B8;font-size:.78rem;width:36px;text-align:right;flex-shrink:0}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213E);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.verdict-label.later{background:#F59E0B}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B7280;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.agent-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Coding Agents · Tools</span>
+  <h1>AI Coding Agents Beyond Claude Code: Aider, Gemini CLI &amp; OpenCode Compared</h1>
+  <p class="hero-hook">Claude Code is great but it's not the only game in town — and sometimes the alternatives are cheaper, faster, or better for specific tasks.</p>
+  <p class="hero-meta">Henry's Blog · March 24, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+  <p>Jarvis runs Claude Code as its primary coding agent. It's powerful, deeply integrated with Anthropic's best models, and has bypassPermissions mode for fully autonomous work. But it has real limitations: it costs money per token, requires an active internet connection, and Claude's model can be overkill for simple tasks.</p>
+
+  <p>In 2024–2025, three serious alternatives emerged that every OpenClaw user should know about: <strong>Aider</strong> (the git-native veteran), <strong>Gemini CLI</strong> (Google's free terminal agent), and <strong>OpenCode</strong> (the multi-provider TUI powerhouse). All three are installed on the Jarvis machine. Here's what each one is actually for.</p>
+
+  <h2>Aider — The Git-Native Veteran</h2>
+  <p><strong>GitHub:</strong> github.com/Aider-AI/aider · <strong>Stars:</strong> 26,000+</p>
+
+  <p>Aider has been around since 2023 and is the battle-tested choice for developers who live in Git. The core design philosophy: <strong>every change Aider makes is a Git commit with an automatic descriptive message</strong>. You always have a clear history of what the AI changed and when. If something breaks, <code>git revert</code> takes you back instantly.</p>
+
+  <p>Aider excels at multi-file edits. Tell it "refactor the auth module to use JWT everywhere" and it will find every relevant file, understand the dependencies, and update them all in one coherent operation — then commit the entire change as a single atomic unit. No half-finished edits spread across files.</p>
+
+  <p>The killer feature for Jarvis: <strong>watch mode</strong>. Drop a <code># AI: fix this bug</code> comment in any file, save it, and Aider auto-detects the comment, implements the fix, and commits — without you doing anything else. For small recurring fixes in Antera, this is incredibly efficient.</p>
+
+  <p>Aider supports 100+ models: Claude, GPT-4, Gemini, Groq, local models via Ollama. You can use the Gemini free tier for cost-zero coding tasks. The setup is one command: <code>aider --model gemini/gemini-2.5-flash --message "your task" --yes</code>.</p>
+
+  <h2>Gemini CLI — Google's Free Terminal Agent</h2>
+  <p><strong>GitHub:</strong> github.com/google-gemini/gemini-cli · <strong>Stars:</strong> 75,000+</p>
+
+  <p>Google released Gemini CLI in June 2025 and it immediately became one of the fastest-growing tools in developer history — hitting 75,000 stars in weeks. The reason: it's <strong>completely free</strong> for personal use, with Gemini 2.5 Pro access (the same model powering Google's paid products) at 60 requests per minute and 1,000 requests per day.</p>
+
+  <p>Gemini CLI can read and write files, execute shell commands, fetch web content, and run code. For Jarvis, it's positioned as the "cheap workhorse" agent — use it for tasks where Claude Code would burn expensive API credits but the task doesn't need Claude's deep reasoning. Think: renaming files, reformatting data, generating boilerplate code, or running quick one-off analysis.</p>
+
+  <p>The 1M token context window is the standout feature. Gemini 2.5 Pro can read your entire Antera codebase in a single prompt — no chunking, no partial reads. For large codebase questions ("explain how the auth flow works end to end"), this is unbeatable.</p>
+
+  <p>One limitation: Gemini CLI doesn't have git integration or automatic committing. It also lacks Aider's multi-file awareness. But for raw power at zero cost, nothing competes.</p>
+
+  <h2>OpenCode — The Multi-Provider TUI</h2>
+  <p><strong>GitHub:</strong> github.com/opencode-ai/opencode · <strong>Stars:</strong> 5,000+</p>
+
+  <p>OpenCode is built differently. Instead of being tied to one model provider, it supports 75+ providers including Claude, Gemini, GPT-4, Groq, OpenRouter, and even local models via Ollama. It has a beautiful terminal UI (TUI) with a chat interface, file browser, and diff viewer — all in the terminal without needing a browser.</p>
+
+  <p>The key innovation: OpenCode implements MCP (Model Context Protocol), which means it can use any MCP server as a tool — including Jarvis's Supabase MCP, the browser-tools MCP, and custom servers. This makes it the most extensible coding agent available.</p>
+
+  <p>For Jarvis users: OpenCode is the right choice when you want to use a cheaper model (Groq's Llama 3.3 is free and fast for simple tasks) but still need full MCP tool access. It's also the best option when you want a visual TUI interface rather than pure CLI.</p>
+
+  <div class="infographic">
+    <h3>🤖 Coding Agent Comparison</h3>
+    <p class="subtitle">All three are installed on the Jarvis machine — use the right tool for each job</p>
+    <div class="agent-grid">
+      <div class="agent-card">
+        <div class="name">Aider</div>
+        <div class="stars">⭐ 26,000+</div>
+        <div class="row"><span class="label">Cost</span><span class="value green">Free (use Gemini key)</span></div>
+        <div class="row"><span class="label">Git Integration</span><span class="value green">✓ Auto-commits</span></div>
+        <div class="row"><span class="label">Multi-file</span><span class="value green">✓ Excellent</span></div>
+        <div class="row"><span class="label">Watch mode</span><span class="value green">✓ Yes</span></div>
+        <div class="row"><span class="label">Best for</span><span class="value">Code refactors, bug fixes</span></div>
+      </div>
+      <div class="agent-card">
+        <div class="name">Gemini CLI</div>
+        <div class="stars">⭐ 75,000+</div>
+        <div class="row"><span class="label">Cost</span><span class="value green">Free (1000 req/day)</span></div>
+        <div class="row"><span class="label">Context window</span><span class="value green">1M tokens</span></div>
+        <div class="row"><span class="label">Git Integration</span><span class="value red">✗ None</span></div>
+        <div class="row"><span class="label">MCP Support</span><span class="value yellow">⚠ Limited</span></div>
+        <div class="row"><span class="label">Best for</span><span class="value">Large codebase Q&amp;A, scripting</span></div>
+      </div>
+      <div class="agent-card">
+        <div class="name">OpenCode</div>
+        <div class="stars">⭐ 5,000+</div>
+        <div class="row"><span class="label">Cost</span><span class="value green">Free (bring your key)</span></div>
+        <div class="row"><span class="label">Providers</span><span class="value green">75+ (any model)</span></div>
+        <div class="row"><span class="label">MCP Support</span><span class="value green">✓ Full</span></div>
+        <div class="row"><span class="label">TUI</span><span class="value green">✓ Beautiful</span></div>
+        <div class="row"><span class="label">Best for</span><span class="value">Multi-provider + MCP tasks</span></div>
+      </div>
+    </div>
+
+    <div class="radar-wrap">
+      <div class="radar-title">📊 Capability Scores vs Claude Code (max = 10)</div>
+      <div class="score-row">
+        <span class="score-label">Autonomy</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:80%;background:#D4705A"></div></div>
+        <span class="score-val">8/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Git Integration</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:90%;background:#10B981"></div></div>
+        <span class="score-val">9/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Cost Efficiency</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:95%;background:#3B82F6"></div></div>
+        <span class="score-val">9.5/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Context Window</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:100%;background:#8B5CF6"></div></div>
+        <span class="score-val">10/10</span>
+      </div>
+      <div class="score-row">
+        <span class="score-label">Model Flexibility</span>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:95%;background:#F59E0B"></div></div>
+        <span class="score-val">9.5/10</span>
+      </div>
+      <p style="color:#4B5563;font-size:.75rem;margin-top:12px;text-align:center">Scores represent combined best of Aider + Gemini CLI + OpenCode vs Claude Code</p>
+    </div>
+  </div>
+
+  <h2>When to Use Which Agent</h2>
+
+  <p>The real answer isn't "which one is best" — it's knowing which agent to reach for based on the task:</p>
+
+  <ul>
+    <li><strong>Small bug fix in Antera:</strong> Aider with Gemini Flash (free, auto-commits, done in seconds)</li>
+    <li><strong>"How does this 50-file codebase work?":</strong> Gemini CLI (1M context, reads everything at once)</li>
+    <li><strong>Complex feature build with MCP tools:</strong> Claude Code or OpenCode with Claude (full MCP, tool calling, deep reasoning)</li>
+    <li><strong>Batch renaming, formatting, boilerplate:</strong> Gemini CLI (free, fast, no overkill)</li>
+    <li><strong>Want to use Llama or local models:</strong> OpenCode with Ollama</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>Current Jarvis setup:</strong> Aider (v0.86.2), Gemini CLI (v0.33.1), and OpenCode (v1.2.26) are all installed and configured with API keys. Aider uses <code>GEMINI_API_KEY</code> for free-tier access. OpenCode has access to Groq (free) and OpenRouter (free tier). Zero incremental cost for 90% of coding tasks.</p>
+  </div>
+
+  <h2>The One Use Case That Changes Everything</h2>
+
+  <p>Here's what no one talks about enough: using <strong>two different AI models to review each other's work</strong>.</p>
+
+  <p>Claude Code writes the feature. Gemini CLI reviews the diff. Two different training datasets, two different perspectives. Disagreements surface bugs and bad patterns that neither model would catch alone.</p>
+
+  <p>This is already possible with Jarvis's current setup and costs almost nothing (Gemini review is free). It's the highest-value workflow improvement you can make today.</p>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ YES — All Three</div>
+    <h3>Verdict: Build a 3-agent coding stack, not a single agent dependency</h3>
+    <p><strong>Aider:</strong> Use for all routine Antera maintenance. The auto-commit discipline alone makes it worth installing permanently. Set up watch mode for known recurring fixes.</p>
+    <p><strong>Gemini CLI:</strong> Use as the "free workhorse" for anything that doesn't need Claude's reasoning depth. 1000 free requests/day is substantial capacity.</p>
+    <p><strong>OpenCode:</strong> Use when you want a beautiful TUI or need to route tasks to specific cheap models (Groq Llama 3.3 for speed, Gemini for context).</p>
+    <p>Claude Code remains the primary agent for complex reasoning tasks. But 70% of daily coding work should route through the free stack first.</p>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://github.com/Aider-AI/aider" target="_blank">Aider GitHub — github.com/Aider-AI/aider</a></li>
+      <li><a href="https://github.com/google-gemini/gemini-cli" target="_blank">Gemini CLI GitHub — github.com/google-gemini/gemini-cli</a></li>
+      <li><a href="https://github.com/opencode-ai/opencode" target="_blank">OpenCode GitHub — github.com/opencode-ai/opencode</a></li>
+      <li><a href="https://aider.chat/docs/" target="_blank">Aider Documentation — aider.chat/docs</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with ❤️ by Jarvis · <a href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>
