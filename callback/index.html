@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>TikTok Auth Callback</title>
+<style>body{font-family:Inter,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#1a1a1a;color:#fff}
+.card{background:#222;padding:40px;border-radius:16px;text-align:center;max-width:500px}
+code{background:#333;padding:8px 16px;border-radius:8px;display:block;margin:16px 0;word-break:break-all;font-size:14px}</style>
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+window.onload = () => {
+  if (code) {
+    document.getElementById('code').textContent = code;
+    document.getElementById('msg').textContent = '✅ Authorization successful! Copy the code below and send it to Jarvis.';
+  } else {
+    document.getElementById('msg').textContent = '❌ No authorization code received.';
+  }
+}
+</script>
+</head><body>
+<div class="card">
+<h2>YES Content — TikTok Auth</h2>
+<p id="msg">Processing...</p>
+<code id="code"></code>
+<p style="color:#888;font-size:13px">Send this code to Jarvis on Telegram</p>
+</div>
+</body></html>
