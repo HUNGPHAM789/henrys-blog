@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building a Route Inspector for Your Next.js App with AI — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+
+:root {
+  --bg: #FAFAF8; --card: #fff; --text: #1a1a1a; --muted: #6B7280;
+  --accent: #FF6B35; --accent-light: #FFF3EE; --border: #E5E5E5;
+  --green: #58CC02; --blue: #1CB0F6; --purple: #CE82FF;
+  --font: 'Comfortaa', sans-serif;
+}
+
+body.dark {
+  --bg: #1a1a2e; --card: #16213e; --text: #e0e0e0; --muted: #8b95a5;
+  --accent: #FF8C5A; --accent-light: rgba(255,140,90,0.12); --border: #2a2a4a;
+}
+body.dark { color-scheme: dark; }
+body.dark article p, body.dark article li, body.dark .callout-text { color: #c0c8d4; }
+body.dark article code { background: #2a2a4a; color: #e0e0e0; }
+body.dark .callout { background: rgba(255,107,53,0.08); border-color: rgba(255,107,53,0.15); }
+body.dark nav { background: #16213e; border-color: #2a2a4a; }
+body.dark header { background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%); }
+body.dark footer { background: var(--bg); border-color: var(--border); color: var(--muted); }
+body.dark .back-link { color: var(--muted); }
+body.dark .back-link:hover { color: var(--accent); }
+body.dark .hero-tag { background: var(--accent); }
+body.dark img { opacity: 0.9; }
+body.dark .step-num { background: var(--accent); }
+body.dark .tool-card { background: var(--card); border-color: var(--border); }
+body.dark .tool-card h4 { color: var(--text); }
+body.dark .tool-card p { color: var(--muted); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+.nav-actions { display: flex; gap: 8px; }
+.nav-btn {
+  background: none; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 6px 12px; font-family: var(--font); font-size: 0.8rem;
+  color: var(--muted); cursor: pointer; transition: all 0.2s;
+}
+.nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 60px 24px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(28,176,246,0.15) 0%, transparent 60%),
+              radial-gradient(circle at 70% 30%, rgba(88,204,2,0.1) 0%, transparent 50%);
+}
+.hero-inner { position: relative; max-width: 760px; margin: 0 auto; }
+.hero-tag {
+  display: inline-block;
+  background: var(--blue);
+  color: white; font-size: 0.72rem; font-weight: 700;
+  padding: 4px 12px; border-radius: 20px; letter-spacing: 0.05em;
+  text-transform: uppercase; margin-bottom: 18px;
+}
+header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700; color: white; line-height: 1.25;
+  margin-bottom: 16px;
+}
+.hero-meta {
+  color: rgba(255,255,255,0.55); font-size: 0.85rem;
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+}
+.hero-meta span { display: flex; align-items: center; gap: 5px; }
+
+.container { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+
+article p { color: #374151; margin-bottom: 1.4em; font-size: 1rem; }
+article h2 {
+  font-size: 1.35rem; font-weight: 700;
+  margin: 2.2em 0 0.8em; color: var(--text);
+  display: flex; align-items: center; gap: 10px;
+}
+article h2::before {
+  content: ''; display: inline-block;
+  width: 4px; height: 1.2em;
+  background: var(--accent); border-radius: 2px; flex-shrink: 0;
+}
+article h3 { font-size: 1.05rem; font-weight: 700; margin: 1.6em 0 0.5em; color: var(--text); }
+
+article code {
+  background: #F3F4F6; color: #E11D48;
+  padding: 2px 7px; border-radius: 5px; font-size: 0.88em;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+pre {
+  background: #1e1e2e; color: #cdd6f4;
+  padding: 20px 24px; border-radius: 12px;
+  overflow-x: auto; margin: 1.2em 0 1.6em;
+  font-size: 0.85rem; line-height: 1.6;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
+
+.callout {
+  background: var(--accent-light);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px; margin: 1.6em 0;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.callout-text { font-size: 0.92rem; color: #374151; line-height: 1.6; }
+
+.callout.green { background: #F0FDF4; border-color: var(--green); }
+.callout.blue { background: #EFF6FF; border-color: var(--blue); }
+.callout.purple { background: #FAF5FF; border-color: var(--purple); }
+
+/* Steps */
+.steps { margin: 1.6em 0 2em; display: flex; flex-direction: column; gap: 20px; }
+.step { display: flex; gap: 16px; align-items: flex-start; }
+.step-num {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent); color: white;
+  font-weight: 700; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-body { flex: 1; }
+.step-body strong { display: block; margin-bottom: 4px; font-size: 0.95rem; }
+.step-body p { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+/* Tool cards */
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 1.6em 0 2em; }
+.tool-card {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 14px;
+  padding: 18px 20px; transition: border-color 0.2s, transform 0.2s;
+}
+.tool-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.tool-card .tool-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.tool-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+.tool-card p { font-size: 0.82rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+/* Stat bar */
+.stat-bar { display: flex; flex-wrap: wrap; gap: 12px; margin: 1.6em 0; }
+.stat {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 14px 18px; text-align: center; flex: 1; min-width: 120px;
+}
+.stat-num { font-size: 1.8rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--muted); text-decoration: none; font-size: 0.85rem;
+  margin-bottom: 32px; transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+
+footer {
+  text-align: center; padding: 32px 24px;
+  border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem;
+}
+
+@media (max-width: 600px) {
+  header { padding: 40px 16px 36px; }
+  .container { padding: 32px 16px 60px; }
+  .tool-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Henry's Blog</a>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="document.body.classList.toggle('dark')">
+      <i class="ph ph-moon"></i>
+    </button>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-inner">
+    <div class="hero-tag">AI Dev Tools</div>
+    <h1>Building a Route Inspector for Your Next.js App — in One Claude Code Run</h1>
+    <div class="hero-meta">
+      <span><i class="ph ph-calendar-blank"></i> March 25, 2026</span>
+      <span><i class="ph ph-clock"></i> 6 min read</span>
+      <span><i class="ph ph-tag"></i> AI, Next.js, Developer Tools</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <a href="../index.html" class="back-link">
+    <i class="ph ph-arrow-left"></i> Back to all posts
+  </a>
+
+  <article>
+
+    <p>
+      When your Next.js app hits 30+ routes, you lose track of what's where. Which pages are protected? Which components does <code>/teacher/dashboard</code> import? What links go where? I had this problem with <a href="https://antera.vercel.app" target="_blank">Antera</a> — our ESL platform with 33 routes across teacher, student, and public flows.
+    </p>
+
+    <p>
+      So I asked Jarvis (my AI assistant running on OpenClaw) to build a tool that solves it. One prompt. One Claude Code run. Done in under an hour.
+    </p>
+
+    <div class="stat-bar">
+      <div class="stat"><div class="stat-num">33</div><div class="stat-label">Routes inspected</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">MCP tools exposed</div></div>
+      <div class="stat"><div class="stat-num">&lt;1h</div><div class="stat-label">Build time</div></div>
+      <div class="stat"><div class="stat-num">0</div><div class="stat-label">API calls needed</div></div>
+    </div>
+
+    <h2>The Problem</h2>
+
+    <p>
+      Antera has routes like <code>/teacher/generator</code>, <code>/student/drills/[id]</code>, <code>/join/[code]</code> — spread across nested folders. When I want to understand how the app flows, I'm constantly jumping between files in VS Code, tracing imports, trying to remember if a route is server or client rendered.
+    </p>
+
+    <p>
+      What I actually wanted was something like a living sitemap — something I could open in a browser, click a route, and immediately see: the source code, the auth protection status, the components it imports, and what other routes it links to.
+    </p>
+
+    <div class="callout">
+      <span class="callout-icon">💡</span>
+      <div class="callout-text">
+        <strong>The insight:</strong> Your Next.js <code>app/</code> folder is already a perfect data source. Every <code>page.tsx</code> is a node. Imports are edges. Auth middleware is metadata. You don't need a database — just parse the filesystem.
+      </div>
+    </div>
+
+    <h2>What We Built</h2>
+
+    <p>The Antera Route Inspector is a local web app + MCP server, two things in one package:</p>
+
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🗺️</div>
+        <h4>Route Tree</h4>
+        <p>All 33 routes grouped by Teacher / Student / Public, with auth and layout info.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📄</div>
+        <h4>Route Detail</h4>
+        <p>Source code with syntax highlighting, imported components, data fetching, and outbound links.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔗</div>
+        <h4>Flow Map</h4>
+        <p>Visual graph of route connections, color-coded by type (teacher/student/public/API).</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🤖</div>
+        <h4>MCP Server</h4>
+        <p>6 tools for Claude Code agents to query the codebase without reading files manually.</p>
+      </div>
+    </div>
+
+    <h2>How It Works</h2>
+
+    <p>
+      The server is a simple Express app that walks the <code>src/app/</code> directory on startup, finds every <code>page.tsx</code>, parses it with a lightweight AST scanner, and caches the results in memory. File watching via <code>chokidar</code> invalidates the cache when files change.
+    </p>
+
+    <p>No build step. No config. Just:</p>
+
+    <pre><code>cd C:\antera-inspector
+node server.js
+# → http://localhost:3004</code></pre>
+
+    <p>
+      The MCP server runs separately as a stdio process, registered in <code>~/.claude/mcp.json</code>. Claude Code agents can call it directly to explore the codebase without doing their own file traversal.
+    </p>
+
+    <h2>The MCP Tools</h2>
+
+    <p>Six tools, all returning structured JSON:</p>
+
+    <div class="tool-grid">
+      <div class="tool-card">
+        <div class="tool-icon"><i class="ph ph-list-bullets"></i></div>
+        <h4>get_all_routes()</h4>
+        <p>All routes with type, layout, and auth status.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon"><i class="ph ph-file-code"></i></div>
+        <h4>get_route_detail(route)</h4>
+        <p>Full source, links, components, layout for one route.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon"><i class="ph ph-magnifying-glass"></i></div>
+        <h4>find_component_usages(name)</h4>
+        <p>All routes importing a given component.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon"><i class="ph ph-graph"></i></div>
+        <h4>get_navigation_map()</h4>
+        <p>Full navigation graph as nodes + edges.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon"><i class="ph ph-code"></i></div>
+        <h4>search_code(query)</h4>
+        <p>Grep across all .tsx/.ts files in the project.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon"><i class="ph ph-database"></i></div>
+        <h4>get_page_props(route)</h4>
+        <p>Extract server component data fetching info.</p>
+      </div>
+    </div>
+
+    <h2>Why This Matters for AI Agents</h2>
+
+    <p>
+      When you give Claude Code a task like "add a notifications bell to the teacher dashboard", it normally has to read a dozen files to understand where the nav lives, what components exist, and what patterns are already in use. With the MCP server, it can call <code>get_route_detail('/teacher/dashboard')</code> and get everything in one shot.
+    </p>
+
+    <div class="callout blue">
+      <span class="callout-icon">🤖</span>
+      <div class="callout-text">
+        <strong>The meta-trick:</strong> We built a tool that makes the AI better at building more tools. The Route Inspector is itself used by AI agents to build features in the app it inspects.
+      </div>
+    </div>
+
+    <h2>How to Build One for Your App</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Write the spec</strong>
+          <p>Describe what you want: "A local web app that lists all my Next.js routes, shows source code, imports, and navigation links. Also expose this as an MCP server for Claude Code."</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Spawn Claude Code with a task file</strong>
+          <p>Write the spec to a <code>task.md</code> file and run <code>claude --permission-mode bypassPermissions --print "$(cat task.md)"</code> in an empty directory.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Register the MCP server</strong>
+          <p>Add it to <code>~/.claude/mcp.json</code> and use <code>"type": "stdio"</code> with <code>"command": "node"</code> pointing to your server file.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Iterate</strong>
+          <p>Open the UI, find what's missing, and ask Claude to add it. The whole thing is vanilla JS + Express — easy to extend.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Build Prompt</h2>
+
+    <p>For reference, here's roughly what we gave Claude Code (condensed):</p>
+
+    <pre><code>Build a local web tool called "Antera Route Inspector" at C:\antera-inspector.
+
+Requirements:
+- Express server on port 3004
+- Scan C:\eslp-app\src\app for all page.tsx files
+- Parse each file: extract route path, auth status, imported components,
+  navigation links, data fetching patterns
+- Web UI: sidebar route tree + detail panel + flow map
+- MCP server (stdio, JSON-RPC 2.0) with 6 tools:
+  get_all_routes, get_route_detail, find_component_usages,
+  get_navigation_map, search_code, get_page_props
+- File watching with cache invalidation
+- VS Code integration (open file links)</code></pre>
+
+    <div class="callout green">
+      <span class="callout-icon">✅</span>
+      <div class="callout-text">
+        <strong>Result:</strong> Claude Code built the full app in one run — server, UI, MCP server, file watching, syntax highlighting. Total time: under an hour including testing. Zero manual code written.
+      </div>
+    </div>
+
+    <h2>What's Next</h2>
+
+    <p>
+      We're planning a visual mode — a proper sitemap with page boxes and flow arrows that Boss can screenshot and use for planning. The MCP server already has the navigation graph data; it's just a matter of rendering it nicely.
+    </p>
+
+    <p>
+      If you're building a Next.js app with AI agents, a route inspector like this is genuinely one of the highest-ROI tools you can build. It takes an hour and it makes every subsequent coding session faster.
+    </p>
+
+    <p>
+      The full source is at <code>C:\antera-inspector\</code> — not open source yet, but we'll clean it up and publish it when Antera launches.
+    </p>
+
+  </article>
+</div>
+
+<footer>
+  <p>Henry's Blog · Built with AI, shipped daily</p>
+</footer>
+
+<script>
+const saved = localStorage.getItem('blog-mode');
+if (saved === 'dark') document.body.classList.add('dark');
+</script>
+</body>
+</html>
