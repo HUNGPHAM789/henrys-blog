@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Top 20 Vietnamese Fonts for Web Design in 2026 — Henry's Blog</title>
+<title>LoRA Training Explained: Fine-Tune AI Models Without Breaking the Bank — Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
@@ -246,28 +246,20 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
   <a href="/henrys-blog/" class="logo">Henry's Blog</a>
   <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
 </nav>
-<div class="hero-wrapper"><div class="hero-info"><span class="hero-tag">Design</span><h1>Top 20 Vietnamese Fonts for Web Design in 2026</h1><span class="hero-meta">2026-03-21</span></div></div>
+<div class="hero-wrapper"><div class="hero-info"><span class="hero-tag">& Tech</span><h1>LoRA Training Explained: Fine-Tune AI Models Without Breaking the Bank</h1><span class="hero-meta">2026-03-26</span></div></div>
 <a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
 <article>
-<p>Vietnamese typography is uniquely challenging. With 12 vowels, 5 tone marks, and diacritics that stack on top of each other, most fonts butcher the reading experience. Here are 20 fonts that actually get it right.</p><h2>Why Vietnamese Fonts Are Hard</h2><p>Vietnamese uses Latin script but adds a complex system of diacritical marks. A single character can carry TWO marks simultaneously — a vowel modifier AND a tone mark. If a font doesn't handle this well, characters collide, clip, or become unreadable.</p><h2>The Top 20 (with live previews on the blog)</h2><p>1. Be Vietnam Pro — The gold standard, built BY Vietnamese designers
-2. Inter — The internet's favorite UI font
-3. Montserrat — Urban, geometric, modern
-4. Nunito — Rounded, friendly, educational
-5. Comfortaa — Stylish AND functional
-6. Manrope — Clean, geometric, minimalist
-7. Quicksand — Rounded, friendly display
-8. Space Grotesk — Grotesque with character
-9. Mulish — Clean, minimal, great line-height
-10. Source Sans 3 — Adobe's battle-tested family</p><p>11. Roboto — Android's system font
-12. Noto Sans — Google's "no tofu" project
-13. Open Sans — The workhorse
-14. Work Sans — Screen-optimized
-15. Lexend — Designed for reading proficiency
-16. Chivo — Hidden gem, clear diacritics
-17. Andika — Clearest diacritics of any font
-18. IBM Plex Sans — Enterprise-grade
-19. Gotu — Expressive calligraphic feel
-20. Momo Trust Sans — Built for Vietnam's MoMo</p><h2>DO NOT USE List</h2><p>These popular fonts have NO Vietnamese subset: Poppins, DM Sans, Outfit, Urbanist, Sora, Lato, Rubik.</p><h2>Recommendation</h2><p>For Vietnamese web projects in 2026: Be Vietnam Pro for body text, Montserrat or Comfortaa for headings. For ESL apps: Andika or Nunito for maximum diacritic clarity.</p>
+<h2>The Problem with Full Fine-Tuning</h2><p>You want Llama 70B to speak like a Vietnamese ESL tutor. Full fine-tuning = updating ALL 70 billion parameters:</p><ul><li> 140GB+ VRAM needed (two A100 GPUs, $10K+ each)</li><li> Days of training</li><li> Risk of 'catastrophic forgetting'</li><li> Output: a full 140GB model file</li></ul><p>For 99% of use cases, this is overkill. Enter LoRA.</p><hr><h2>What is LoRA?</h2><p>LoRA (Low-Rank Adaptation) fine-tunes a model by only training tiny 'adapter' layers — 0.1-1% of total parameters.</p><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/lora-vs-full-finetuning.jpg" alt="" loading="lazy"><figcaption></figcaption></figure><h3>The Camera Lens Analogy</h3><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text"> Base model = camera body. LoRA = specialized lens. Camera doesn't change — lens adds new capability. Swap lenses anytime.</div></div><h3>The Math (Simplified)</h3><p>Neural network layer: y = Wx (W is a huge weight matrix)</p><p>Full fine-tuning: update W directly (billions of numbers)</p><p>LoRA: add a small correction: y = Wx + (A×B)x</p><ul><li>A: small matrix (4096 × 16)</li><li>B: small matrix (16 × 4096)</li><li>Rank (16) controls learning capacity</li><li>New parameters: 131K instead of 16.7M = 128× fewer!</li></ul><hr><h2>How LoRA Training Works</h2><figure><img src="https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/lora-training-process.jpg" alt="" loading="lazy"><figcaption></figcaption></figure><h3>Step 1: Choose Base Model</h3><ul><li>Llama 3.1 8B — fast, consumer GPU (8GB VRAM)</li><li>Llama 3.1 70B — powerful, needs 24-48GB VRAM</li><li>Qwen 2.5 — strong multilingual (great for Vietnamese!)</li></ul><h3>Step 2: Prepare Training Data</h3><p>Format as instruction-response pairs: {"instruction": "Explain borrow vs lend for Vietnamese learners", "response": "BORROW = mượn (receive). LEND = cho mượn (give)."}</p><ul><li>Minimum: 100-500 high-quality examples</li><li>Sweet spot: 1,000-5,000 examples</li><li>Quality &gt; quantity — 500 perfect examples beat 5,000 sloppy ones</li></ul><h3>Step 3: Configure Parameters</h3><ul><li>r (rank): 4-64. Start with 16</li><li>alpha: scaling factor. Usually 2× rank → 32</li><li>target_modules: 'q_proj, v_proj' (attention layers)</li><li>epochs: 1-3 (more = overfitting)</li><li>learning_rate: 1e-4 to 2e-4</li></ul><h3>Step 4: Train</h3><p>Using unsloth (fastest, free):
+pip install unsloth
+python train.py --model llama-3.1-8b --data data.jsonl --r 16 --epochs 3</p><ul><li>8B model: ~30 min on RTX 3090/4090</li><li>70B model: ~2-4 hours on A100 or M4 Max</li><li>Output: 50-200MB adapter file (NOT a full model!)</li></ul><h3>Step 5: Use Your LoRA</h3><p>Load base model + snap on adapter:
+ollama create my-esl-tutor -f Modelfile
+# FROM llama3.1:8b
+# ADAPTER ./my-lora-adapter.gguf</p><hr><h2>LoRA on M4 Max</h2><ul><li> Train on 8B: ~30 min, 16GB RAM enough</li><li> Train on 70B: ~3-4h, needs 48-64GB RAM</li><li> Run any LoRA: load base + adapter</li><li>Tools: mlx-lm (Apple-native) or unsloth</li></ul><h3>Build a Vietnamese ESL Tutor (Free)</h3><ul><li>1. Download Llama 8B via Ollama</li><li>2. Prepare 500 ESL instruction-response pairs</li><li>3. Train LoRA with mlx-lm (~30 min)</li><li>4. Load adapter into Ollama</li><li>5. Free, private, offline ESL tutor! Total cost: $0</li></ul><hr><h2>QLoRA: Even Cheaper</h2><p>QLoRA quantizes the base model to 4-bit DURING training:</p><ul><li>Full fine-tune 70B: 140GB VRAM</li><li>LoRA 70B: 48GB VRAM</li><li>QLoRA 70B: 24GB VRAM ← fits on RTX 4090!</li></ul><p>Quality loss: &lt;1% accuracy drop in most tasks.</p><hr><h2>Common Mistakes</h2><ul><li><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> Noisy data — clean it, remove duplicates</li><li><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> Training too long — 1-3 epochs max, more = overfitting</li><li><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> Rank too high — r=16 is plenty, r=128 wastes VRAM</li><li><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> Wrong base model — use instruct-tuned, NOT base</li><li><i class="ph-duotone ph-x-circle" style="font-size:1em;vertical-align:-0.1em"></i> Not evaluating — always test on held-out examples</li></ul><hr><h2>RAG + LoRA: The Power Combo</h2><p>The real magic:</p><ul><li>LoRA → HOW to behave (ESL tutor personality, Vietnamese style)</li><li>RAG → WHAT to know (lesson database, student records)</li></ul><p>LoRA-tuned Llama + RAG from your lessons = free, private, specialized AI tutor.</p><h2>TL;DR</h2><div class="callout"><i class="ph-duotone ph-lightbulb-filament callout-icon"></i><div class="callout-text"><i class="ph-duotone ph-push-pin" style="font-size:1em;vertical-align:-0.1em"></i> LoRA = fine-tune with tiny adapters (0.1% of model)
+<i class="ph-duotone ph-push-pin" style="font-size:1em;vertical-align:-0.1em"></i> 50-200MB file instead of 140GB
+<i class="ph-duotone ph-push-pin" style="font-size:1em;vertical-align:-0.1em"></i> Train in 30 min on consumer GPU or M4 Max
+<i class="ph-duotone ph-push-pin" style="font-size:1em;vertical-align:-0.1em"></i> QLoRA cuts VRAM 75% with &lt;1% quality loss
+<i class="ph-duotone ph-push-pin" style="font-size:1em;vertical-align:-0.1em"></i> RAG + LoRA = ultimate specialized AI
+<i class="ph-duotone ph-push-pin" style="font-size:1em;vertical-align:-0.1em"></i> Build a free Vietnamese ESL tutor in one afternoon</div></div>
 </article>
 <footer data-en="&copy; 2026 Henry's Blog. Built with OpenClaw + Notion." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với OpenClaw + Notion.">&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
 
