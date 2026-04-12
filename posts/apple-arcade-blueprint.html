@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Apple Arcade Blueprint: How to Build and Publish Games for the Arcade Ecosystem — Henry's Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1a1a14;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+.nav{background:#fff;border-bottom:1px solid #e5e5e5;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1a1a1a;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0D1117 0%,#0A0F1E 30%,#130B2E 60%,#1A0533 100%);padding:72px 24px 64px;text-align:center}
+.hero-tag{display:inline-block;background:#D4705:0;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-hook{color:#94A3B8;font-size:1.1rem;max-width:620px;margin:0 auto 24px}
+.hero-meta{color:#64748B;font-size:.85rem}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+h2{font-size:1.5rem;font-weight:700;color:#1a1a1a;margin:40px 0 16px}
+h3{font-size:1.15rem;font-weight:600;color:#1a1a1a;margin:28px 0 12px}
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+ul,ol{color:#374151;margin:0 0 16px 24px}
+li{margin-bottom:8px}
+strong{color:#1a1a1a}
+code{background:#F3F4F6;padding:2px 6px;border-radius:4px;font-size:.9em;font-family:monospace}
+.callout{background:#FFF3EE;border-left:4px solid #D4705A;border-radius:0 8px 8px 0;padding:16px 20px;margin:24px 0}
+.callout p{margin:0;color:#374151}
+.infographic{background:linear-gradient(160deg,#0D1117,#0A0F1E 40%,#130B2E 80%);border-radius:16px;padding:40px 32px;margin:40px 0;color:#fff}
+.infographic h3{color:#E2E8F0;margin-top:0;margin-bottom:8px;font-size:1.2rem;text-align:center}
+.infographic .subtitle{color:#64748B;text-align:center;font-size:.85rem;margin-bottom:28px}
+.evolution-loop{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:28px}
+.loop-step{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:14px 16px;text-align:center;min-width:130px}
+.loop-step .icon{font-size:1.5rem;margin-bottom:6px}
+.loop-step h4{color:#E2E8F0;font-size:.82rem;margin-bottom:2px}
+.loop-step p{color:#64748B;font-size:.72rem;margin:0}
+.loop-arrow{color:#D4705A;font-size:1.4rem;padding:0 6px}
+.project-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:16px}
+.proj-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px}
+.proj-card h4{color:#E2E8F0;font-size:.9rem;margin-bottom:6px}
+.proj-card p{color:#64748B;font-size:.78rem;margin:0 0 8px}
+.proj-card .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600}
+.tag-coral{background:rgba(212,112,90,0.2);color:#D4705A;border:1px solid rgba(212,112,90,0.3)}
+.tag-blue{background:rgba(59,130,246,0.2);color:#60A5FA;border:1px solid rgba(59,130,246,0.3)}
+.tag-green{background:rgba(16,185,129,0.2);color:#34D399;border:1px solid rgba(16,185,129,0.3)}
+.tag-purple{background:rgba(139,92,246,0.2);color:#A78BFA;border:1px solid rgba(139,92,246,0.3)}
+.verdict-box{background:linear-gradient(135deg,#0F3460,#16213mu);border-radius:16px;padding:32px;margin:40px 0;border:1px solid rgba(212,112,90,0.3)}
+.verdict-box h3{color:#D4705A;margin-top:0}
+.verdict-box p{color:#CBD5E1;margin-bottom:8px}
+.verdict-label{display:inline-block;background:#10B981;color:#fff;font-weight:700;padding:6px 16px;border-radius:20px;font-size:.9rem;margin-bottom:16px}
+.sources{background:#F3F4F6;border-radius:12px;padding:24px;margin-top:40px}
+.sources h3{color:#6B728CA;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.sources ul{margin:0;padding:0;list-style:none}
+.sources li{margin-bottom:6px;font-size:.88rem}
+footer{background:#fff;border-top:1px solid #e5e5e5;padding:32px 24px;text-align:center;color:#6B7280;font-size:.85rem;margin-top:48px}
+@media(max-width:600px){.hero{padding:48px 16px 40px}.container{padding:32px 16px}.evolution-loop{flex-direction:column;align-items:stretch}.loop-arrow{transform:rotate(90deg)}.project-cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <span class="nav-logo">Henry's Blog</span>
+    <a href="../index.html" class="nav-back">← All posts</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="hero-tag">Game Dev · Apple Ecosystem</span>
+  <h1 class="apple-arcade-title">The Apple Arcade Blueprint: How to Build and Publish Games for the Arcade Ecosystem</h1>
+  <p class="hero-hook">No IAP, no ads, no microtransactions. Just pure, high-quality gaming. Here is the blueprint for solo devs and small teams.</p>
+  <p class="hero-meta">Henry's Blog · April 12, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+  <p>Apple Arcade isn't just another storefront. It's a curated, premium experience. For developers, it represents a fundamentally different business model than the App Store. Instead of fighting for downloads or managing complex ad networks, you are pitching a premium product to a subscription-based audience.</p>
+
+  <p>But getting accepted isn't just about having a "good" game. It's about adhering to a strict set of technical and design principles. If you break the "No IAP/No Ads" rule, your application is dead on arrival.</p>
+
+  <h2 id="the-golden-rule">The Golden Rule: Zero Friction</h2>
+
+  <p>The single most important requirement for Apple Arcade is <strong>the complete absence of monetization friction.</strong></p>
+
+  <ul>
+    <li><strong class="rule-text">No In-App Purchases (IAP):</strong> You cannot sell skins, extra levels, or currency.</li>
+    <li><strong class="rule-text">No Ads:</strong> No interstitials, no rewarded videos, no banner ads.</li>
+    <li><strong class="rule-text">No External Links:</strong> You cannot link to your own website to "buy more gems."</li>
+  </ul>
+
+  <p>The value proposition is simple: Players pay for the subscription so they <em>never</em> have to encounter a transaction or an ad again. As a developer, your revenue comes from Apple's pool based on play time and engagement.</p>
+
+  <h2 id="the-development-stack">The Development Stack</h2>
+
+  <p>Because you are targeting iOS, iPadOS, and macOS, your choice of engine is critical. You need something that handles Apple's metal API efficiently and allows for easy deployment across the ecosystem.</p>
+
+  <div class="project-cards">
+    <div class="proj-card">
+      <h4>Unity</h4>
+      <p>The industry standard. Best for 3D, massive asset store, and easy deployment.</p>
+      <span class="tag tag-blue">Pro</span>
+    </div>
+    <div class="proj-card">
+      <h4>Godot</h4>
+      <p>Rising star. Lightweight, open-source, and incredibly fast for 2D/simple 3D.</p>
+      <span class="tag tag-green">Open Source</span>
+    </div>
+    <div class="proj-card">
+      <h4>Swift/Metal</h4>
+      <p>The hardcore path. Maximum performance, zero overhead, but much higher complexity.</p>
+      <span class="tag tag-purple">Native</span>
+    </div>
+  </div>
+
+  <h2 id="the-blueprint">The 4-Step Blueprint</h2>
+
+  <p>How do you go from an idea to the Arcade storefront?</p>
+
+  <ol>
+    <li><strong>The Prototype (The "Fun" Test):</strong> Build a small, mechanically tight loop. If it isn't fun without any progression or skins, it won't work on Arcade.</li>
+    <li><strong>The Apple-First Polish:</strong> Implement native features. Support Haptics (Core Haptics), Game Controller support (MFi), and seamless iCloud syncing.</li>
+    <strong>The Submission Pitch:</strong> This is where most fail. You don't just submit a binary; you submit a pitch. Highlight why your game is "premium" and how it utilizes Apple hardware.</li>
+    <li><strong>The Review & Iteration:</strong> Apple's review team will test your game for performance, stability, and adherence to the "No IAP" rule. Be prepared for feedback.</li>
+  </ol>
+
+  <div class="infographic">
+    <h3 class="apple-arcade-title">🚀 The Arcade Success Loop</h3>
+    <p class="subtitle">Design for engagement, not for transaction</p>
+    <div class="evolution-loop">
+      <div class="loop-step">
+        <div class="icon">🎮</div>
+        <h4 class="apple-arcade-title">Mechanics</h4>
+        <p class="apple-arcade-title">Pure, ad-free gameplay loop</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">📱</div>
+        <h4 class="apple-arcade-title">Native</h4>
+        <p class="apple-arcade-title">Haptics, Game Controller, iCloud</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">🍎</div>
+        <h4 class="apple-arcade-title">Pitch</h4>
+        <p class="apple-arcade-title">Showcase "Premium" quality</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="icon">✨</div>
+        <h4 class="apple-arcade-title">Arcade</h4>
+        <p class="apple-arcade-title">Discovery via Subscription</p>
+      </div>
+    </div>
+
+    <div class="project-cards">
+      <div class="proj-card">
+        <h4 class="apple-arcade-title">✅ Must-Have</h4>
+        <p class="apple-arcade-title">Game Controller Support</p>
+        <span class="tag tag-green">Essential</span>
+      </div>
+      <div class="proj-card">
+        <h4 class="apple-arcade-title">❌ Must-Avoid</h4>
+        <p class="apple-arcade-title">Microtransactions / Ads</p>
+        <span class="tag tag-coral">Forbidden</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Pro Tip:</strong> When pitching, use high-quality video trailers. Apple's reviewers are looking for visual fidelity and "polish" that justifies a premium subscription. If your game looks like a generic hyper-casual title, it will be rejected.</p>
+  </div>
+
+  <div class="verdict-box">
+    <div class="verdict-label">✅ VERDICT</div>
+    <h3 class="apple-arcade-title">High Risk, High Reward</h3>
+    <p class="apple-arcade-title">The barrier to entry is high due to strict content guidelines and the need for high production value. However, the reward is a stable,-ad-free audience and a much more respectful relationship with your players.</p>
+    <p class="apple-arcade-title"><strong>Ideal For:</strong> Solo developers and small studios with a strong focus on gameplay mechanics, art direction, and polished, "premium" experiences.</p>
+  </div>
+
+  <div class="sources">
+    <h3 class="apple-arcade-title">Sources & Resources</h3>
+    <ul class="apple-arcade-title">
+      <li class="apple-arcade-title"><a class="apple-arcade-title" href="https://developer.apple.com/apple-arcade/" target="_blank">Apple Arcade Developer Portal</a></li>
+      <li class="apple-arcade-title"><a class="apple-arcade-title" href="https://developer.apple.com/game-controller/" target="_blank">Game Controller Framework</a></li>
+      <li class="apple-arcade-title"><a class="apple-arcade-title" href="https://developer.apple.com/documentation/corehaptics" target="_blank">Core Haptics Documentation</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="apple-arcade-title">
+  <p class="apple-arcade-title">Henry's Blog · Built with ❤️ by Jarvis · <a class="apple-arcade-title" href="../index.html">← Back to all posts</a></p>
+</footer>
+
+</body>
+</html>
