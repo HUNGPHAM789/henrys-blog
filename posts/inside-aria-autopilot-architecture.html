@@ -246,7 +246,20 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
   <a href="/henrys-blog/" class="logo">Henry's Blog</a>
   <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
 </nav>
-<div class="hero-wrapper"><div class="hero-info"><span class="hero-tag">Dev Journal</span><h1>Inside ARIA Autopilot: The Architecture of a Self-Driving AI Agent</h1><span class="hero-meta">2026-04-13</span></div></div>
+<div class="hero-wrapper">
+<div class="hero" style="background:linear-gradient(135deg,#1a1a2e 0%,#FF6B35 50%,#16213e 100%);display:flex;align-items:center;justify-content:center;padding:40px">
+<svg viewBox="0 0 400 160" style="max-width:360px;width:100%">
+<rect x="140" y="10" width="120" height="30" rx="6" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/><text x="200" y="30" text-anchor="middle" fill="white" font-family="monospace" font-size="11" font-weight="bold">classifyTask()</text>
+<line x1="160" y1="40" x2="60" y2="70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><line x1="185" y1="40" x2="145" y2="70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><line x1="215" y1="40" x2="255" y2="70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/><line x1="240" y1="40" x2="340" y2="70" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+<rect x="15" y="70" width="85" height="25" rx="5" fill="rgba(255,255,255,0.15)"/><text x="57" y="87" text-anchor="middle" fill="white" font-size="10">chat</text>
+<rect x="110" y="70" width="85" height="25" rx="5" fill="rgba(255,255,255,0.15)"/><text x="152" y="87" text-anchor="middle" fill="white" font-size="10">simple</text>
+<rect x="210" y="70" width="85" height="25" rx="5" fill="rgba(255,255,255,0.15)"/><text x="252" y="87" text-anchor="middle" fill="white" font-size="10">plan mode</text>
+<rect x="305" y="70" width="85" height="25" rx="5" fill="rgba(255,255,255,0.15)"/><text x="347" y="87" text-anchor="middle" fill="white" font-size="10">debug</text>
+<line x1="57" y1="95" x2="200" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line x1="152" y1="95" x2="200" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line x1="252" y1="95" x2="200" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line x1="347" y1="95" x2="200" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+<rect x="130" y="120" width="140" height="30" rx="6" fill="#FF6B35"/><text x="200" y="140" text-anchor="middle" fill="white" font-family="monospace" font-size="11" font-weight="bold">runClaude()</text>
+</svg>
+</div>
+<div class="hero-info"><span class="hero-tag">Dev Journal</span><h1>Inside ARIA Autopilot: The Architecture of a Self-Driving AI Agent</h1><span class="hero-meta">2026-04-14</span></div></div>
 <a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
 <article>
 
@@ -301,6 +314,25 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 
 <p>This is the big upgrade. For complex tasks, the runner adds two phases before execution:</p>
 
+<figure>
+<svg viewBox="0 0 500 200" style="width:100%;background:var(--card);border-radius:16px;padding:16px;border:1.5px solid var(--border)">
+<defs><marker id="ah3" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)"/></marker></defs>
+<rect x="20" y="20" width="100" height="40" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="1.5"/><text x="70" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">🔍 Explore</text><text x="70" y="56" text-anchor="middle" font-size="8" fill="var(--muted)">Read, Glob, Recall</text>
+<path d="M120,40 L150,40" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah3)"/>
+<rect x="150" y="20" width="100" height="40" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="1.5"/><text x="200" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">📐 Design</text><text x="200" y="56" text-anchor="middle" font-size="8" fill="var(--muted)">plan + risks</text>
+<path d="M250,40 L280,40" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah3)"/>
+<rect x="280" y="15" width="100" height="50" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/><text x="330" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="white">👆 Approve</text><text x="330" y="52" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.8)">✅ ✏️ ❌</text>
+<path d="M380,40 L410,40" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah3)"/>
+<rect x="410" y="20" width="70" height="40" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="1.5"/><text x="445" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">⚡ Execute</text>
+
+<text x="250" y="100" text-anchor="middle" font-size="10" fill="var(--muted)">↓ Execute uses Task Runner with exploration context</text>
+<rect x="100" y="115" width="300" height="60" rx="10" fill="var(--accent-light)" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+<text x="250" y="138" text-anchor="middle" font-size="10" fill="var(--text)">Step 1 → judge → Step 2 → judge → ... → Step N</text>
+<text x="250" y="155" text-anchor="middle" font-size="9" fill="var(--muted)">2min timeout per step · retry on fail · 2KB context between steps</text>
+</svg>
+<figcaption>Plan Mode: explore first, design second, execute only after approval</figcaption>
+</figure>
+
 <h3>Phase 1: Explore</h3>
 <p>The model gets tools and a clear instruction: "Before planning, investigate. Read files, check git status, search memory. Report what exists." This is 12 turns of pure investigation — no writing, no building.</p>
 
@@ -318,6 +350,22 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <p>Same step-by-step loop as the Simple Task Runner, but with the exploration context injected. Every step knows what the model discovered in Phase 1.</p>
 
 <h2>Path 4: Debug Runner — Diagnose, Fix, Verify, Loop</h2>
+
+<figure>
+<svg viewBox="0 0 420 140" style="width:100%;background:var(--card);border-radius:16px;padding:16px;border:1.5px solid var(--border)">
+<defs><marker id="ah4" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)"/></marker></defs>
+<rect x="20" y="30" width="90" height="35" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="1.5"/><text x="65" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">🔍 Diagnose</text>
+<path d="M110,47 L140,47" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah4)"/>
+<rect x="140" y="30" width="90" height="35" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="1.5"/><text x="185" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">🔧 Fix</text>
+<path d="M230,47 L260,47" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah4)"/>
+<rect x="260" y="30" width="90" height="35" rx="8" fill="var(--accent-light)" stroke="var(--accent)" stroke-width="1.5"/><text x="305" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text)">✅ Verify</text>
+<path d="M305,65 L305,90 L65,90 L65,65" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#ah4)"/>
+<text x="185" y="105" text-anchor="middle" font-size="9" fill="var(--muted)">still broken? loop (max 3x)</text>
+<path d="M350,47 L380,47" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah4)"/>
+<text x="395" y="52" font-size="11" font-weight="700" fill="var(--green,#58CC02)">✅</text>
+</svg>
+<figcaption>Debug Runner: diagnose → fix → verify, loop until fixed or 3 attempts exhausted</figcaption>
+</figure>
 
 <p>When something is broken, the pattern is fundamentally different from building something new:</p>
 

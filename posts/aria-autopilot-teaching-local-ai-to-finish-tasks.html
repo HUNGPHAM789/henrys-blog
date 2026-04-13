@@ -246,7 +246,11 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
   <a href="/henrys-blog/" class="logo">Henry's Blog</a>
   <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
 </nav>
-<div class="hero-wrapper"><div class="hero-info"><span class="hero-tag">Dev Journal</span><h1>ARIA Autopilot: How I Taught a 26B Local AI to Actually Finish Its Tasks</h1><span class="hero-meta">2026-04-13</span></div></div>
+<div class="hero-wrapper">
+<div class="hero" style="background:linear-gradient(135deg,#FF6B35 0%,#1a1a2e 60%,#FF8C5A 100%);display:flex;align-items:center;justify-content:center;padding:40px">
+<svg viewBox="0 0 400 200" style="max-width:360px;width:100%"><text x="200" y="50" text-anchor="middle" fill="white" font-family="monospace" font-size="14" font-weight="bold">Boss: "are you done?"</text><text x="200" y="80" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="12">...</text><text x="200" y="100" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="12">...</text><text x="200" y="120" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="12">(silence)</text><text x="200" y="160" text-anchor="middle" fill="#FF8C5A" font-family="monospace" font-size="14" font-weight="bold">→ ARIA Autopilot: "✅ Done."</text></svg>
+</div>
+<div class="hero-info"><span class="hero-tag">Dev Journal</span><h1>ARIA Autopilot: How I Taught a 26B Local AI to Actually Finish Its Tasks</h1><span class="hero-meta">2026-04-13</span></div></div>
 <a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
 <article>
 
@@ -277,6 +281,29 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 <h2>The Solution: ARIA Autopilot</h2>
 
 <p>I stopped trusting the model to manage itself and built an external orchestrator. The model is the worker. The code is the boss.</p>
+
+<figure>
+<svg viewBox="0 0 600 280" style="width:100%;background:var(--card);border-radius:16px;padding:20px;border:1.5px solid var(--border)">
+<style>svg text{font-family:var(--font),sans-serif;fill:var(--text)}svg .box{rx:10;fill:var(--accent-light);stroke:var(--accent);stroke-width:1.5}svg .arrow{stroke:var(--accent);stroke-width:2;fill:none;marker-end:url(#ah)}svg .label{font-size:11px;fill:var(--muted)}</style>
+<defs><marker id="ah" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)"/></marker></defs>
+<rect class="box" x="20" y="20" width="120" height="45"/><text x="80" y="48" text-anchor="middle" font-size="13" font-weight="700">Boss</text>
+<rect class="box" x="200" y="20" width="120" height="45"/><text x="260" y="48" text-anchor="middle" font-size="13" font-weight="700">Task Router</text>
+<path class="arrow" d="M140,42 L200,42"/>
+
+<rect class="box" x="40" y="110" width="100" height="40"/><text x="90" y="135" text-anchor="middle" font-size="11" font-weight="600">Chat</text>
+<rect class="box" x="160" y="110" width="100" height="40"/><text x="210" y="135" text-anchor="middle" font-size="11" font-weight="600">Task Runner</text>
+<rect class="box" x="280" y="110" width="100" height="40"/><text x="330" y="135" text-anchor="middle" font-size="11" font-weight="600">Plan Mode</text>
+<rect class="box" x="400" y="110" width="100" height="40"/><text x="450" y="135" text-anchor="middle" font-size="11" font-weight="600">Debug Runner</text>
+
+<path class="arrow" d="M230,65 L90,110"/><path class="arrow" d="M260,65 L210,110"/><path class="arrow" d="M280,65 L330,110"/><path class="arrow" d="M300,65 L450,110"/>
+
+<rect class="box" x="180" y="200" width="240" height="45" style="fill:var(--accent);"/><text x="300" y="228" text-anchor="middle" font-size="13" font-weight="700" style="fill:white">runClaude() — Ollama Loop</text>
+<path class="arrow" d="M90,150 L250,200"/><path class="arrow" d="M210,150 L280,200"/><path class="arrow" d="M330,150 L310,200"/><path class="arrow" d="M450,150 L350,200"/>
+
+<text class="label" x="90" y="170">direct</text><text class="label" x="200" y="175">plan+exec</text><text class="label" x="330" y="175">explore+approve</text><text class="label" x="460" y="175">diagnose+fix</text>
+</svg>
+<figcaption>ARIA Autopilot: every path funnels through one core inference loop</figcaption>
+</figure>
 
 <h3>1. Task Router</h3>
 <p>Every incoming message gets classified:</p>
@@ -309,6 +336,25 @@ footer { text-align: center; padding: 28px; border-top: 1px solid var(--border);
 
 <h3>4. Continuation Detection</h3>
 <p>The biggest fix was catching the "Step 1 done, now Step 2..." exit pattern. When the model responds with text mentioning future steps but makes no tool calls, the loop injects: <code>"Continue. Do the next step now — use your tools."</code> and keeps going.</p>
+
+<figure>
+<svg viewBox="0 0 500 180" style="width:100%;background:var(--card);border-radius:16px;padding:16px;border:1.5px solid var(--border)">
+<style>svg .step{rx:8;fill:var(--accent-light);stroke:var(--accent);stroke-width:1.5}svg .yes{font-size:10px;fill:var(--green);font-weight:700}svg .no{font-size:10px;fill:#ef4444;font-weight:700}</style>
+<defs><marker id="ah2" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)"/></marker></defs>
+<rect class="step" x="10" y="30" width="90" height="35"/><text x="55" y="52" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Model says</text><text x="55" y="63" text-anchor="middle" font-size="9" fill="var(--muted)">"now step 2..."</text>
+<path d="M100,47 L130,47" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah2)"/>
+<rect class="step" x="130" y="30" width="90" height="35"/><text x="175" y="52" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Tool called?</text>
+<path d="M220,47 L250,47" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah2)"/><text class="no" x="235" y="42">NO</text>
+<rect class="step" x="250" y="30" width="90" height="35"/><text x="295" y="48" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Nudge:</text><text x="295" y="60" text-anchor="middle" font-size="8" fill="var(--muted)">"Continue. Use tools."</text>
+<path d="M295,65 L295,90 L55,90 L55,65" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="4" marker-end="url(#ah2)"/>
+<text x="175" y="85" text-anchor="middle" font-size="9" fill="var(--muted)">max 3x then force summary</text>
+<path d="M175,65 L175,120" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah2)"/><text class="yes" x="182" y="95">YES</text>
+<rect class="step" x="130" y="120" width="90" height="35"/><text x="175" y="142" text-anchor="middle" font-size="10" font-weight="600" fill="var(--text)">Execute tool</text>
+<path d="M220,137 L260,137" stroke="var(--accent)" stroke-width="2" marker-end="url(#ah2)"/>
+<rect class="step" x="260" y="120" width="90" height="35" style="fill:var(--accent)"/><text x="305" y="142" text-anchor="middle" font-size="10" font-weight="700" fill="white">Next turn →</text>
+</svg>
+<figcaption>Continuation detection: the model can't say "I'll do it later" and stop</figcaption>
+</figure>
 
 <h3>5. Silent Exit Safety Net</h3>
 <p>If the agentic loop ends with a tool result as the last message (meaning the model went silent), it forces one more inference: <code>"You just used a tool but didn't reply to Boss. Summarize what you did."</code></p>
