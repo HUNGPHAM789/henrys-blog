@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Tools for Agentic Workflow to Build Arcade Games — Henry's Blog</title>
+<meta name="description" content="Free-first toolkit for using AI agents to design, code, and ship arcade games — plus how to build your own agent from scratch.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#FAFAF8;color:#1A1A1A;line-height:1.7}
+a{color:#D4705A;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Nav */
+.nav{background:#fff;border-bottom:1px solid #E5E7EB;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{font-weight:700;color:#1A1A1A;font-size:1.1rem}
+.nav-back{color:#6B7280;font-size:.9rem}
+.nav-back:hover{color:#D4705A;text-decoration:none}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#1A1A2E 0%,#16213E 50%,#D4705A 100%);padding:80px 24px 72px;text-align:center}
+.hero-tag{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;font-size:.75rem;font-weight:700;padding:4px 14px;border-radius:999px;margin-bottom:16px;letter-spacing:.5px;text-transform:uppercase;backdrop-filter:blur(4px)}
+.hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;max-width:720px;margin:0 auto 16px}
+.hero-desc{color:rgba(255,255,255,0.75);font-size:1.05rem;max-width:600px;margin:0 auto 12px}
+.hero-meta{color:rgba(255,255,255,0.45);font-size:.85rem}
+
+/* Container */
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+
+/* Section headers */
+.section-label{display:inline-block;background:#FFF0EC;color:#D4705A;font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:999px;margin-bottom:12px;letter-spacing:.5px;text-transform:uppercase}
+h2{font-size:1.5rem;font-weight:700;color:#1A1A1A;margin:48px 0 8px}
+h2:first-of-type{margin-top:0}
+.section-desc{color:#6B7280;font-size:.95rem;margin-bottom:24px}
+
+/* Tool Cards Grid */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:40px}
+.tool-card{background:#FFFFFF;border:1.5px solid #E5E7EB;border-radius:12px;padding:28px;transition:all .25s}
+.tool-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.08);border-color:#D4705A}
+.tool-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.tool-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.tool-name{font-weight:700;font-size:1.05rem;color:#1A1A1A}
+.badge{display:inline-block;font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle}
+.badge-free{background:#ECFDF5;color:#059669}
+.badge-freemium{background:#FFF7ED;color:#D97706}
+.badge-oss{background:#EEF2FF;color:#4F46E5}
+.tool-desc{color:#374151;font-size:.9rem;margin-bottom:10px;line-height:1.6}
+.tool-why{color:#6B7280;font-size:.82rem;font-style:italic;margin-bottom:12px}
+.tool-link{color:#D4705A;font-size:.82rem;font-weight:600}
+.tool-link:hover{text-decoration:underline}
+
+/* Code block */
+.code-block{background:#1A1A2E;border-radius:12px;padding:24px;margin:20px 0;overflow-x:auto}
+.code-block code{color:#E0E0E0;font-size:.85rem;line-height:1.7;font-family:'Fira Code',monospace;white-space:pre}
+.code-block .comment{color:#6B7280}
+.code-block .keyword{color:#C792EA}
+.code-block .string{color:#C3E88D}
+.code-block .func{color:#82AAFF}
+.code-block .const{color:#F78C6C}
+
+/* Callout */
+.callout{background:#FFF0EC;border-left:4px solid #D4705A;border-radius:0 12px 12px 0;padding:16px 20px;margin:24px 0}
+.callout strong{color:#D4705A}
+
+/* Hero image */
+.hero-img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;margin:32px 0}
+
+/* Verdict */
+.verdict{background:linear-gradient(135deg,#1A1A2E,#16213E);border-radius:12px;padding:32px;margin:40px 0;color:#fff}
+.verdict h3{color:#fff;font-size:1.2rem;margin-bottom:12px}
+.verdict p{color:rgba(255,255,255,0.8);margin-bottom:8px}
+.verdict ul{color:rgba(255,255,255,0.8);margin:0 0 0 20px}
+.verdict li{margin-bottom:6px}
+
+p{color:#374151;margin-bottom:16px;font-size:1rem}
+footer{text-align:center;padding:40px 24px;color:#6B7280;font-size:.85rem;border-top:1px solid #E5E7EB;margin-top:48px}
+
+@media(max-width:600px){
+  .tool-grid{grid-template-columns:1fr}
+  .hero{padding:56px 16px 48px}
+  .container{padding:32px 16px}
+  .code-block{padding:16px;font-size:.78rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="nav-logo" href="../index.html">Henry's Blog</a>
+  <a class="nav-back" href="../index.html">← Back</a>
+</div></nav>
+
+<div class="hero">
+  <span class="hero-tag">AI + Games</span>
+  <h1>Best Tools for Agentic Workflow to Build Arcade Games</h1>
+  <p class="hero-desc">Free first, or build it yourself — the complete toolkit for AI-powered game development.</p>
+  <p class="hero-meta">April 13, 2026 · 8 min read</p>
+</div>
+
+<div class="container">
+
+<img class="hero-img" src="../images/agentic-arcade-game-tools/hero.jpg" alt="Arcade game development setup">
+
+<p>AI agents can now scaffold, code, and ship arcade games with minimal human intervention. The trick is picking the right combination of <strong>agentic framework</strong>, <strong>game engine</strong>, and <strong>AI coding assistant</strong> — or just building your own agent from scratch.</p>
+
+<p>This guide groups every tool by category, rates them free-first, and ends with a "build it yourself" blueprint using the raw Anthropic Claude Agent SDK.</p>
+
+<!-- ─── SECTION 1: AGENTIC FRAMEWORKS ─── -->
+
+<span class="section-label">Category 1</span>
+<h2>Agentic Frameworks</h2>
+<p class="section-desc">Orchestrate multi-step AI workflows — planning, coding, testing, iterating — without manual hand-holding.</p>
+
+<div class="tool-grid">
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#EEF2FF">🦜</div>
+      <div><span class="tool-name">LangGraph</span><span class="badge badge-oss">Open Source</span></div>
+    </div>
+    <p class="tool-desc">Stateful, graph-based multi-agent orchestration by LangChain. Model your game dev pipeline as nodes: design → code → test → deploy.</p>
+    <p class="tool-why">Best for: Complex workflows with branching logic. Lowest latency of all frameworks.</p>
+    <a class="tool-link" href="https://github.com/langchain-ai/langgraph" target="_blank">github.com/langchain-ai/langgraph →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#FEF3C7">🚀</div>
+      <div><span class="tool-name">CrewAI</span><span class="badge badge-oss">Open Source</span></div>
+    </div>
+    <p class="tool-desc">Role-based multi-agent teams. Assign "Game Designer", "Coder", "QA Tester" roles and let them collaborate like a real studio.</p>
+    <p class="tool-why">Best for: Intuitive role delegation. Feels like managing a virtual team.</p>
+    <a class="tool-link" href="https://github.com/crewAIInc/crewAI" target="_blank">github.com/crewAIInc/crewAI →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#DBEAFE">🔷</div>
+      <div><span class="tool-name">AutoGen</span><span class="badge badge-oss">Open Source</span></div>
+    </div>
+    <p class="tool-desc">Microsoft's conversational multi-agent framework. Agents debate and refine game mechanics through structured dialogue.</p>
+    <p class="tool-why">Best for: Iterative refinement through agent conversation. Great for game balancing.</p>
+    <a class="tool-link" href="https://github.com/microsoft/autogen" target="_blank">github.com/microsoft/autogen →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#F3E8FF">🤖</div>
+      <div><span class="tool-name">MetaGPT</span><span class="badge badge-oss">Open Source</span></div>
+    </div>
+    <p class="tool-desc">Software dev simulation — PM, architect, engineer, QA agents collaborate with SOPs. Can generate entire game projects from a one-line prompt.</p>
+    <p class="tool-why">Best for: Full project scaffolding from a single description.</p>
+    <a class="tool-link" href="https://github.com/geekan/MetaGPT" target="_blank">github.com/geekan/MetaGPT →</a>
+  </div>
+
+</div>
+
+<!-- ─── SECTION 2: GAME ENGINES ─── -->
+
+<span class="section-label">Category 2</span>
+<h2>Game Engines for Arcade Games</h2>
+<p class="section-desc">Free engines that AI agents can target — the runtime where your game actually lives.</p>
+
+<div class="tool-grid">
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#ECFDF5">⚡</div>
+      <div><span class="tool-name">Phaser.js</span><span class="badge badge-free">100% Free</span></div>
+    </div>
+    <p class="tool-desc">The king of browser arcade games. HTML5/Canvas/WebGL, massive ecosystem, publish to CrazyGames/Poki/itch.io instantly.</p>
+    <p class="tool-why">Best for: Web-native arcade games. AI agents love generating Phaser code — it's well-documented and LLM-friendly.</p>
+    <a class="tool-link" href="https://phaser.io" target="_blank">phaser.io →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#EDE9FE">🐍</div>
+      <div><span class="tool-name">Pygame</span><span class="badge badge-free">100% Free</span></div>
+    </div>
+    <p class="tool-desc">Python game library using SDL. Dead simple for prototyping — AI agents can generate a working arcade game in a single prompt.</p>
+    <p class="tool-why">Best for: Rapid prototyping. Python = the language AI models know best.</p>
+    <a class="tool-link" href="https://www.pygame.org" target="_blank">pygame.org →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#DBEAFE">🎮</div>
+      <div><span class="tool-name">Godot Engine</span><span class="badge badge-oss">Open Source</span></div>
+    </div>
+    <p class="tool-desc">Full open-source engine with visual editor, GDScript, C# support. 2D excellence with 3D capability as you grow.</p>
+    <p class="tool-why">Best for: Serious arcade projects. Scene-based architecture maps well to agent-generated code.</p>
+    <a class="tool-link" href="https://godotengine.org" target="_blank">godotengine.org →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#FEF3C7">❤️</div>
+      <div><span class="tool-name">LÖVE (Love2D)</span><span class="badge badge-free">100% Free</span></div>
+    </div>
+    <p class="tool-desc">Lua-based 2D framework. Tiny footprint, zero boilerplate, perfect for jam-style arcade games.</p>
+    <p class="tool-why">Best for: Minimalist arcade games. Entire game fits in one file — ideal for AI generation.</p>
+    <a class="tool-link" href="https://love2d.org" target="_blank">love2d.org →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#FEE2E2">🎲</div>
+      <div><span class="tool-name">Kaboom.js</span><span class="badge badge-free">100% Free</span></div>
+    </div>
+    <p class="tool-desc">Fun-first JavaScript game library. Opinionated API that reads like pseudocode — AI agents generate near-perfect Kaboom code on first try.</p>
+    <p class="tool-why">Best for: Quick arcade games with minimal setup. The API is almost natural language.</p>
+    <a class="tool-link" href="https://kaboomjs.com" target="_blank">kaboomjs.com →</a>
+  </div>
+
+</div>
+
+<!-- ─── SECTION 3: AI CODING AGENTS ─── -->
+
+<span class="section-label">Category 3</span>
+<h2>AI Coding Agents</h2>
+<p class="section-desc">The actual AI that writes your game code — from autocomplete to full autonomous coding.</p>
+
+<div class="tool-grid">
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#FFF0EC">🧠</div>
+      <div><span class="tool-name">Claude Code</span><span class="badge badge-freemium">Free Tier</span></div>
+    </div>
+    <p class="tool-desc">Anthropic's terminal-based coding agent. Opus 4.6 with 1M token context — can reason across your entire game project at once. #1 on SWE-bench.</p>
+    <p class="tool-why">Best for: Deep multi-file game projects. Understands architecture, not just syntax.</p>
+    <a class="tool-link" href="https://claude.ai/code" target="_blank">claude.ai/code →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#F0FDF4">🔮</div>
+      <div><span class="tool-name">Cursor</span><span class="badge badge-freemium">Free Tier</span></div>
+    </div>
+    <p class="tool-desc">AI-native IDE with Composer mode for multi-file visual editing. 1M+ users. Supermaven-powered autocomplete is blazing fast.</p>
+    <p class="tool-why">Best for: Visual game development. See changes across files in real-time.</p>
+    <a class="tool-link" href="https://cursor.com" target="_blank">cursor.com →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#F5F5F5">🐙</div>
+      <div><span class="tool-name">GitHub Copilot</span><span class="badge badge-free">Free Tier</span></div>
+    </div>
+    <p class="tool-desc">2,000 completions + 50 chat requests/month free, no credit card. Lowest friction entry point for individual game devs.</p>
+    <p class="tool-why">Best for: In-editor assistance while you're hands-on coding game logic.</p>
+    <a class="tool-link" href="https://github.com/features/copilot" target="_blank">github.com/features/copilot →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#E0F2FE">💎</div>
+      <div><span class="tool-name">Gemini CLI</span><span class="badge badge-free">Free Tier</span></div>
+    </div>
+    <p class="tool-desc">Google's terminal coding agent. Most generous free tier of any AI coding tool — great for budget-conscious indie game devs.</p>
+    <p class="tool-why">Best for: High-volume code generation without hitting limits.</p>
+    <a class="tool-link" href="https://github.com/google-gemini/gemini-cli" target="_blank">github.com/google-gemini/gemini-cli →</a>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-header">
+      <div class="tool-icon" style="background:#FFFBEB">⚡</div>
+      <div><span class="tool-name">Bolt.new</span><span class="badge badge-free">1M tokens/mo free</span></div>
+    </div>
+    <p class="tool-desc">Browser-based AI app builder. Generates full-stack apps in one shot — including Phaser games with preview. No local setup needed.</p>
+    <p class="tool-why">Best for: Zero-setup game prototyping. Share a playable URL in minutes.</p>
+    <a class="tool-link" href="https://bolt.new" target="_blank">bolt.new →</a>
+  </div>
+
+</div>
+
+<!-- ─── SECTION 4: BUILD IT YOURSELF ─── -->
+
+<span class="section-label">Category 4</span>
+<h2>Build It Yourself</h2>
+<p class="section-desc">Skip the frameworks — wire up your own agent with the raw Anthropic SDK. Full control, zero overhead.</p>
+
+<div class="callout">
+  <strong>Why build your own?</strong> Frameworks add abstraction layers, token overhead, and opinions you may not need. For a focused task like "generate an arcade game," a 30-line agent script can outperform a full framework.
+</div>
+
+<p>Here's a minimal agent using the <strong>@anthropic-ai/claude-agent-sdk</strong> that scaffolds a complete Phaser.js arcade game:</p>
+
+<div class="code-block"><code><span class="comment">// agent-arcade.mjs — Minimal agent to scaffold a Phaser arcade game</span>
+<span class="keyword">import</span> { Agent } <span class="keyword">from</span> <span class="string">'@anthropic-ai/claude-agent-sdk'</span>;
+
+<span class="keyword">const</span> agent = <span class="keyword">new</span> <span class="func">Agent</span>({
+  <span class="const">model</span>: <span class="string">'claude-sonnet-4-6'</span>,
+  <span class="const">instructions</span>: <span class="string">`You are an arcade game developer.
+    When asked to create a game, generate a complete
+    single-file Phaser.js game with:
+    - HTML boilerplate with Phaser CDN
+    - Game config (800x600, arcade physics)
+    - Preload, create, update functions
+    - Player movement, enemies, scoring, game over
+    Output the complete file ready to open in a browser.`</span>,
+  <span class="const">tools</span>: [<span class="string">'bash'</span>, <span class="string">'file_read'</span>, <span class="string">'file_write'</span>],
+});
+
+<span class="comment">// Run the agent with a game prompt</span>
+<span class="keyword">const</span> result = <span class="keyword">await</span> agent.<span class="func">run</span>(
+  <span class="string">'Create a Space Invaders clone with Phaser.js. '</span> +
+  <span class="string">'Include particle effects, a high-score system, '</span> +
+  <span class="string">'and progressive difficulty. Save to game.html'</span>
+);
+
+console.<span class="func">log</span>(<span class="string">'Game created:'</span>, result.<span class="const">output</span>);</code></div>
+
+<p>That's it. <strong>15 lines.</strong> The agent handles the tool loop — it'll write the file, test it by reading it back, and iterate if something's wrong. No framework overhead, no "crew" setup, no graph definitions.</p>
+
+<h3>When to use this approach:</h3>
+<ul style="color:#374151;margin:0 0 16px 24px">
+  <li><strong>Single-purpose agents</strong> — you want one thing: generate a game</li>
+  <li><strong>Token efficiency</strong> — no framework overhead eating your context window</li>
+  <li><strong>Full control</strong> — you decide the tools, the model, the instructions</li>
+  <li><strong>Learning</strong> — understand how agents actually work under the hood</li>
+</ul>
+
+<h3>Scale it up:</h3>
+<p>Need multiple agents? Just compose them — one agent designs the game concept, another writes the code, a third tests it. No framework needed:</p>
+
+<div class="code-block"><code><span class="keyword">const</span> designer = <span class="keyword">new</span> <span class="func">Agent</span>({ <span class="const">model</span>: <span class="string">'claude-haiku-4-5'</span>, <span class="const">instructions</span>: <span class="string">'Design arcade game concepts...'</span> });
+<span class="keyword">const</span> coder   = <span class="keyword">new</span> <span class="func">Agent</span>({ <span class="const">model</span>: <span class="string">'claude-sonnet-4-6'</span>, <span class="const">instructions</span>: <span class="string">'Write Phaser.js games...'</span> });
+<span class="keyword">const</span> tester  = <span class="keyword">new</span> <span class="func">Agent</span>({ <span class="const">model</span>: <span class="string">'claude-haiku-4-5'</span>, <span class="const">instructions</span>: <span class="string">'Review game code for bugs...'</span> });
+
+<span class="keyword">const</span> concept = <span class="keyword">await</span> designer.<span class="func">run</span>(<span class="string">'Design a neon-themed brick breaker'</span>);
+<span class="keyword">const</span> game    = <span class="keyword">await</span> coder.<span class="func">run</span>(concept.<span class="const">output</span>);
+<span class="keyword">const</span> review  = <span class="keyword">await</span> tester.<span class="func">run</span>(<span class="string">`Review this game:\n${game.output}`</span>);</code></div>
+
+<!-- ─── VERDICT ─── -->
+
+<div class="verdict">
+  <h3>🎯 The Recommended Stack (Free First)</h3>
+  <ul>
+    <li><strong>Framework:</strong> LangGraph (if you need orchestration) or skip it entirely</li>
+    <li><strong>Game Engine:</strong> Phaser.js — best AI-compatibility, instant web deployment</li>
+    <li><strong>AI Coder:</strong> Claude Code (best reasoning) + GitHub Copilot Free (in-editor assist)</li>
+    <li><strong>DIY Option:</strong> @anthropic-ai/claude-agent-sdk — 15 lines to a working agent</li>
+  </ul>
+  <p style="margin-top:16px;font-size:.9rem">Total cost to start: <strong>$0</strong>. Scale up to paid tiers only when you hit limits.</p>
+</div>
+
+<img class="hero-img" src="../images/agentic-arcade-game-tools/arcade-pixel.jpg" alt="Arcade gaming pixel art">
+
+<h2>Real-World Proof</h2>
+<p>In early 2026, the Dodo Payments team asked AI agents to build 8 browser arcade games — and they one-shotted every single one. Games like "Flappy Dodo" and "Transaction Snake" were generated, tested, and deployed with minimal human intervention. The workflow went from "write me a game" to "ship it" in under an hour per game.</p>
+
+<p>Google Cloud's survey of 615 game developers confirms: <strong>87% already use AI agents</strong> in their workflows. This isn't future tech — it's the current standard.</p>
+
+<div class="callout">
+  <strong>Start today:</strong> Install <code>@anthropic-ai/claude-agent-sdk</code>, point it at Phaser.js, and prompt it with your arcade game idea. You'll have a playable prototype before lunch.
+</div>
+
+</div>
+
+<footer>© 2026 Henry's Blog</footer>
+</body>
+</html>
