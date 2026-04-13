@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Henry's Blog</title>
+<title>Inside ARIA Autopilot: The Architecture of a Self-Driving AI Agent — Henry's Blog</title>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
@@ -204,324 +204,163 @@ body.linear .empty { color: #6B6F76; }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: var(--font); background: var(--bg); color: var(--text);
-  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M14 8v12M8 14h12' stroke='%23d1d5db' stroke-width='0.8' fill='none'/%3E%3C/svg%3E");
+  font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.8;
+  background-color: #f3f4f6; border: 1px dashed #d1d5db; min-height: 150px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background-image: none !important;
   background-size: 28px 28px;
-  transition: background-color 0.3s, color 0.3s;
 }
-
-/* Header */
-header { background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); color: white; padding: 48px 24px 24px; transition: background 0.3s; }
-.header-inner { max-width: 1100px; margin: 0 auto; }
-header h1 { font-size: 2rem; font-weight: 700; }
-header h1 span { color: var(--accent); }
-header p { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin-top: 4px; }
-
-/* Category Tabs */
-.tabs { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
-.tab {
-  padding: 8px 20px; border-radius: 999px; border: 2px solid rgba(255,255,255,0.15);
-  background: transparent; color: rgba(255,255,255,0.7); font-family: var(--font);
-  font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-}
-.tab:hover { border-color: rgba(255,255,255,0.4); color: white; }
-.tab.active { background: var(--accent); border-color: var(--accent); color: white; }
-
-/* Container */
-.container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
-
-/* Masonry Grid */
-.masonry { columns: 3; column-gap: 20px; }
-.card {
-  display: block; text-decoration: none; color: inherit;
-  background: var(--card); border: 1.5px solid var(--border); border-radius: 20px;
-  overflow: hidden; break-inside: avoid; margin-bottom: 20px;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.04); transition: all 0.25s;
-}
-.card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-.card.hidden { display: none; }
-.card-img { width: 100%; background-size: cover; background-position: center; min-height: 160px; }
-.card:nth-child(1) .card-img { min-height: 220px; }
-.card:nth-child(2) .card-img { min-height: 180px; }
-.card:nth-child(3) .card-img { min-height: 200px; }
-.card-body { padding: 16px 18px 20px; }
-.tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; background: var(--accent); color: white; }
-.tag-coding { background: var(--purple); }
-.tag-education { background: var(--green); }
-.tag-automation { background: var(--blue); }
-.tag-research { background: #8B6914; }
-.card-body h3 { font-size: 0.95rem; font-weight: 700; margin-top: 10px; line-height: 1.45; }
-.meta { font-size: 0.78rem; color: var(--muted); margin-top: 8px; }
-.empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 0.95rem; display: none; }
-footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; margin-top: 20px; transition: background 0.3s; }
-
-@media (max-width: 900px) { .masonry { columns: 2; } }
-@media (max-width: 560px) {
-  .masonry { columns: 1; }
-  header { padding: 36px 16px 20px; }
-  header h1 { font-size: 1.6rem; }
-  .tabs { gap: 6px; }
-  .tab { padding: 6px 14px; font-size: 0.78rem; }
-}
+.hero-wrapper { max-width: 720px; margin: 24px auto 0; padding: 0 20px; }
+.hero { width: 100%; aspect-ratio: 4/3; max-height: 400px; background-size: cover; background-position: center; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.hero-info { padding: 20px 0 0; }
+.hero-info h1 { font-size: 2rem; font-weight: 700; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+.hero-meta { font-size: 0.85rem; color: var(--muted); }
+.hero-tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; background: var(--accent); color: white; margin-bottom: 12px; }
+nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 14px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 20px; transition: background 0.3s; }
+nav a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.88rem; }
+nav a:hover { color: var(--accent); }
+nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+article { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; background: var(--card); border-radius: 20px; margin-top: 20px; transition: background 0.3s; }
+article h2 { font-size: 1.4rem; font-weight: 700; margin: 32px 0 12px; color: var(--text); }
+article h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px; color: var(--text); }
+article p { margin-bottom: 16px; font-size: 0.95rem; color: #374151; }
+article ul { margin: 0 0 16px 24px; }
+article li { margin-bottom: 8px; font-size: 0.93rem; color: #374151; }
+article a { color: var(--accent); text-decoration: underline; }
+article hr { border: none; border-top: 1.5px solid var(--border); margin: 28px 0; }
+article img { width: 100%; border-radius: 16px; margin: 8px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+article figure { margin: 20px 0; }
+article figcaption { text-align: center; font-size: 0.8rem; color: var(--muted); margin-top: 6px; }
+article code { background: #F3F4F6; padding: 2px 6px; border-radius: 6px; font-size: 0.85rem; }
+.callout { display: flex; gap: 12px; padding: 16px; border-radius: 16px; background: var(--accent-light); border: 1.5px solid rgba(255,107,53,0.15); margin: 16px 0; white-space: pre-line; }
+.callout-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+.callout-text { font-size: 0.88rem; color: #374151; line-height: 1.7; }
+.bookmark { display: block; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 12px; margin: 12px 0; font-size: 0.85rem; color: var(--accent); text-decoration: none; transition: border-color 0.2s; word-break: break-all; }
+.bookmark:hover { border-color: var(--accent); }
+.back-link { display: inline-flex; align-items: center; gap: 6px; margin: 24px 20px; font-size: 0.9rem; color: var(--muted); text-decoration: none; font-weight: 600; }
+.back-link:hover { color: var(--accent); }
+footer { text-align: center; padding: 28px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; transition: background 0.3s; }
+@media (max-width: 600px) { .hero-wrapper { padding: 0 12px; margin-top: 16px; } .hero { aspect-ratio: 1/1; max-height: 320px; border-radius: 16px; } .hero-info h1 { font-size: 1.4rem; } article { margin-top: 0; border-radius: 0; } }
 </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <h1>Henry's <span>Blog</span></h1>
-    <p data-en="Research, ideas, and things worth sharing" data-vi="Nghiên cứu, ý tưởng và những điều đáng chia sẻ">Research, ideas, and things worth sharing</p>
-    <div class="tabs"><button class="tab active" onclick="filterPosts('All',this)">All</button><button class="tab " onclick="filterPosts('& Tech',this)">& Tech</button><button class="tab " onclick="filterPosts('Design',this)">Design</button><button class="tab " onclick="filterPosts('Automation',this)">Automation</button><button class="tab " onclick="filterPosts('Education',this)">Education</button><button class="tab " onclick="filterPosts('Coding',this)">Coding</button><button class="tab " onclick="filterPosts('Tech',this)">Tech</button><button class="tab " onclick="filterPosts('Research',this)">Research</button></div>
-  </div>
-</header>
-<div class="container">
-  <div class="masonry" id="masonry">
-    <a href="posts/inside-aria-autopilot-architecture.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#1a1a2e 0%,#FF6B35 50%,#16213e 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🏗️</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Dev Journal</span>
-        <h3>Inside ARIA Autopilot: The Architecture of a Self-Driving AI Agent</h3>
-        <p class="meta">Four runners, one router, zero trust in the model. How the task orchestration actually works under the hood.</p>
-        <p class="meta">2026-04-14</p>
-      </div>
-    </a>
-    <a href="posts/aria-autopilot-teaching-local-ai-to-finish-tasks.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#FF6B35 0%,#1a1a2e 50%,#FF8C5A 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🤖</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Dev Journal</span>
-        <h3>ARIA Autopilot: How I Taught a 26B Local AI to Actually Finish Its Tasks</h3>
-        <p class="meta">I spent 3 days asking my AI "are you done?" — so I built a system where it can't NOT answer.</p>
-        <p class="meta">2026-04-13</p>
-      </div>
-    </a>
-    <a href="posts/agentic-arcade-game-tools.html" class="card" data-category="Coding">
-      <div class="card-img" style="background:linear-gradient(135deg,#1A1A2E 0%,#16213E 50%,#D4705A 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🎮</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI + Games</span>
-        <h3>Best Tools for Agentic Workflow to Build Arcade Games</h3>
-        <p class="meta">Free-first toolkit for using AI agents to design, code, and ship arcade games — plus how to build your own agent from scratch.</p>
-        <p class="meta">2026-04-13</p>
-      </div>
-    </a>
-    <a href="posts/current-agentic-ai-agent-capabilities-april-2026-vs-2025.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#0F2027 0%,#203A43 50%,#2C5364 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🤖</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI Agents</span>
-        <h3>Current Agentic AI Capabilities: April 2026 vs 2025</h3>
-        <p class="meta">A year-over-year breakdown of how far agentic AI has come — what changed, what surprised us, and what's still broken.</p>
-        <p class="meta">2026-04-12</p>
-      </div>
-    </a>
-    <a href="posts/top-mcp-servers-for-ai-agents.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#1A1A2E 0%,#16213E 50%,#0F3460 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🔌</div>
-      <div class="card-body">
-        <span class="tag tag-coding">MCP</span>
-        <h3>Top 10 MCP Servers Every AI Agent Should Have</h3>
-        <p class="meta">The best Model Context Protocol servers for giving your AI agent real power — file systems, browsers, APIs, and more.</p>
-        <p class="meta">2026-04-10</p>
-      </div>
-    </a>
-    <a href="posts/agent-self-improvement-patterns.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#134E5E 0%,#71B280 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🧬</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI Agents</span>
-        <h3>Agent Self-Improvement: How AI Systems Learn to Upgrade Themselves</h3>
-        <p class="meta">Exploring EvoAgentX and the patterns behind AI agents that evaluate, evolve, and rewrite their own workflows.</p>
-        <p class="meta">2026-04-08</p>
-      </div>
-    </a>
-    <a href="posts/ai-agent-security-prompt-injection.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#200122 0%,#6f0000 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🔐</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Security</span>
-        <h3>AI Agent Security: Defending Against Prompt Injection and Tool Abuse</h3>
-        <p class="meta">The attacks targeting agentic AI systems and practical defenses — input validation, sandboxing, and permission scoping.</p>
-        <p class="meta">2026-04-06</p>
-      </div>
-    </a>
-    <a href="posts/multi-agent-orchestration-guide.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#093028 0%,#237A57 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🕸️</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI Agents</span>
-        <h3>Multi-Agent Orchestration: How to Build AI Teams That Actually Work</h3>
-        <p class="meta">Patterns for coordinating multiple AI agents — director/worker models, shared state, handoffs, and avoiding chaos.</p>
-        <p class="meta">2026-04-05</p>
-      </div>
-    </a>
-    <a href="posts/agentic-game-development-workflow.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#1A1A2E 0%,#E94560 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🎮</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI + Games</span>
-        <h3>The Agentic Game Studio: How AI Teams Are Building Games in Hours</h3>
-        <p class="meta">How multi-agent workflows — Director, Artist, Developer, Playtester — are replacing entire game studios. From concept to playable game in one session.</p>
-        <p class="meta">2026-04-04</p>
-      </div>
-    </a>
-    <a href="posts/apple-arcade-blueprint.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#000000 0%,#434343 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🍎</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Game Dev</span>
-        <h3>The Apple Arcade Blueprint: How to Build and Publish Games for Arcade</h3>
-        <p class="meta">From concept to App Store submission — a complete guide to building and publishing games for the Apple Arcade ecosystem.</p>
-        <p class="meta">2026-04-03</p>
-      </div>
-    </a>
-    <a href="posts/apple-arcade-game-tools.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#1c1c1c 0%,#555 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🕹️</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Game Dev</span>
-        <h3>Apple Arcade Game Tools: What You Need to Build for the Platform</h3>
-        <p class="meta">The toolchain, frameworks, and workflows Apple developers use to ship high-quality Arcade games — engines, testing, and submission tips.</p>
-        <p class="meta">2026-04-02</p>
-      </div>
-    </a>
-    <a href="posts/ai-agent-memory-systems-2025.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#2C3E50 0%,#4CA1AF 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🧠</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI Agents</span>
-        <h3>The Best Memory Systems for AI Agents in 2025</h3>
-        <p class="meta">Short-term, long-term, semantic, and episodic memory — how modern AI agents remember context and why it matters for your workflow.</p>
-        <p class="meta">2026-03-30</p>
-      </div>
-    </a>
-    <a href="posts/long-task-tracking-agent-notifications.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#4B0082 0%,#8B008B 50%,#D4705A 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🔔</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI Agents</span>
-        <h3>Long-Task Tracking and Agent Notification Systems</h3>
-        <p class="meta">How to build AI agents that run for hours without going dark — progress tracking, heartbeat pings, and Telegram notifications.</p>
-        <p class="meta">2026-03-29</p>
-      </div>
-    </a>
-    <a href="posts/browser-automation-ai-agents.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#0052D4 0%,#4364F7 50%,#6FB1FC 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🌐</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Automation</span>
-        <h3>Browser Automation + AI: Give Your Agent Eyes and Hands on the Web</h3>
-        <p class="meta">Playwright, Puppeteer, and CDP-based agents that can browse, click, fill forms, and scrape — without getting blocked.</p>
-        <p class="meta">2026-03-28</p>
-      </div>
-    </a>
-    <a href="posts/ai-coding-agents-beyond-claude-code.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#232526 0%,#414345 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">💻</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Coding</span>
-        <h3>AI Coding Agents Beyond Claude Code: Aider, Gemini CLI, OpenCode Compared</h3>
-        <p class="meta">A deep comparison of the best AI coding agents — strengths, weaknesses, and which one fits which workflow.</p>
-        <p class="meta">2026-03-27</p>
-      </div>
-    </a>
-    <a href="posts/n8n-workflow-automation-guide.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#EA4C89 0%,#FF6B6B 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">⚙️</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Automation</span>
-        <h3>n8n: The Open-Source Automation Engine for AI Workflows</h3>
-        <p class="meta">How to use n8n to orchestrate AI agents, connect APIs, and automate complex workflows — without writing a backend.</p>
-        <p class="meta">2026-03-26</p>
-      </div>
-    </a>
-    <a href="posts/productivity-automation-solo-builders.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#11998e 0%,#38ef7d 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">⚡</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Productivity</span>
-        <h3>The Productivity Automation Stack for Solo Builders</h3>
-        <p class="meta">Calendar, email, and tasks on autopilot — the exact tools and workflows solo builders use to reclaim 2+ hours a day.</p>
-        <p class="meta">2026-03-25</p>
-      </div>
-    </a>
-    <a href="posts/openclaw-jarvis-upgrade-roadmap-2025.html" class="card" data-category="AI">
-      <div class="card-img" style="background:linear-gradient(135deg,#0F0C29 0%,#302B63 50%,#24243e 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🦾</div>
-      <div class="card-body">
-        <span class="tag tag-coding">AI Agents</span>
-        <h3>The OpenClaw + Jarvis Upgrade Roadmap: 10 Improvements That Make AI Smarter</h3>
-        <p class="meta">The exact upgrades — memory integration, workflow automation, security hardening, and multi-agent coordination — that take Jarvis from demo to daily driver.</p>
-        <p class="meta">2026-03-24</p>
-      </div>
-    </a>
-    <a href="posts/building-a-route-inspector-for-your-nextjs-app-with-ai.html" class="card" data-category="Coding">
-      <div class="card-img" style="background:linear-gradient(135deg,#000000 0%,#434343 100%);display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem;min-height:220px">🔍</div>
-      <div class="card-body">
-        <span class="tag tag-coding">Next.js</span>
-        <h3>Building a Route Inspector for Your Next.js App with AI</h3>
-        <p class="meta">How to build a local web app that lists all your Next.js routes, shows source code, and exposes them as an MCP server for Claude Code.</p>
-        <p class="meta">2026-03-22</p>
-      </div>
-    </a>
-    <a href="posts/lora-training-explained-fine-tune-ai-models-without-breaking-the-bank.html" class="card" data-category="& Tech">
-      <div class="card-img" style="background:#F3F4F6;display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem"></div>
-      <div class="card-body">
-        <span class="tag tag-tech">& Tech</span>
-        <h3>LoRA Training Explained: Fine-Tune AI Models Without Breaking the Bank</h3>
-        <p class="meta">2026-03-26</p>
-      </div>
-    </a>
-    <a href="posts/rag-vs-fine-tuning-how-to-make-ai-smarter-and-can-a-mac-mini-do-it.html" class="card" data-category="& Tech">
-      <div class="card-img" style="background:#F3F4F6;display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem"></div>
-      <div class="card-body">
-        <span class="tag tag-tech">& Tech</span>
-        <h3>RAG vs Fine-Tuning: How to Make AI Smarter (And Can a Mac Mini Do It?)</h3>
-        <p class="meta">2026-03-26</p>
-      </div>
-    </a>
-    <a href="posts/top-20-vietnamese-fonts-for-web-design-in-2026.html" class="card" data-category="Design">
-      <div class="card-img" style="background:#F3F4F6;display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem"></div>
-      <div class="card-body">
-        <span class="tag tag-design">Design</span>
-        <h3>Top 20 Vietnamese Fonts for Web Design in 2026</h3>
-        <p class="meta">2026-03-21</p>
-      </div>
-    </a>
-    <a href="posts/building-an-ai-assistant-that-actually-remembers-the-openclaw-memory-system.html" class="card" data-category="Automation">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc3-memory-system.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-automation">Automation</span>
-        <h3>Building an AI Assistant That Actually Remembers: The OpenClaw Memory System</h3>
-        <p class="meta">2026-03-20</p>
-      </div>
-    </a>
-    <a href="posts/turn-any-youtube-video-into-an-esl-lesson-in-60-seconds.html" class="card" data-category="Education">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc2-youtube-esl.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-education">Education</span>
-        <h3>Turn Any YouTube Video into an ESL Lesson in 60 Seconds</h3>
-        <p class="meta">2026-03-20</p>
-      </div>
-    </a>
-    <a href="posts/74-commits-in-one-day-building-an-edtech-app-with-an-ai-pair-programmer.html" class="card" data-category="Coding">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/uc1-74-commits.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-coding">Coding</span>
-        <h3>74 Commits in One Day: Building an EdTech App with an AI Pair Programmer</h3>
-        <p class="meta">2026-03-20</p>
-      </div>
-    </a>
-    <a href="posts/making-manga-with-ai.html" class="card" data-category="Coding">
-      <div class="card-img" style="background:#F3F4F6;display:flex;align-items:center;justify-content:center;color:white;font-size:2.5rem"></div>
-      <div class="card-body">
-        <span class="tag tag-coding">Coding</span>
-        <h3>Making Manga with AI: An Agentic Workflow</h3>
-        <p class="meta">2026-05-20</p>
-      </div>
-    </a>
-    <a href="posts/apple-arcade-blueprint.html" class="card" data-category="& Tech">
-      <div class="card-img" style="background-image:url('assets/images/apple-arcade-forest.png'); background-size:cover; background-position:center;"></div>
-      <div class="card-body">
-        <span class="tag tag-tech">& Tech</span>
-        <h3 class="apple-arcade-title">The Apple Arcade Blueprint: How to Build and Publish Games</h3>
-        <p class="meta">2026-04-12</p>
-      </div>
-    </a>
-    <a href="posts/eyebrow-research.html" class="card" data-category="Research">
-      <div class="card-img" style="background-image:url('https://gywxlajkidlgilkjegvi.supabase.co/storage/v1/object/public/lesson-covers/blog/eyebrow-cover.png')"></div>
-      <div class="card-body">
-        <span class="tag tag-research">Research</span>
-        <h3>Top 5 Xu Hướng Phun Xăm Lông Mày & Top 10 Cơ Sở TP.HCM 2026</h3>
-        <p class="meta">2026-03-16</p>
-      </div>
-    </a></div>
-  <div class="empty" id="empty" data-en="No posts in this category yet" data-vi="Chưa có bài viết trong danh mục này">No posts in this category yet</div>
-</div>
-<footer data-en="&copy; 2026 Henry's Blog. Built with OpenClaw + Notion." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với OpenClaw + Notion.">&copy; 2026 Henry's Blog. Built with OpenClaw + Notion.</footer>
+<nav>
+  <a href="/henrys-blog/" class="logo">Henry's Blog</a>
+  <a href="/henrys-blog/" data-en="Home" data-vi="Trang chủ">Home</a>
+</nav>
+<div class="hero-wrapper"><div class="hero-info"><span class="hero-tag">Dev Journal</span><h1>Inside ARIA Autopilot: The Architecture of a Self-Driving AI Agent</h1><span class="hero-meta">2026-04-13</span></div></div>
+<a href="/henrys-blog/" class="back-link" data-en="← Back to blog" data-vi="← Quay lại blog">← Back to blog</a>
+<article>
 
+<p>Yesterday I wrote about <a href="aria-autopilot-teaching-local-ai-to-finish-tasks.html">teaching a 26B model to finish its tasks</a>. Today I want to go deeper — into the actual architecture of the task runner system that makes it work.</p>
+
+<p>The core idea: <strong>the model is the worker, the code is the foreman.</strong> The model never decides when to start, stop, or what to do next. An external orchestrator drives every step.</p>
+
+<h2>The Router: Four Paths for Four Problems</h2>
+
+<p>Every message from the user hits a classifier first. It's regex-based — no LLM call, instant.</p>
+
+<code>classifyTask(message) → chat | simple-task | complex-task | debug-task</code>
+
+<ul>
+<li><strong>Chat</strong> — "what time is it?", "explain X" → straight to the model, no orchestration</li>
+<li><strong>Simple task</strong> — "write a script to do X" → plan + execute, no approval needed</li>
+<li><strong>Complex task</strong> — "write a blog post and publish it" → full plan mode with exploration and approval</li>
+<li><strong>Debug task</strong> — "the blog post is broken" → diagnose-fix-verify loop</li>
+</ul>
+
+<p>The classifier looks at message length, keyword patterns, and complexity signals. A 20-character message is always chat. "Fix" or "broken" routes to debug. Multi-domain requests with sequential language ("and then", "first...then") route to complex.</p>
+
+<h2>Path 1: Chat — Direct Model Call</h2>
+
+<p>Simple questions go through <code>runClaude()</code> — the core agentic loop. Despite the name (legacy from the Claude SDK days), it talks to Ollama.</p>
+
+<p>The loop runs up to 40 turns:</p>
+<ol>
+<li>Send message + conversation history (last 20 from DB) to Ollama</li>
+<li>Model responds — tool calls? Execute them, feed results back, loop</li>
+<li>No tool calls? Check for continuation signals. If model says "now I'll do step 2" but didn't call a tool → inject "Continue. Use tools." (max 3 nudges)</li>
+<li>If model went silent after a tool call (empty response) → force one more turn: "Summarize what you did"</li>
+</ol>
+
+<p>Three safety nets stacked: continuation detection catches the "I'll do it next" stall. Silent-exit forces a summary. And the 3-nudge cap prevents infinite loops.</p>
+
+<h2>Path 2: Simple Task Runner — Plan + Execute</h2>
+
+<p>For straightforward tasks, the runner takes over:</p>
+
+<ol>
+<li><strong>Plan:</strong> Ask the model to break the task into 2-6 numbered steps</li>
+<li><strong>Validate:</strong> Reorder if deploy comes before create. Deduplicate similar steps.</li>
+<li><strong>Execute each step:</strong> Feed individually — "Do step N now. Use tools." Each step gets a 2-minute timeout via <code>Promise.race()</code>.</li>
+<li><strong>Judge each step:</strong> Regex checks for success ("done", "created", "✅") or failure ("error", "blocked"). If unclear but tools were used, call it done. If failed, retry once.</li>
+<li><strong>Summarize:</strong> Force a final message starting with ✅ or ❌.</li>
+</ol>
+
+<p>Key detail: each step gets the <em>full result</em> of previous steps (up to 2KB) as context. Not just "Step 1 done" — the actual file contents, command outputs, whatever the model produced. This means Step 3 can reference what Step 1 read without re-reading it.</p>
+
+<h2>Path 3: Plan Mode — Explore, Design, Approve, Execute</h2>
+
+<p>This is the big upgrade. For complex tasks, the runner adds two phases before execution:</p>
+
+<h3>Phase 1: Explore</h3>
+<p>The model gets tools and a clear instruction: "Before planning, investigate. Read files, check git status, search memory. Report what exists." This is 12 turns of pure investigation — no writing, no building.</p>
+
+<p>This is why the blog post came out wrong before. Without exploration, the model guessed at the HTML structure. With exploration, it reads the actual template, existing posts, and index.html before deciding anything.</p>
+
+<h3>Phase 2: Design</h3>
+<p>Feed the exploration findings to the model: "Based on what you found, design the approach. What are the risks? What's the sequence?" This produces a specific plan with actual file paths, not generic steps.</p>
+
+<h3>Phase 3: Approve</h3>
+<p>The plan goes to the user on Telegram with inline buttons:</p>
+<p><code>[✅ Approve] [✏️ Modify] [❌ Cancel]</code></p>
+<p>Nothing executes until the user taps Approve. If they tap Modify, the system asks what to change and replans. Cancel drops everything.</p>
+
+<h3>Phase 4: Execute</h3>
+<p>Same step-by-step loop as the Simple Task Runner, but with the exploration context injected. Every step knows what the model discovered in Phase 1.</p>
+
+<h2>Path 4: Debug Runner — Diagnose, Fix, Verify, Loop</h2>
+
+<p>When something is broken, the pattern is fundamentally different from building something new:</p>
+
+<ol>
+<li><strong>Diagnose:</strong> "Boss reported [issue]. Investigate with tools. What's wrong?" (10 turns)</li>
+<li><strong>Fix:</strong> "Based on diagnosis, fix it NOW. Use tools." (15 turns)</li>
+<li><strong>Verify:</strong> "Test if the fix works. Curl the URL, read the file. Answer YES or NO." (8 turns)</li>
+</ol>
+
+<p>If verification fails — loop back. Up to 3 cycles. Each cycle gets the context from previous attempts, so it doesn't repeat the same fix twice.</p>
+
+<h2>Background Agents: Same Architecture, Async Execution</h2>
+
+<p>When the user asks ARIA to research something or build something big, ARIA can spawn background agents. These are isolated <code>runTask()</code> calls running asynchronously.</p>
+
+<p>The agent goes through the <em>same router</em>. A researcher agent's prompt gets classified, routed to the appropriate runner, and executed with the same plan-execute-verify pattern. ARIA's main session stays responsive while agents work in the background.</p>
+
+<p>Completion notification comes through a 15-second poller that checks the database for finished tasks.</p>
+
+<h2>The Foundation: runClaude()</h2>
+
+<p>Every path — chat, simple, complex, debug, background agents — funnels through one function at the bottom: <code>runClaude()</code>. The runners don't do inference. They compose multiple <code>runClaude()</code> calls with different prompts, each scoped to one job.</p>
+
+<ul>
+<li>Explorer phase: <code>runClaude("investigate", maxTurns=12)</code></li>
+<li>Design phase: <code>runClaude("plan the approach", maxTurns=3)</code></li>
+<li>Step execution: <code>runClaude("do step N", maxTurns=15)</code></li>
+<li>Verification: <code>runClaude("test if it works", maxTurns=8)</code></li>
+<li>Summary: <code>runClaude("summarize for Boss", maxTurns=3)</code></li>
+</ul>
+
+<p>The runner is a state machine. The model is a function it calls.</p>
+
+<h2>What This Means for Local AI</h2>
+
+<p>A 26B model can't reliably manage a 5-step task on its own. But it can reliably execute one step when told exactly what to do. The Autopilot architecture exploits this — decompose, isolate, verify, repeat.</p>
+
+<p>This pattern works with <em>any</em> model that supports tool calling. Swap Gemma 4 for Llama, Qwen, or Mistral — the architecture doesn't change. The model is a replaceable component. The orchestration is the product.</p>
+
+<div class="callout"><span class="callout-icon">🔑</span><span class="callout-text">The lesson: a dumb model in a smart system outperforms a smart model in no system. Structure beats intelligence when reliability matters.</span></div>
+
+</article>
+<footer data-en="&copy; 2026 Henry's Blog. Built with ARIA Autopilot + Claude Code." data-vi="&copy; 2026 Henry's Blog. Được xây dựng với ARIA Autopilot + Claude Code.">&copy; 2026 Henry's Blog. Built with ARIA Autopilot + Claude Code.</footer>
 <div class="switcher">
   <button class="switcher-btn" onclick="toggleSwitcher()"><i class="ph-duotone ph-gear" style="font-size:1.3rem"></i></button>
   <div class="switcher-panel" id="switcherPanel">
@@ -642,19 +481,6 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = rLang === 'vi' ? el.dataset.vi : el.dataset.en;
   });
 });
-</script>
-<script>
-function filterPosts(category, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  const cards = document.querySelectorAll('.card');
-  let shown = 0;
-  cards.forEach(c => {
-    if (category === 'All' || c.dataset.category === category) { c.classList.remove('hidden'); shown++; }
-    else { c.classList.add('hidden'); }
-  });
-  document.getElementById('empty').style.display = shown === 0 ? 'block' : 'none';
-}
 </script>
 </body>
 </html>
